@@ -1,120 +1,126 @@
+ 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Лилия | AI-контент</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Лилия | AI Навигатор</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
-      --bg-color: #f7f6f2;
-      --card-bg: #eceae1;
-      --card-active-bg: #e2dfd4;
-      --text-main: #3a322d;
-      --text-muted: #7d756d;
-      --border: #dfdbd0;
+      --bg-color: #f7f4ed;
+      --card-bg: #ece6dc;
+      --card-hover: #e3dcce;
+      --text-main: #2d2621;
+      --text-muted: #786f66;
+      --btn-active-bg: #ffffff;
+      --border-color: #dfd7cb;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
-      padding-bottom: 90px;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 16px 16px 90px 16px;
     }
 
-    .hero {
-      padding: 24px 20px 16px;
+    /* Header Profile */
+    .header {
       text-align: center;
-      background: #f1efe9;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
     }
 
-    .hero h1 {
-      font-size: 19px;
+    .title {
+      font-size: 20px;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
-    .hero p {
+    .subtitle {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 14px;
     }
 
-    .btn-main {
+    .contact-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
       width: 100%;
       max-width: 320px;
-      padding: 12px 18px;
-      background: var(--card-bg);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      font-weight: 600;
-      font-size: 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
     }
 
-    .btn-main:active {
-      background: var(--card-active-bg);
+    .contact-btn:active {
       transform: scale(0.98);
+      background-color: var(--card-hover);
     }
 
-    .container {
-      padding: 18px 16px;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
+    /* Section Headers */
     .section-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-      margin-bottom: 12px;
       color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 16px 0 10px 4px;
     }
 
-    .list-cards {
+    /* Cards */
+    .cards-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 20px;
     }
 
     .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background-color: var(--card-bg);
+      border-radius: 16px;
       padding: 14px 16px;
-      cursor: pointer;
       display: flex;
       flex-direction: column;
-      gap: 3px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-      transition: background-color 0.2s, transform 0.1s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
 
     .card:active {
-      background: var(--card-active-bg);
-      transform: scale(0.99);
+      transform: scale(0.98);
+      background-color: var(--card-hover);
     }
 
     .card-title {
       font-size: 14px;
       font-weight: 700;
-      color: var(--text-main);
+      letter-spacing: 0.2px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .card-desc {
@@ -123,141 +129,165 @@
       line-height: 1.35;
     }
 
+    /* Tab Content Switcher */
     .tab-content {
       display: none;
+      animation: fadeIn 0.25s ease;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    .tabbar {
-      position: fixed;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 32px);
-      max-width: 340px;
-      background: rgba(236, 234, 225, 0.94);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      display: flex;
-      padding: 5px;
-      gap: 5px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
-      z-index: 100;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .tab-btn {
+    /* Bottom Navigation Bar */
+    .bottom-nav-container {
+      position: fixed;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      padding: 0 16px;
+    }
+
+    .bottom-nav {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 30px;
+      padding: 4px;
+      display: flex;
+      gap: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .nav-btn {
       flex: 1;
-      padding: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 12px;
+      border-radius: 24px;
       border: none;
       background: transparent;
       color: var(--text-muted);
       font-size: 13px;
       font-weight: 600;
-      border-radius: 15px;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .tab-btn.active {
-      background: #fff;
+    .nav-btn.active {
+      background-color: var(--btn-active-bg);
       color: var(--text-main);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
   </style>
 </head>
 <body>
 
-  <div class="hero">
-    <h1>Лилия</h1>
-    <p>AI-контент & Творческий дневник</p>
-    <button class="btn-main" onclick="openLink('https://t.me/LiliyaRoi')">💬 Написать мне в Telegram</button>
+  <!-- Header -->
+  <div class="header">
+    <div class="title">Лилия</div>
+    <div class="subtitle">AI-контент & Творческий дневник</div>
+    <button class="contact-btn" onclick="openTgLink('https://t.me/portfolioroi')">
+      💬 Написать мне в Telegram
+    </button>
   </div>
 
-  <div class="container">
-    
-    <!-- Вкладка 1: Портфолио -->
-    <div id="tab-works" class="tab-content active">
-      <div class="section-title">📂 Направления портфолио</div>
-      <div class="list-cards">
-        <div class="card" onclick="openLink('https://t.me/LRoy_Portfolio')">
-          <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
-          <div class="card-desc">Инфографика, реклама для брендов</div>
-        </div>
-
-        <div class="card" onclick="openLink('https://t.me/LRoy_Portfolio')">
-          <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
-          <div class="card-desc">Генерация роликов, оживление кадров</div>
-        </div>
-
-        <div class="card" onclick="openLink('https://t.me/LRoy_Portfolio')">
-          <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
-          <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
-        </div>
-
-        <div class="card" onclick="openLink('https://t.me/portfolioroi')">
-          <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
-          <div class="card-desc">Процессы, тесты нейросетей и практика</div>
-        </div>
+  <!-- TAB 1: ПОРТФОЛИО -->
+  <div id="tab-portfolio" class="tab-content active">
+    <div class="section-title">📁 Направления портфолио</div>
+    <div class="cards-list">
+      
+      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+        <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
+        <div class="card-desc">Инфографика, реклама для брендов</div>
       </div>
-    </div>
 
-    <!-- Вкладка 2: Услуги -->
-    <div id="tab-services" class="tab-content">
-      <div class="section-title">💼 Форматы работы</div>
-      <div class="list-cards">
-        <div class="card" onclick="openLink('https://t.me/LiliyaRoi')">
-          <div class="card-title">✨ AI-контент и видео под ключ</div>
-          <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
-        </div>
-
-        <div class="card" onclick="openLink('https://t.me/LiliyaRoi')">
-          <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
-          <div class="card-desc">Продающая инфографика и карточки товаров</div>
-        </div>
+      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+        <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
+        <div class="card-desc">Генерация роликов, оживление кадров</div>
       </div>
-    </div>
 
+      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+        <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
+        <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
+      </div>
+
+      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+        <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
+        <div class="card-desc">Процессы, тесты нейросетей и практика</div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="tabbar">
-    <button class="tab-btn active" onclick="switchTab('works')">📂 Портфолио</button>
-    <button class="tab-btn" onclick="switchTab('services')">💼 Услуги</button>
+  <!-- TAB 2: УСЛУГИ -->
+  <div id="tab-services" class="tab-content">
+    <div class="section-title">💼 Форматы работы</div>
+    <div class="cards-list">
+
+      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+        <div class="card-title">✨ AI-контент и видео под ключ</div>
+        <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
+      </div>
+
+      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+        <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
+        <div class="card-desc">Продающая инфографика и карточки товаров</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav-container">
+    <div class="bottom-nav">
+      <button id="btn-portfolio" class="nav-btn active" onclick="switchTab('portfolio')">
+        📁 Портфолио
+      </button>
+      <button id="btn-services" class="nav-btn" onclick="switchTab('services')">
+        💼 Услуги
+      </button>
+    </div>
   </div>
 
   <script>
-    const tg = window.Telegram?.WebApp;
-    if (tg) {
-      tg.expand();
-      tg.setHeaderColor('#f1efe9');
-      tg.setBackgroundColor('#f7f6f2');
+    // Инициализация Telegram WebApp
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
     }
 
-    function openLink(url) {
-      if (tg && tg.openTelegramLink) {
-        tg.openTelegramLink(url);
-      } else {
-        window.location.href = url;
-      }
-    }
-
+    // Переключение вкладок
     function switchTab(tabName) {
-      if (tg?.HapticFeedback) {
-        tg.HapticFeedback.impactOccurred('light');
-      }
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-
-      if (tabName === 'works') {
-        document.getElementById('tab-works').classList.add('active');
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      if (tabName === 'portfolio') {
+        document.getElementById('tab-portfolio').classList.add('active');
+        document.getElementById('btn-portfolio').classList.add('active');
       } else {
         document.getElementById('tab-services').classList.add('active');
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('btn-services').classList.add('active');
+      }
+    }
+
+    // Бесшовный переход по ссылкам Telegram
+    function openTgLink(url) {
+      if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.openTelegramLink(url);
+      } else {
+        window.open(url, '_blank');
       }
     }
   </script>
