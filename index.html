@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Лилия | AI-контент</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root {
+      --bg-color: #f7f6f2;
+      --card-bg: #eceae1;
+      --card-active-bg: #e2dfd4;
+      --text-main: #3a322d;
+      --text-muted: #7d756d;
+      --border: #dfdbd0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding-bottom: 90px;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      padding: 24px 20px 16px;
+      text-align: center;
+      background: #f1efe9;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .hero p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 18px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-main:active {
+      background: var(--card-active-bg);
+      transform: scale(0.98);
+    }
+
+    .container {
+      padding: 18px 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .list-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .card:active {
+      background: var(--card-active-bg);
+      transform: scale(0.99);
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tabbar {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 340px;
+      background: rgba(236, 234, 225, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      display: flex;
+      padding: 5px;
+      gap: 5px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+      z-index: 100;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 9px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #fff;
+      color: var(--text-main);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Лилия</h1>
+    <p>AI-контент & Творческий дневник</p>
+    <button class="btn-main" onclick="openLink('https://t.me/LiliyaRoi')">💬 Написать мне в Telegram</button>
+  </div>
+
+  <div class="container">
+    
+    <!-- Вкладка 1: Портфолио -->
+    <div id="tab-works" class="tab-content active">
+      <div class="section-title">📂 Направления портфолио</div>
+      <div class="list-cards">
+        <div class="card" onclick="openLink('https://t.me/LRoy_Portfolio')">
+          <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
+          <div class="card-desc">Инфографика, реклама для брендов</div>
+        </div>
+
+        <div class="card" onclick="openLink('https://t.me/LRoy_Portfolio')">
+          <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
+          <div class="card-desc">Генерация роликов, оживление кадров</div>
+        </div>
+
+        <div class="card" onclick="openLink('https://t.me/LRoy_Portfolio')">
+          <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
+          <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
+        </div>
+
+        <div class="card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
+          <div class="card-desc">Процессы, тесты нейросетей и практика</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Вкладка 2: Услуги -->
+    <div id="tab-services" class="tab-content">
+      <div class="section-title">💼 Форматы работы</div>
+      <div class="list-cards">
+        <div class="card" onclick="openLink('https://t.me/LiliyaRoi')">
+          <div class="card-title">✨ AI-контент и видео под ключ</div>
+          <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
+        </div>
+
+        <div class="card" onclick="openLink('https://t.me/LiliyaRoi')">
+          <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
+          <div class="card-desc">Продающая инфографика и карточки товаров</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tabbar">
+    <button class="tab-btn active" onclick="switchTab('works')">📂 Портфолио</button>
+    <button class="tab-btn" onclick="switchTab('services')">💼 Услуги</button>
+  </div>
+
+  <script>
+    const tg = window.Telegram?.WebApp;
+    if (tg) {
+      tg.expand();
+      tg.setHeaderColor('#f1efe9');
+      tg.setBackgroundColor('#f7f6f2');
+    }
+
+    function openLink(url) {
+      if (tg && tg.openTelegramLink) {
+        tg.openTelegramLink(url);
+      } else {
+        window.location.href = url;
+      }
+    }
+
+    function switchTab(tabName) {
+      if (tg?.HapticFeedback) {
+        tg.HapticFeedback.impactOccurred('light');
+      }
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+      if (tabName === 'works') {
+        document.getElementById('tab-works').classList.add('active');
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      } else {
+        document.getElementById('tab-services').classList.add('active');
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
