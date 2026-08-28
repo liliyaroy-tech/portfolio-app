@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Лилия | AI Портфолио</title>
+  <title>Лилия | AI Навигатор</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
@@ -14,7 +14,6 @@
       --text-muted: #786f66;
       --btn-active-bg: #ffffff;
       --border-color: #dfd7cb;
-      --modal-bg: #ffffff;
     }
 
     * {
@@ -187,87 +186,6 @@
       color: var(--text-main);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-
-    /* Modal Sheet for Viewing Content */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      display: none;
-      align-items: flex-end;
-      z-index: 200;
-      backdrop-filter: blur(2px);
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-sheet {
-      background: var(--modal-bg);
-      width: 100%;
-      max-height: 85vh;
-      border-radius: 24px 24px 0 0;
-      padding: 24px 20px 32px 20px;
-      overflow-y: auto;
-      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
-      animation: slideUp 0.25s ease;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .modal-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .modal-close {
-      background: #eee;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-    }
-
-    .modal-body {
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--text-main);
-    }
-
-    .modal-body p {
-      margin-bottom: 12px;
-    }
-
-    .modal-body ul {
-      margin-left: 20px;
-      margin-bottom: 16px;
-      color: var(--text-muted);
-    }
-
-    .modal-body li {
-      margin-bottom: 6px;
-    }
   </style>
 </head>
 <body>
@@ -276,9 +194,9 @@
   <div class="header">
     <div class="title">Лилия</div>
     <div class="subtitle">AI-контент & Творческий дневник</div>
-    <button class="contact-btn" onclick="openContact()">
+    <a href="https://t.me/LiliyaRoi" class="contact-btn link-action">
       💬 Написать мне в Telegram
-    </button>
+    </a>
   </div>
 
   <!-- TAB 1: ПОРТФОЛИО -->
@@ -286,25 +204,25 @@
     <div class="section-title">📁 Направления портфолио</div>
     <div class="cards-list">
       
-      <div class="card" onclick="openDetail('visual')">
+      <a href="https://t.me/portfolioroi?q=%23визуал" class="card link-action">
         <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
-        <div class="card-desc">Инфографика, реклама для брендов и маркетплейсов</div>
-      </div>
+        <div class="card-desc">Инфографика, реклама для брендов</div>
+      </a>
 
-      <div class="card" onclick="openDetail('video')">
+      <a href="https://t.me/portfolioroi?q=%23видео" class="card link-action">
         <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
-        <div class="card-desc">Генерация роликов, динамические эффекты и анимация</div>
-      </div>
+        <div class="card-desc">Генерация роликов, оживление кадров</div>
+      </a>
 
-      <div class="card" onclick="openDetail('art')">
+      <a href="https://t.me/portfolioroi?q=%23арт" class="card link-action">
         <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
-        <div class="card-desc">Нейрофотосессии, персонажи, стилизации и арт-концепты</div>
-      </div>
+        <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
+      </a>
 
-      <div class="card" onclick="openDetail('diary')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
-        <div class="card-desc">Процессы создания, тесты нейросетей и авторские заметки</div>
-      </div>
+        <div class="card-desc">Процессы, тесты нейросетей и практика</div>
+      </a>
 
     </div>
   </div>
@@ -314,15 +232,15 @@
     <div class="section-title">💼 Форматы работы</div>
     <div class="cards-list">
 
-      <div class="card" onclick="openDetail('service-video')">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">✨ AI-контент и видео под ключ</div>
-        <div class="card-desc">От идеи и сценария до финального монтажа и генерации</div>
-      </div>
+        <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
+      </a>
 
-      <div class="card" onclick="openDetail('service-brand')">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
-        <div class="card-desc">Продающая инфографика, баннеры и оформление карточек</div>
-      </div>
+        <div class="card-desc">Продающая инфографика и карточки товаров</div>
+      </a>
 
     </div>
   </div>
@@ -339,19 +257,6 @@
     </div>
   </div>
 
-  <!-- Modal Sheet -->
-  <div id="modalOverlay" class="modal-overlay" onclick="closeModal(event)">
-    <div class="modal-sheet" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div id="modalTitle" class="modal-title">Заголовок</div>
-        <button class="modal-close" onclick="closeModal()">✕</button>
-      </div>
-      <div id="modalBody" class="modal-body">
-        Содержимое
-      </div>
-    </div>
-  </div>
-
   <script>
     const tg = window.Telegram?.WebApp;
     if (tg) {
@@ -359,96 +264,24 @@
       tg.expand();
     }
 
-    // База данных контента карточек
-    const detailsData = {
-      visual: {
-        title: "🛍 Продающий визуал",
-        content: `
-          <p>Разработка визуального контента, привлекающего внимание покупателей и повышающего конверсию.</p>
-          <ul>
-            <li>Инфографика для маркетплейсов (Wildberries, Ozon)</li>
-            <li>Рекламные баннеры и креативы</li>
-            <li>Оформление карточек товаров и акцент на преимуществах</li>
-          </ul>
-        `
-      },
-      video: {
-        title: "🎬 AI-видео и анимация",
-        content: `
-          <p>Создание динамичных роликов с помощью нейросетей и монтажа.</p>
-          <ul>
-            <li>Оживление статичных кадров и генерация видео</li>
-            <li>Динамичный монтаж, переходы и трендовые эффекты</li>
-            <li>Адаптация форматов под Reels, Shorts и Stories</li>
-          </ul>
-        `
-      },
-      art: {
-        title: "🎨 Нейродизайн и арт-проекты",
-        content: `
-          <p>Концептуальное художественное оформление и уникальная стилистика.</p>
-          <ul>
-            <li>Нейрофотосессии и генерация персонажей</li>
-            <li>Стилизованные арт-концепты и иллюстрации</li>
-            <li>Разработка фирменного визуального стиля</li>
-          </ul>
-        `
-      },
-      diary: {
-        title: "📖 Дневник в канале",
-        content: `
-          <p>В моем основном канале я делюсь закулисьем творческого процесса:</p>
-          <ul>
-            <li>Эксперименты с новыми нейросетями и промптами</li>
-            <li>Разборы работ и до/после</li>
-            <li>Практический опыт и вдохновение</li>
-          </ul>
-        `
-      },
-      'service-video': {
-        title: "✨ AI-контент под ключ",
-        content: `
-          <p>Полный цикл производства контента под ваши задачи:</p>
-          <ul>
-            <li>Разработка концепции и промптов</li>
-            <li>Генерация визуалов и видеоряда</li>
-            <li>Цветокоррекция, саунд-дизайн и финальная сборка</li>
-          </ul>
-        `
-      },
-      'service-brand': {
-        title: "📦 Упаковка брендов",
-        content: `
-          <p>Комплексное визуальное сопровождение товаров и брендов:</p>
-          <ul>
-            <li>Создание единой визуальной стилистики</li>
-            <li>Продающие карточки для маркетплейсов</li>
-            <li>Оформление презентаций и витрин</li>
-          </ul>
-        `
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('.link-action');
+      if (link) {
+        e.preventDefault();
+        const url = link.getAttribute('href');
+        
+        if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
+          tg.openTelegramLink(url);
+          setTimeout(() => {
+            if (typeof tg.close === 'function') {
+              tg.close();
+            }
+          }, 150);
+        } else {
+          window.location.href = url;
+        }
       }
-    };
-
-    function openDetail(key) {
-      const data = detailsData[key];
-      if (!data) return;
-      document.getElementById('modalTitle').innerText = data.title;
-      document.getElementById('modalBody').innerHTML = data.content;
-      document.getElementById('modalOverlay').classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-    }
-
-    function openContact() {
-      const url = "https://t.me/LiliyaRoi";
-      if (tg && typeof tg.openTelegramLink === 'function') {
-        tg.openTelegramLink(url);
-      } else {
-        window.open(url, '_blank');
-      }
-    }
+    });
 
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
