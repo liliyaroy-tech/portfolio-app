@@ -1,5 +1,4 @@
- 
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -132,11 +131,11 @@
     /* Tab Content Switcher */
     .tab-content {
       display: none;
-      animation: fadeIn 0.25s ease;
     }
 
     .tab-content.active {
       display: block;
+      animation: fadeIn 0.25s ease;
     }
 
     @keyframes fadeIn {
@@ -198,9 +197,9 @@
   <div class="header">
     <div class="title">Лилия</div>
     <div class="subtitle">AI-контент & Творческий дневник</div>
-    <button class="contact-btn" onclick="openTgLink('https://t.me/portfolioroi')">
+    <a href="https://t.me/portfolioroi" class="contact-btn link-action">
       💬 Написать мне в Telegram
-    </button>
+    </a>
   </div>
 
   <!-- TAB 1: ПОРТФОЛИО -->
@@ -208,25 +207,25 @@
     <div class="section-title">📁 Направления портфолио</div>
     <div class="cards-list">
       
-      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
         <div class="card-desc">Инфографика, реклама для брендов</div>
-      </div>
+      </a>
 
-      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
         <div class="card-desc">Генерация роликов, оживление кадров</div>
-      </div>
+      </a>
 
-      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
         <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
-      </div>
+      </a>
 
-      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
         <div class="card-desc">Процессы, тесты нейросетей и практика</div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -236,15 +235,15 @@
     <div class="section-title">💼 Форматы работы</div>
     <div class="cards-list">
 
-      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">✨ AI-контент и видео под ключ</div>
         <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
-      </div>
+      </a>
 
-      <div class="card" onclick="openTgLink('https://t.me/portfolioroi')">
+      <a href="https://t.me/portfolioroi" class="card link-action">
         <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
         <div class="card-desc">Продающая инфографика и карточки товаров</div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -262,11 +261,27 @@
   </div>
 
   <script>
-    // Инициализация Telegram WebApp
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
+    // Инициализация WebApp
+    const tg = window.Telegram?.WebApp;
+    if (tg) {
+      tg.ready();
+      tg.expand();
     }
+
+    // Универсальный обработчик кликов
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('.link-action');
+      if (link) {
+        e.preventDefault();
+        const url = link.getAttribute('href');
+        
+        if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
+          tg.openTelegramLink(url);
+        } else {
+          window.location.href = url;
+        }
+      }
+    });
 
     // Переключение вкладок
     function switchTab(tabName) {
@@ -279,15 +294,6 @@
       } else {
         document.getElementById('tab-services').classList.add('active');
         document.getElementById('btn-services').classList.add('active');
-      }
-    }
-
-    // Бесшовный переход по ссылкам Telegram
-    function openTgLink(url) {
-      if (window.Telegram && window.Telegram.WebApp) {
-        window.Telegram.WebApp.openTelegramLink(url);
-      } else {
-        window.open(url, '_blank');
       }
     }
   </script>
