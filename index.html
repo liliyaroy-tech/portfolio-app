@@ -197,7 +197,7 @@
   <div class="header">
     <div class="title">Лилия</div>
     <div class="subtitle">AI-контент & Творческий дневник</div>
-    <a href="https://t.me/portfolioroi" class="contact-btn link-action">
+    <a href="https://t.me/LiliyaRoi" class="contact-btn link-action">
       💬 Написать мне в Telegram
     </a>
   </div>
@@ -207,17 +207,17 @@
     <div class="section-title">📁 Направления портфолио</div>
     <div class="cards-list">
       
-      <a href="https://t.me/portfolioroi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
         <div class="card-desc">Инфографика, реклама для брендов</div>
       </a>
 
-      <a href="https://t.me/portfolioroi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
         <div class="card-desc">Генерация роликов, оживление кадров</div>
       </a>
 
-      <a href="https://t.me/portfolioroi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
         <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
       </a>
@@ -235,12 +235,12 @@
     <div class="section-title">💼 Форматы работы</div>
     <div class="cards-list">
 
-      <a href="https://t.me/portfolioroi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">✨ AI-контент и видео под ключ</div>
         <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
       </a>
 
-      <a href="https://t.me/portfolioroi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" class="card link-action">
         <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
         <div class="card-desc">Продающая инфографика и карточки товаров</div>
       </a>
@@ -267,7 +267,6 @@
       tg.expand();
     }
 
-    // Обработчик кликов с мгновенным открытием и закрытием окна витрины
     document.addEventListener('click', function(e) {
       const link = e.target.closest('.link-action');
       if (link) {
@@ -276,19 +275,17 @@
         
         if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
           tg.openTelegramLink(url);
-          // Закрываем окно Mini App, чтобы пользователь сразу увидел открывшийся чат/пост
           setTimeout(() => {
             if (typeof tg.close === 'function') {
               tg.close();
             }
           }, 150);
         } else {
-          window.location.href = url;
+          window.open(url, '_blank');
         }
       }
     });
 
-    // Переключение вкладок
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
