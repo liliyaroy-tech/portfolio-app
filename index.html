@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Лилия | AI Навигатор</title>
+  <title>Лилия | AI Портфолио</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
@@ -14,6 +14,7 @@
       --text-muted: #786f66;
       --btn-active-bg: #ffffff;
       --border-color: #dfd7cb;
+      --accent: #2d2621;
     }
 
     * {
@@ -33,6 +34,22 @@
       padding: 16px 16px 90px 16px;
     }
 
+    /* Screen Management */
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header Profile */
     .header {
       text-align: center;
       margin-bottom: 20px;
@@ -75,6 +92,7 @@
       background-color: var(--card-hover);
     }
 
+    /* Section Headers */
     .section-title {
       font-size: 14px;
       font-weight: 700;
@@ -85,6 +103,34 @@
       margin: 16px 0 10px 4px;
     }
 
+    /* Back Navigation Bar inside sub-pages */
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .back-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .page-title {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    /* Cards */
     .cards-list {
       display: flex;
       flex-direction: column;
@@ -97,8 +143,6 @@
       padding: 14px 16px;
       display: flex;
       flex-direction: column;
-      text-decoration: none;
-      color: inherit;
       cursor: pointer;
       transition: transform 0.15s ease, background-color 0.15s ease;
       border: 1px solid rgba(0, 0, 0, 0.03);
@@ -114,6 +158,15 @@
       font-weight: 700;
       letter-spacing: 0.2px;
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-title::after {
+      content: "→";
+      font-size: 14px;
+      color: var(--text-muted);
     }
 
     .card-desc {
@@ -122,20 +175,40 @@
       line-height: 1.35;
     }
 
-    .tab-content {
-      display: none;
+    /* Gallery / Project Items */
+    .work-item {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-color);
     }
 
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.25s ease;
+    .work-item h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: var(--text-main);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    .work-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 10px;
     }
 
+    .work-tag {
+      display: inline-block;
+      background: var(--btn-active-bg);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Bottom Navigation Bar */
     .bottom-nav-container {
       position: fixed;
       bottom: 16px;
@@ -185,64 +258,155 @@
 </head>
 <body>
 
-  <div class="header">
-    <div class="title">Лилия</div>
-    <div class="subtitle">AI-контент & Творческий дневник</div>
-    <a href="https://t.me/LiliyaRoi" class="contact-btn link-action">
-      💬 Написать мне в Telegram
-    </a>
-  </div>
+  <!-- ==================== ЭКРАН 1: ГЛАВНАЯ (ПОРТФОЛИО) ==================== -->
+  <div id="screen-portfolio" class="screen active">
+    <div class="header">
+      <div class="title">Лилия</div>
+      <div class="subtitle">AI-контент & Творческий дневник</div>
+      <button class="contact-btn" onclick="openChat('LiliyaRoi')">
+        💬 Написать мне в Telegram
+      </button>
+    </div>
 
-  <div id="tab-portfolio" class="tab-content active">
     <div class="section-title">📁 Направления портфолио</div>
     <div class="cards-list">
       
-      <a href="https://t.me/portfolioroi?q=%23визуал" data-app-url="tg://resolve?domain=portfolioroi&query=%23визуал" class="card link-action">
+      <div class="card" onclick="showScreen('page-visual')">
         <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
-        <div class="card-desc">Инфографика, реклама для брендов</div>
-      </a>
+        <div class="card-desc">Инфографика, реклама для брендов и карточки</div>
+      </div>
 
-      <a href="https://t.me/portfolioroi?q=%23видео" data-app-url="tg://resolve?domain=portfolioroi&query=%23видео" class="card link-action">
+      <div class="card" onclick="showScreen('page-video')">
         <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
-        <div class="card-desc">Генерация роликов, оживление кадров</div>
-      </a>
+        <div class="card-desc">Генерация роликов, оживление кадров и монтаж</div>
+      </div>
 
-      <a href="https://t.me/portfolioroi?q=%23арт" data-app-url="tg://resolve?domain=portfolioroi&query=%23арт" class="card link-action">
+      <div class="card" onclick="showScreen('page-art')">
         <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
-        <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
-      </a>
+        <div class="card-desc">Нейрофотосессии, персонажи и креативный стиль</div>
+      </div>
 
-      <a href="https://t.me/portfolioroi" data-app-url="tg://resolve?domain=portfolioroi" class="card link-action">
-        <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
-        <div class="card-desc">Процессы, тесты нейросетей и практика</div>
-      </a>
+      <div class="card" onclick="openChannel('portfolioroi')">
+        <div class="card-title">📖 МОЙ ДНЕВНИК В КАНАЛЕ</div>
+        <div class="card-desc">Процессы, тесты нейросетей и авторские заметки</div>
+      </div>
 
     </div>
   </div>
 
-  <div id="tab-services" class="tab-content">
-    <div class="section-title">💼 Форматы работы</div>
+  <!-- ==================== ЭКРАН 2: УСЛУГИ ==================== -->
+  <div id="screen-services" class="screen">
+    <div class="header">
+      <div class="title">Лилия</div>
+      <div class="subtitle">Форматы сотрудничества и прайс</div>
+      <button class="contact-btn" onclick="openChat('LiliyaRoi')">
+        💬 Написать мне в Telegram
+      </button>
+    </div>
+
+    <div class="section-title">💼 Доступные услуги</div>
     <div class="cards-list">
 
-      <a href="https://t.me/LiliyaRoi" data-app-url="tg://resolve?domain=LiliyaRoi" class="card link-action">
-        <div class="card-title">✨ AI-контент и видео под ключ</div>
-        <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
-      </a>
+      <div class="work-item">
+        <h4>✨ AI-контент и видео под ключ</h4>
+        <p>Полное создание роликов от идеи и генерации до саунд-дизайна и финального монтажа.</p>
+        <span class="work-tag">Reels / Shorts / Реклама</span>
+      </div>
 
-      <a href="https://t.me/LiliyaRoi" data-app-url="tg://resolve?domain=LiliyaRoi" class="card link-action">
-        <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
-        <div class="card-desc">Продающая инфографика и карточки товаров</div>
-      </a>
+      <div class="work-item">
+        <h4>📦 Упаковка брендов и товаров</h4>
+        <p>Продающая инфографика для карточек Wildberries, Ozon, баннеров и промо-кампаний.</p>
+        <span class="work-tag">Маркетплейсы / Дизайн</span>
+      </div>
+
+      <div class="work-item">
+        <h4>🎨 Нейрофотосессии и концепты</h4>
+        <p>Генерация реалистичных или стилизованных персонажей, предметная съёмка без фотографа.</p>
+        <span class="work-tag">Midjourney / Flux / AI</span>
+      </div>
 
     </div>
   </div>
 
+  <!-- ==================== СТРАНИЦА: ПРОДАЮЩИЙ ВИЗУАЛ ==================== -->
+  <div id="page-visual" class="screen">
+    <div class="page-header">
+      <button class="back-btn" onclick="showScreen('screen-portfolio')">← Назад</button>
+      <div class="page-title">🛍 Продающий визуал</div>
+    </div>
+
+    <div class="work-item">
+      <h4>Дизайн для маркетплейсов</h4>
+      <p>Создание продающей инфографики с акцентом на УТП товара, структурой и чистым визуальным рядом.</p>
+      <span class="work-tag">Wildberries / Ozon</span>
+    </div>
+
+    <div class="work-item">
+      <h4>Рекламные баннеры и креативы</h4>
+      <p>Оформление рекламных материалов, сторис и постов для соцсетей брендов.</p>
+      <span class="work-tag">Digital-реклама</span>
+    </div>
+
+    <button class="contact-btn" style="margin-top: 10px;" onclick="openChat('LiliyaRoi')">
+      Заказать визуал
+    </button>
+  </div>
+
+  <!-- ==================== СТРАНИЦА: AI-ВИДЕО ==================== -->
+  <div id="page-video" class="screen">
+    <div class="page-header">
+      <button class="back-btn" onclick="showScreen('screen-portfolio')">← Назад</button>
+      <div class="page-title">🎬 AI-видео и анимация</div>
+    </div>
+
+    <div class="work-item">
+      <h4>Оживление статичных кадров</h4>
+      <p>Создание плавных кинематографичных движений, переходов и эффектов из обычных изображений.</p>
+      <span class="work-tag">Runway / Luma / Kling</span>
+    </div>
+
+    <div class="work-item">
+      <h4>Динамичные ролики для соцсетей</h4>
+      <p>Сборка трендовых роликов с синхронизацией музыки, текстом и визуальными хуками.</p>
+      <span class="work-tag">Reels / Shorts</span>
+    </div>
+
+    <button class="contact-btn" style="margin-top: 10px;" onclick="openChat('LiliyaRoi')">
+      Заказать AI-видео
+    </button>
+  </div>
+
+  <!-- ==================== СТРАНИЦА: НЕЙРОДИЗАЙН ==================== -->
+  <div id="page-art" class="screen">
+    <div class="page-header">
+      <button class="back-btn" onclick="showScreen('screen-portfolio')">← Назад</button>
+      <div class="page-title">🎨 Нейродизайн и арт</div>
+    </div>
+
+    <div class="work-item">
+      <h4>Нейрофотосессии</h4>
+      <p>Создание уникальных модельных и предметных съёмок в любых локациях и стилистиках.</p>
+      <span class="work-tag">Fashion / Editorial</span>
+    </div>
+
+    <div class="work-item">
+      <h4>Персонажи и арт-концепты</h4>
+      <p>Разработка визуального образа брендов, маскотов и художественных иллюстраций.</p>
+      <span class="work-tag">Concept Art</span>
+    </div>
+
+    <button class="contact-btn" style="margin-top: 10px;" onclick="openChat('LiliyaRoi')">
+      Обсудить концепт
+    </button>
+  </div>
+
+  <!-- ==================== НИЖНЕЕ МЕНЮ ПЕРЕКЛЮЧЕНИЯ ==================== -->
   <div class="bottom-nav-container">
     <div class="bottom-nav">
-      <button id="btn-portfolio" class="nav-btn active" onclick="switchTab('portfolio')">
+      <button id="btn-portfolio" class="nav-btn active" onclick="showScreen('screen-portfolio')">
         📁 Портфолио
       </button>
-      <button id="btn-services" class="nav-btn" onclick="switchTab('services')">
+      <button id="btn-services" class="nav-btn" onclick="showScreen('screen-services')">
         💼 Услуги
       </button>
     </div>
@@ -255,40 +419,38 @@
       tg.expand();
     }
 
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('.link-action');
-      if (link) {
-        e.preventDefault();
-        const appUrl = link.getAttribute('data-app-url');
-        const webUrl = link.getAttribute('href');
-
-        if (tg) {
-          if (appUrl && typeof tg.openTelegramLink === 'function') {
-            tg.openTelegramLink(appUrl);
-          } else if (typeof tg.openTelegramLink === 'function' && webUrl.includes('t.me/')) {
-            tg.openTelegramLink(webUrl);
-          } else {
-            window.location.href = webUrl;
-          }
-          setTimeout(() => {
-            if (typeof tg.close === 'function') tg.close();
-          }, 150);
-        } else {
-          window.location.href = webUrl;
-        }
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById(screenId);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo(0, 0);
       }
-    });
 
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-
-      if (tabName === 'portfolio') {
-        document.getElementById('tab-portfolio').classList.add('active');
-        document.getElementById('btn-portfolio').classList.add('active');
-      } else {
-        document.getElementById('tab-services').classList.add('active');
+      // Обновление подсветки нижних кнопок
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      if (screenId === 'screen-services') {
         document.getElementById('btn-services').classList.add('active');
+      } else {
+        document.getElementById('btn-portfolio').classList.add('active');
+      }
+    }
+
+    function openChat(username) {
+      const url = 'https://t.me/' + username;
+      if (tg && typeof tg.openTelegramLink === 'function') {
+        tg.openTelegramLink(url);
+      } else {
+        window.open(url, '_blank');
+      }
+    }
+
+    function openChannel(channelName) {
+      const url = 'https://t.me/' + channelName;
+      if (tg && typeof tg.openTelegramLink === 'function') {
+        tg.openTelegramLink(url);
+      } else {
+        window.open(url, '_blank');
       }
     }
   </script>
