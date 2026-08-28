@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -261,14 +261,13 @@
   </div>
 
   <script>
-    // Инициализация WebApp
     const tg = window.Telegram?.WebApp;
     if (tg) {
       tg.ready();
       tg.expand();
     }
 
-    // Универсальный обработчик кликов
+    // Обработчик кликов с мгновенным открытием и закрытием окна витрины
     document.addEventListener('click', function(e) {
       const link = e.target.closest('.link-action');
       if (link) {
@@ -277,6 +276,12 @@
         
         if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
           tg.openTelegramLink(url);
+          // Закрываем окно Mini App, чтобы пользователь сразу увидел открывшийся чат/пост
+          setTimeout(() => {
+            if (typeof tg.close === 'function') {
+              tg.close();
+            }
+          }, 150);
         } else {
           window.location.href = url;
         }
