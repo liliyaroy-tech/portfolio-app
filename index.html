@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Лилия | AI Портфолио</title>
+  <title>Лилия | AI Навигатор</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
@@ -33,7 +33,6 @@
       padding: 16px 16px 90px 16px;
     }
 
-    /* Header Profile */
     .header {
       text-align: center;
       margin-bottom: 20px;
@@ -76,7 +75,6 @@
       background-color: var(--card-hover);
     }
 
-    /* Section Headers */
     .section-title {
       font-size: 14px;
       font-weight: 700;
@@ -87,7 +85,6 @@
       margin: 16px 0 10px 4px;
     }
 
-    /* Cards */
     .cards-list {
       display: flex;
       flex-direction: column;
@@ -125,7 +122,6 @@
       line-height: 1.35;
     }
 
-    /* Tab Content Switcher */
     .tab-content {
       display: none;
     }
@@ -140,7 +136,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Bottom Navigation Bar */
     .bottom-nav-container {
       position: fixed;
       bottom: 16px;
@@ -190,7 +185,6 @@
 </head>
 <body>
 
-  <!-- Header -->
   <div class="header">
     <div class="title">Лилия</div>
     <div class="subtitle">AI-контент & Творческий дневник</div>
@@ -199,27 +193,26 @@
     </a>
   </div>
 
-  <!-- TAB 1: ПОРТФОЛИО -->
   <div id="tab-portfolio" class="tab-content active">
     <div class="section-title">📁 Направления портфолио</div>
     <div class="cards-list">
       
-      <a href="https://t.me/portfolioroi?q=%23визуал" class="card link-action">
+      <a href="https://t.me/portfolioroi?q=%23визуал" data-app-url="tg://resolve?domain=portfolioroi&query=%23визуал" class="card link-action">
         <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
         <div class="card-desc">Инфографика, реклама для брендов</div>
       </a>
 
-      <a href="https://t.me/portfolioroi?q=%23видео" class="card link-action">
+      <a href="https://t.me/portfolioroi?q=%23видео" data-app-url="tg://resolve?domain=portfolioroi&query=%23видео" class="card link-action">
         <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
         <div class="card-desc">Генерация роликов, оживление кадров</div>
       </a>
 
-      <a href="https://t.me/portfolioroi?q=%23арт" class="card link-action">
+      <a href="https://t.me/portfolioroi?q=%23арт" data-app-url="tg://resolve?domain=portfolioroi&query=%23арт" class="card link-action">
         <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
         <div class="card-desc">Нейрофотосессии, персонажи и стиль</div>
       </a>
 
-      <a href="https://t.me/portfolioroi" class="card link-action">
+      <a href="https://t.me/portfolioroi" data-app-url="tg://resolve?domain=portfolioroi" class="card link-action">
         <div class="card-title">📖 ДНЕВНИК В КАНАЛЕ</div>
         <div class="card-desc">Процессы, тесты нейросетей и практика</div>
       </a>
@@ -227,17 +220,16 @@
     </div>
   </div>
 
-  <!-- TAB 2: УСЛУГИ -->
   <div id="tab-services" class="tab-content">
     <div class="section-title">💼 Форматы работы</div>
     <div class="cards-list">
 
-      <a href="https://t.me/LiliyaRoi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" data-app-url="tg://resolve?domain=LiliyaRoi" class="card link-action">
         <div class="card-title">✨ AI-контент и видео под ключ</div>
         <div class="card-desc">Концепция, генерация, анимация и монтаж</div>
       </a>
 
-      <a href="https://t.me/LiliyaRoi" class="card link-action">
+      <a href="https://t.me/LiliyaRoi" data-app-url="tg://resolve?domain=LiliyaRoi" class="card link-action">
         <div class="card-title">📦 Упаковка брендов и маркетплейсов</div>
         <div class="card-desc">Продающая инфографика и карточки товаров</div>
       </a>
@@ -245,7 +237,6 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation -->
   <div class="bottom-nav-container">
     <div class="bottom-nav">
       <button id="btn-portfolio" class="nav-btn active" onclick="switchTab('portfolio')">
@@ -268,17 +259,22 @@
       const link = e.target.closest('.link-action');
       if (link) {
         e.preventDefault();
-        const url = link.getAttribute('href');
-        
-        if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
-          tg.openTelegramLink(url);
+        const appUrl = link.getAttribute('data-app-url');
+        const webUrl = link.getAttribute('href');
+
+        if (tg) {
+          if (appUrl && typeof tg.openTelegramLink === 'function') {
+            tg.openTelegramLink(appUrl);
+          } else if (typeof tg.openTelegramLink === 'function' && webUrl.includes('t.me/')) {
+            tg.openTelegramLink(webUrl);
+          } else {
+            window.location.href = webUrl;
+          }
           setTimeout(() => {
-            if (typeof tg.close === 'function') {
-              tg.close();
-            }
+            if (typeof tg.close === 'function') tg.close();
           }, 150);
         } else {
-          window.location.href = url;
+          window.location.href = webUrl;
         }
       }
     });
