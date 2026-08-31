@@ -3,21 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Лилия | AI Портфолио</title>
+  <title>Лилия | AI-контент</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
-      --bg: #F8F6F2;
-      --card-bg: #FFFFFF;
-      --accent: #8E735B;
-      --accent-hover: #755C46;
-      --accent-soft: #F1ECE6;
-      --text-main: #2C2623;
-      --text-muted: #7E7670;
-      --border: #E8E2D9;
-      --nav-bg: rgba(255, 255, 255, 0.92);
-      --shadow-sm: 0 4px 12px rgba(44, 38, 35, 0.05);
-      --shadow-md: 0 8px 24px rgba(44, 38, 35, 0.08);
+      --bg-page: #FAF8F5;
+      --header-bg: #DCE3DD;
+      --card-bg: #EFEAE3;
+      --card-border: #DFD7CB;
+      --text-main: #3D352E;
+      --text-sub: #7A726A;
+      --shadow: 0 4px 12px rgba(61, 53, 46, 0.06);
     }
 
     * {
@@ -30,412 +26,193 @@
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-page);
       color: var(--text-main);
       min-height: 100vh;
-      padding-bottom: 96px;
-    }
-
-    .hero-header {
-      background: linear-gradient(180deg, #EFEAE2 0%, var(--bg) 100%);
-      padding: 24px 16px 16px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-title {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .hero-subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .quick-links {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      margin-bottom: 8px;
-    }
-
-    .btn-pill {
-      flex: 1;
-      max-width: 170px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      color: var(--text-main);
-      box-shadow: var(--shadow-sm);
-      cursor: pointer;
-    }
-
-    .btn-pill.primary {
-      background: var(--accent);
-      color: #FFFFFF;
-      border-color: var(--accent);
-      box-shadow: 0 4px 14px rgba(142, 115, 91, 0.25);
-    }
-
-    .btn-pill:active {
-      transform: scale(0.98);
-    }
-
-    .content {
-      padding: 16px;
-    }
-
-    .section-title-wrap {
-      margin: 12px 0 14px 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .work-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: var(--shadow-sm);
-      cursor: pointer;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      min-height: 120px;
-      transition: all 0.15s ease;
+      align-items: center;
+      padding-bottom: 30px;
     }
 
-    .work-card:active {
-      transform: scale(0.97);
-      box-shadow: none;
+    .container {
+      width: 100%;
+      max-width: 440px;
+      padding: 0 16px;
     }
 
-    .card-icon {
-      font-size: 26px;
-      margin-bottom: 10px;
+    /* ШАПКА С АВАТАРОМ */
+    .header-card {
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      border-top: none;
     }
 
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
+    .header-top {
+      height: 70px;
+      background: var(--header-bg);
+      position: relative;
+    }
+
+    .avatar-wrapper {
+      position: absolute;
+      bottom: -45px;
+      left: 20px;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      border: 4px solid #FFFFFF;
+      background: #EFEAE3;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .header-content {
+      padding: 12px 20px 18px 120px;
+      min-height: 75px;
+    }
+
+    .profile-name {
+      font-size: 19px;
+      font-weight: 800;
       color: var(--text-main);
-      line-height: 1.3;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    .profile-bio {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.35;
+    }
+
+    /* КНОПКИ-ПЛАШКИ */
+    .btn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .action-card {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.15s ease;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .action-card:active {
+      transform: scale(0.98);
+      background: #E8E2D9;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: var(--text-main);
+      text-transform: uppercase;
       margin-bottom: 4px;
     }
 
-    .card-desc {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.3;
-    }
-
-    .card-arrow {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-top: 8px;
-    }
-
-    .tab-view {
-      display: none;
-    }
-
-    .tab-view.active {
-      display: block;
-      animation: fadeIn 0.2s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(2px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .service-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .service-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .service-icon {
-      font-size: 22px;
-    }
-
-    .service-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .service-body {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    .service-action {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .btn-service-order {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 14px;
+    .card-subtitle {
       font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-service-order:active {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .nav-wrapper {
-      position: fixed;
-      bottom: 16px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      padding: 0 16px;
-      z-index: 100;
-    }
-
-    .nav-bar {
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 4px;
-      display: flex;
-      gap: 4px;
-      width: 100%;
-      max-width: 290px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .nav-btn {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 14px;
-      border-radius: 24px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .nav-btn.active {
-      background: var(--accent);
-      color: #FFFFFF;
-      box-shadow: 0 2px 8px rgba(142, 115, 91, 0.25);
+      color: var(--text-sub);
+      font-weight: 400;
+      line-height: 1.3;
     }
   </style>
 </head>
 <body>
 
-  <!-- ВКЛАДКА 1: РАБОТЫ -->
-  <div id="view-works" class="tab-view active">
-    <div class="hero-header">
-      <div class="hero-title">Лилия | AI-визуал</div>
-      <div class="hero-subtitle">Витрина AI-контента, видео и инфографики</div>
-      
-      <div class="quick-links">
-        <button class="btn-pill primary" onclick="openLink('https://t.me/LiliyaRoi')">
-          💬 Написать в ЛС
-        </button>
-        <button class="btn-pill" onclick="openLink('https://t.me/portfolioroi')">
-          📢 Мой TG-канал
-        </button>
+  <div class="container">
+    
+    <!-- ВЕРХНЯЯ ШАПКА -->
+    <div class="header-card">
+      <div class="header-top">
+        <div class="avatar-wrapper">
+          <img class="avatar-img" src="https://liliyaroy-tech.github.io/portfolio-app/avatar.jpg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23DCE3DD\'/><text x=\'50\' y=\'56\' font-size=\'30\' text-anchor=\'middle\' fill=\'%233D352E\'>✨</text></svg>'" alt="Лилия">
+        </div>
+      </div>
+      <div class="header-content">
+        <div class="profile-name">Лилия</div>
+        <div class="profile-bio">AI-контент &<br>Творческий дневник</div>
       </div>
     </div>
 
-    <div class="content">
-      
-      <div class="section-title-wrap">
-        <div class="section-title">🛍 Маркетплейсы & Дизайн</div>
-      </div>
-      <div class="grid">
-        <div class="work-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div>
-            <div class="card-icon">📦</div>
-            <div class="card-title">WB & Ozon</div>
-            <div class="card-desc">Инфографика карточек товаров и УТП</div>
-          </div>
-          <div class="card-arrow">Смотреть кейсы →</div>
+    <!-- СПИСОК КНОПОК -->
+    <div class="btn-list">
+
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
+        <div class="card-title-row">
+          <span>🛍</span>
+          <span>ПРОДАЮЩИЙ ВИЗУАЛ</span>
         </div>
-        <div class="work-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div>
-            <div class="card-icon">🎯</div>
-            <div class="card-title">Промо & Баннеры</div>
-            <div class="card-desc">Рекламный визуал и оформление брендов</div>
-          </div>
-          <div class="card-arrow">Смотреть кейсы →</div>
-        </div>
+        <div class="card-subtitle">Инфографика, реклама для брендов</div>
       </div>
 
-      <div class="section-title-wrap">
-        <div class="section-title">🎬 AI-Видео & Анимация</div>
-      </div>
-      <div class="grid">
-        <div class="work-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div>
-            <div class="card-icon">🎥</div>
-            <div class="card-title">Reels & Shorts</div>
-            <div class="card-desc">Динамичный монтаж и цепляющие сценарии</div>
-          </div>
-          <div class="card-arrow">Смотреть кейсы →</div>
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
+        <div class="card-title-row">
+          <span>🎬</span>
+          <span>AI-ВИДЕО И АНИМАЦИЯ</span>
         </div>
-        <div class="work-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div>
-            <div class="card-icon">⚡</div>
-            <div class="card-title">Оживление кадров</div>
-            <div class="card-desc">Нейроэффекты, зум-переходы и анимация</div>
-          </div>
-          <div class="card-arrow">Смотреть кейсы →</div>
-        </div>
+        <div class="card-subtitle">Генерация роликов, оживление кадров, тесты</div>
       </div>
 
-      <div class="section-title-wrap">
-        <div class="section-title">🎨 AI-Арт & Фотосессии</div>
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
+        <div class="card-title-row">
+          <span>🎨</span>
+          <span>НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</span>
+        </div>
+        <div class="card-subtitle">Нейрофотосессия, персонажи, обложки и стиль</div>
       </div>
-      <div class="grid">
-        <div class="work-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div>
-            <div class="card-icon">✨</div>
-            <div class="card-title">Нейрофотосессии</div>
-            <div class="card-desc">Фэшн-съёмки и генерация моделей</div>
-          </div>
-          <div class="card-arrow">Смотреть кейсы →</div>
+
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
+        <div class="card-title-row">
+          <span>📖</span>
+          <span>ДНЕВНИК & ПРАКТИКА В КАНАЛЕ</span>
         </div>
-        <div class="work-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div>
-            <div class="card-icon">📖</div>
-            <div class="card-title">Концепт-проекты</div>
-            <div class="card-desc">3D-истории, комиксы и персонажи</div>
-          </div>
-          <div class="card-arrow">Смотреть кейсы →</div>
+        <div class="card-subtitle">Процессы, тесты нейросетей и практика</div>
+      </div>
+
+      <div class="action-card" onclick="openLink('https://t.me/LiliyaRoi')">
+        <div class="card-title-row">
+          <span>💬</span>
+          <span>НАПИСАТЬ МНЕ ЛИЧНО</span>
         </div>
+        <div class="card-subtitle">Обсудить проект или задать вопрос</div>
       </div>
 
     </div>
-  </div>
 
-  <!-- ВКЛАДКА 2: УСЛУГИ -->
-  <div id="view-services" class="tab-view">
-    <div class="hero-header">
-      <div class="hero-title">Услуги & Сотрудничество</div>
-      <div class="hero-subtitle">Форматы разработки под ваши задачи</div>
-      
-      <div class="quick-links">
-        <button class="btn-pill primary" onclick="openLink('https://t.me/LiliyaRoi')">
-          💬 Обсудить задачу
-        </button>
-      </div>
-    </div>
-
-    <div class="content">
-      <div class="service-card">
-        <div class="service-head">
-          <span class="service-icon">📦</span>
-          <div class="service-title">Инфографика для маркетплейсов</div>
-        </div>
-        <div class="service-body">
-          Создание главного и дополнительных слайдов для WB/Ozon: структурирование преимуществ, подбор графики, акцент на продающие триггеры.
-        </div>
-        <div class="service-action">
-          <button class="btn-service-order" onclick="openLink('https://t.me/LiliyaRoi')">Заказать →</button>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-head">
-          <span class="service-icon">🎬</span>
-          <div class="service-title">AI-ролики & Reels под ключ</div>
-        </div>
-        <div class="service-body">
-          Полный цикл: от идеи и промптов для генерации до динамичного монтажа с саунд-дизайном и плавными переходами.
-        </div>
-        <div class="service-action">
-          <button class="btn-service-order" onclick="openLink('https://t.me/LiliyaRoi')">Заказать →</button>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-head">
-          <span class="service-icon">✨</span>
-          <div class="service-title">Генерация визуала & Нейроарт</div>
-        </div>
-        <div class="service-body">
-          Разработка концепций, создание уникальных персонажей, модельных лукбуков и предметной съёмки для брендинга.
-        </div>
-        <div class="service-action">
-          <button class="btn-service-order" onclick="openLink('https://t.me/LiliyaRoi')">Заказать →</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- НАВИГАЦИЯ -->
-  <div class="nav-wrapper">
-    <div class="nav-bar">
-      <button id="tab-btn-works" class="nav-btn active" onclick="switchTab('view-works')">
-        📷 Работы
-      </button>
-      <button id="tab-btn-services" class="nav-btn" onclick="switchTab('view-services')">
-        💼 Услуги
-      </button>
-    </div>
   </div>
 
   <script>
@@ -443,25 +220,8 @@
     if (tg) {
       tg.ready();
       tg.expand();
-      tg.setHeaderColor('#EFEAE2');
-      tg.setBackgroundColor('#F8F6F2');
-    }
-
-    function switchTab(viewId) {
-      document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-
-      const target = document.getElementById(viewId);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo(0, 0);
-      }
-
-      if (viewId === 'view-services') {
-        document.getElementById('tab-btn-services').classList.add('active');
-      } else {
-        document.getElementById('tab-btn-works').classList.add('active');
-      }
+      tg.setHeaderColor('#DCE3DD');
+      tg.setBackgroundColor('#FAF8F5');
     }
 
     function openLink(url) {
