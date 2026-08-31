@@ -2,6 +2,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Лилия | AI-контент</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -41,7 +44,6 @@
       padding: 0 16px;
     }
 
-    /* ШАПКА */
     .header-card {
       width: 100%;
       background: #FFFFFF;
@@ -100,7 +102,6 @@
       line-height: 1.35;
     }
 
-    /* КНОПКИ */
     .btn-list {
       display: flex;
       flex-direction: column;
@@ -122,6 +123,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
     }
 
     .action-card:active {
@@ -154,7 +156,7 @@
 
   <div class="container">
     
-    <!-- ШАПКА -->
+    <!-- ВЕРХНЯЯ ШАПКА -->
     <div class="header-card">
       <div class="header-top">
         <div class="avatar-wrapper">
@@ -167,53 +169,53 @@
       </div>
     </div>
 
-    <!-- КНОПКИ С ТОЧНЫМИ АДРЕСАМИ -->
+    <!-- КНОПКИ-ПЛАШКИ -->
     <div class="btn-list">
 
-      <!-- ВЕДЕТ В ПОРТФОЛИО: РАЗДЕЛ ВИЗУАЛ -->
-      <div class="action-card" onclick="openLink('https://t.me/LRoy_Portfolio')">
+      <!-- 1. ПРОДАЮЩИЙ ВИЗУАЛ -> ПОРТФОЛИО -->
+      <a class="action-card" href="https://t.me/LRoy_Portfolio" onclick="handleLink(event, 'https://t.me/LRoy_Portfolio')">
         <div class="card-title-row">
           <span>🛍</span>
           <span>ПРОДАЮЩИЙ ВИЗУАЛ</span>
         </div>
         <div class="card-subtitle">Инфографика, реклама для брендов</div>
-      </div>
+      </a>
 
-      <!-- ВЕДЕТ В ПОРТФОЛИО: РАЗДЕЛ ВИДЕО -->
-      <div class="action-card" onclick="openLink('https://t.me/LRoy_Portfolio')">
+      <!-- 2. AI-ВИДЕО -> ПОРТФОЛИО -->
+      <a class="action-card" href="https://t.me/LRoy_Portfolio" onclick="handleLink(event, 'https://t.me/LRoy_Portfolio')">
         <div class="card-title-row">
           <span>🎬</span>
           <span>AI-ВИДЕО И АНИМАЦИЯ</span>
         </div>
         <div class="card-subtitle">Генерация роликов, оживление кадров, тесты</div>
-      </div>
+      </a>
 
-      <!-- ВЕДЕТ В ПОРТФОЛИО: РАЗДЕЛ АРТ -->
-      <div class="action-card" onclick="openLink('https://t.me/LRoy_Portfolio')">
+      <!-- 3. НЕЙРОДИЗАЙН -> ПОРТФОЛИО -->
+      <a class="action-card" href="https://t.me/LRoy_Portfolio" onclick="handleLink(event, 'https://t.me/LRoy_Portfolio')">
         <div class="card-title-row">
           <span>🎨</span>
           <span>НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</span>
         </div>
         <div class="card-subtitle">Нейрофотосессия, персонажи, обложки и стиль</div>
-      </div>
+      </a>
 
-      <!-- ВЕДЕТ В ДНЕВНИК -->
-      <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
+      <!-- 4. ДНЕВНИК -> КАНАЛ ДНЕВНИКА -->
+      <a class="action-card" href="https://t.me/portfolioroi" onclick="handleLink(event, 'https://t.me/portfolioroi')">
         <div class="card-title-row">
           <span>📖</span>
           <span>ДНЕВНИК & ПРАКТИКА В КАНАЛЕ</span>
         </div>
         <div class="card-subtitle">Процессы, тесты нейросетей и практика</div>
-      </div>
+      </a>
 
-      <!-- ВЕДЕТ В ЛИЧКУ -->
-      <div class="action-card" onclick="openLink('https://t.me/LiliyaRoi')">
+      <!-- 5. СВЯЗЬ -> ЛИЧКА -->
+      <a class="action-card" href="https://t.me/LiliyaRoi" onclick="handleLink(event, 'https://t.me/LiliyaRoi')">
         <div class="card-title-row">
           <span>💬</span>
           <span>НАПИСАТЬ МНЕ ЛИЧНО</span>
         </div>
         <div class="card-subtitle">Обсудить проект или задать вопрос</div>
-      </div>
+      </a>
 
     </div>
 
@@ -228,11 +230,10 @@
       tg.setBackgroundColor('#FAF8F5');
     }
 
-    function openLink(url) {
-      if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
+    function handleLink(e, url) {
+      if (tg && typeof tg.openTelegramLink === 'function') {
+        e.preventDefault();
         tg.openTelegramLink(url);
-      } else {
-        window.open(url, '_blank');
       }
     }
   </script>
