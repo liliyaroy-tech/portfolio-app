@@ -13,7 +13,6 @@
       --card-border: #DFD7CB;
       --text-main: #3D352E;
       --text-sub: #7A726A;
-      --accent: #8E735B;
       --shadow: 0 4px 14px rgba(61, 53, 46, 0.06);
     }
 
@@ -47,7 +46,7 @@
       width: 100%;
       background: #FFFFFF;
       border-radius: 0 0 20px 20px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       box-shadow: var(--shadow);
       overflow: hidden;
       border: 1px solid var(--card-border);
@@ -64,22 +63,27 @@
       position: absolute;
       bottom: -40px;
       left: 20px;
-      width: 80px;
-      height: 80px;
+      width: 82px;
+      height: 82px;
       border-radius: 50%;
       border: 4px solid #FFFFFF;
-      background: #EAE5DE;
+      background: #EFEAE3;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .header-content {
-      padding: 12px 20px 16px 115px;
-      min-height: 70px;
+      padding: 12px 20px 18px 116px;
+      min-height: 72px;
     }
 
     .profile-name {
@@ -87,7 +91,7 @@
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.2;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .profile-bio {
@@ -96,23 +100,7 @@
       line-height: 1.35;
     }
 
-    /* ЭКРАНЫ */
-    .screen {
-      display: none;
-      width: 100%;
-      animation: fadeIn 0.2s ease-out;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ГЛАВНОЕ МЕНЮ КНОПОК */
+    /* КНОПКИ */
     .btn-list {
       display: flex;
       flex-direction: column;
@@ -160,99 +148,18 @@
       font-weight: 400;
       line-height: 1.3;
     }
-
-    /* ВНУТРЕННИЕ ЭКРАНЫ (ПОДРАЗДЕЛЫ) */
-    .subpage-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .btn-back {
-      background: #FFFFFF;
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-back:active {
-      background: var(--card-bg);
-    }
-
-    .subpage-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .sub-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .case-item {
-      background: #FFFFFF;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-    }
-
-    .case-item:active {
-      transform: scale(0.99);
-    }
-
-    .case-badge {
-      display: inline-block;
-      background: var(--card-bg);
-      color: var(--accent);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
-      margin-bottom: 8px;
-    }
-
-    .case-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 6px;
-    }
-
-    .case-desc {
-      font-size: 13px;
-      color: var(--text-sub);
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-
-    .case-link {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
     
-    <!-- ВЕРХНЯЯ ШАПКА -->
+    <!-- ШАПКА С АВАТАРОМ -->
     <div class="header-card">
       <div class="header-top">
-        <div class="avatar-wrapper">🌸</div>
+        <div class="avatar-wrapper">
+          <img class="avatar-img" src="https://liliyaroy-tech.github.io/portfolio-app/avatar.jpg" onerror="this.outerHTML='<span style=\'font-size:32px\'>🌸</span>'">
+        </div>
       </div>
       <div class="header-content">
         <div class="profile-name">Лилия</div>
@@ -260,117 +167,49 @@
       </div>
     </div>
 
-    <!-- ЭКРАН 1: ГЛАВНОЕ МЕНЮ -->
-    <div id="screen-main" class="screen active">
-      <div class="btn-list">
+    <!-- КНОПКИ С ХЭШТЕГ-ФИЛЬТРАМИ -->
+    <div class="btn-list">
 
-        <div class="action-card" onclick="openScreen('screen-visual')">
-          <div class="card-title-row">
-            <span>🛍</span>
-            <span>ПРОДАЮЩИЙ ВИЗУАЛ</span>
-          </div>
-          <div class="card-subtitle">Инфографика, реклама для брендов</div>
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi?q=%23инфографика')">
+        <div class="card-title-row">
+          <span>🛍</span>
+          <span>ПРОДАЮЩИЙ ВИЗУАЛ</span>
         </div>
-
-        <div class="action-card" onclick="openScreen('screen-video')">
-          <div class="card-title-row">
-            <span>🎬</span>
-            <span>AI-ВИДЕО И АНИМАЦИЯ</span>
-          </div>
-          <div class="card-subtitle">Генерация роликов, оживление кадров, тесты</div>
-        </div>
-
-        <div class="action-card" onclick="openScreen('screen-art')">
-          <div class="card-title-row">
-            <span>🎨</span>
-            <span>НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</span>
-          </div>
-          <div class="card-subtitle">Нейрофотосессия, персонажи, обложки и стиль</div>
-        </div>
-
-        <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
-          <div class="card-title-row">
-            <span>📖</span>
-            <span>ДНЕВНИК & ПРАКТИКА В КАНАЛЕ</span>
-          </div>
-          <div class="card-subtitle">Процессы, тесты нейросетей и практика</div>
-        </div>
-
-        <div class="action-card" onclick="openLink('https://t.me/LiliyaRoi')">
-          <div class="card-title-row">
-            <span>💬</span>
-            <span>НАПИСАТЬ МНЕ ЛИЧНО</span>
-          </div>
-          <div class="card-subtitle">Обсудить проект или задать вопрос</div>
-        </div>
-
+        <div class="card-subtitle">Инфографика, реклама для брендов</div>
       </div>
-    </div>
 
-    <!-- ЭКРАН 2: ПРОДАЮЩИЙ ВИЗУАЛ -->
-    <div id="screen-visual" class="screen">
-      <div class="subpage-top">
-        <button class="btn-back" onclick="openScreen('screen-main')">← Назад</button>
-        <div class="subpage-title">Продающий визуал</div>
-      </div>
-      <div class="sub-grid">
-        <div class="case-item" onclick="openLink('https://t.me/portfolioroi')">
-          <span class="case-badge">Маркетплейсы</span>
-          <div class="case-title">Карточки для Wildberries & Ozon</div>
-          <div class="case-desc">Разработка структуры, предметный рендер, читабельная типографика и продающие акценты.</div>
-          <div class="case-link">Открыть в канале →</div>
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi?q=%23видео')">
+        <div class="card-title-row">
+          <span>🎬</span>
+          <span>AI-ВИДЕО И АНИМАЦИЯ</span>
         </div>
-        <div class="case-item" onclick="openLink('https://t.me/portfolioroi')">
-          <span class="case-badge">Реклама</span>
-          <div class="case-title">Промо-баннеры и брендинг</div>
-          <div class="case-desc">Визуал для рекламных кампаний, соцсетей и спецпредложений в премиальной стилистике.</div>
-          <div class="case-link">Открыть в канале →</div>
-        </div>
+        <div class="card-subtitle">Генерация роликов, оживление кадров, тесты</div>
       </div>
-    </div>
 
-    <!-- ЭКРАН 3: AI-ВИДЕО -->
-    <div id="screen-video" class="screen">
-      <div class="subpage-top">
-        <button class="btn-back" onclick="openScreen('screen-main')">← Назад</button>
-        <div class="subpage-title">AI-Видео и Анимация</div>
-      </div>
-      <div class="sub-grid">
-        <div class="case-item" onclick="openLink('https://t.me/portfolioroi')">
-          <span class="case-badge">Shorts & Reels</span>
-          <div class="case-title">Вертикальные AI-ролики под ключ</div>
-          <div class="case-desc">Динамичный монтаж, генерация сцен, синхронизация с аудиорядом и масочные переходы.</div>
-          <div class="case-link">Смотреть ролики →</div>
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi?q=%23нейроарт')">
+        <div class="card-title-row">
+          <span>🎨</span>
+          <span>НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</span>
         </div>
-        <div class="case-item" onclick="openLink('https://t.me/portfolioroi')">
-          <span class="case-badge">Нейроэффекты</span>
-          <div class="case-title">Оживление статичных кадров</div>
-          <div class="case-desc">Генеративная анимация артов, трансформация объектов и эффекты движения камеры.</div>
-          <div class="case-link">Смотреть примеры →</div>
-        </div>
+        <div class="card-subtitle">Нейрофотосессия, персонажи, обложки и стиль</div>
       </div>
-    </div>
 
-    <!-- ЭКРАН 4: НЕЙРОДИЗАЙН И АРТ -->
-    <div id="screen-art" class="screen">
-      <div class="subpage-top">
-        <button class="btn-back" onclick="openScreen('screen-main')">← Назад</button>
-        <div class="subpage-title">Нейродизайн и Арт</div>
-      </div>
-      <div class="sub-grid">
-        <div class="case-item" onclick="openLink('https://t.me/portfolioroi')">
-          <span class="case-badge">Фотосессии</span>
-          <div class="case-title">Фэшн-съёмки и AI-модели</div>
-          <div class="case-desc">Создание лукбуков, журнальной эстетики, реалистичных образов и художественного света.</div>
-          <div class="case-link">Смотреть галерею →</div>
+      <div class="action-card" onclick="openLink('https://t.me/portfolioroi')">
+        <div class="card-title-row">
+          <span>📖</span>
+          <span>ДНЕВНИК & ПРАКТИКА В КАНАЛЕ</span>
         </div>
-        <div class="case-item" onclick="openLink('https://t.me/portfolioroi')">
-          <span class="case-badge">Спецпроекты</span>
-          <div class="case-title">3D-персонажи, комиксы и обложки</div>
-          <div class="case-desc">Стилизованные сюжетные истории, иллюстрации персонажей и оформление проектов.</div>
-          <div class="case-link">Смотреть проекты →</div>
-        </div>
+        <div class="card-subtitle">Процессы, тесты нейросетей и практика</div>
       </div>
+
+      <div class="action-card" onclick="openLink('https://t.me/LiliyaRoi')">
+        <div class="card-title-row">
+          <span>💬</span>
+          <span>НАПИСАТЬ МНЕ ЛИЧНО</span>
+        </div>
+        <div class="card-subtitle">Обсудить проект или задать вопрос</div>
+      </div>
+
     </div>
 
   </div>
@@ -382,15 +221,6 @@
       tg.expand();
       tg.setHeaderColor('#DCE3DD');
       tg.setBackgroundColor('#FAF8F5');
-    }
-
-    function openScreen(screenId) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      const target = document.getElementById(screenId);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo(0, 0);
-      }
     }
 
     function openLink(url) {
