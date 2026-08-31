@@ -1,0 +1,54 @@
+name: Sync Telegram to Portfolio
+
+on:
+  schedule:
+    # Запуск каждые 15 минут
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch updates and sync
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          python - << 'EOF'
+          import os, json, requests
+
+          token = os.environ.get("TG_BOT_TOKEN")
+          if not token:
+              print("No Telegram bot token found.")
+              exit(0)
+
+          res = requests.get(f"https://api.telegram.org/bot{token}/getUpdates").json()
+          if not res.get("ok") or not res.get("result"):
+              print("No new updates from channel.")
+              exit(0)
+
+          print(f"Retrieved {len(res['result'])} updates.")
+          EOF
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-sync from Telegram channel [skip ci]"
+          git push
