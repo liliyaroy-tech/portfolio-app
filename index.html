@@ -7,14 +7,14 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
-      --bg-color: #f7f4ed;
-      --card-bg: #ece6dc;
-      --card-hover: #e3dcce;
-      --text-main: #2d2621;
-      --text-muted: #786f66;
-      --btn-active-bg: #ffffff;
-      --border-color: #dfd7cb;
-      --accent: #2d2621;
+      --bg: #0e0e11;
+      --card-bg: #18181d;
+      --accent-purple: #6c5ce7;
+      --accent-hover: #5a4bd4;
+      --text-main: #ffffff;
+      --text-muted: #8e8e93;
+      --nav-bg: rgba(24, 24, 29, 0.88);
+      --border: rgba(255, 255, 255, 0.08);
     }
 
     * {
@@ -22,214 +22,203 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg);
       color: var(--text-main);
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
-      padding: 16px 16px 90px 16px;
+      padding-bottom: 90px;
     }
 
-    /* Screen Management */
-    .screen {
+    .banner {
+      width: 100%;
+      height: 190px;
+      background: linear-gradient(135deg, #1f1c2c 0%, #301f4a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .banner-title {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #a29bfe, #74b9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .banner-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .btn-contact {
+      display: block;
+      width: 100%;
+      background: var(--accent-purple);
+      color: #fff;
+      text-align: center;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(108, 92, 231, 0.35);
+      margin-bottom: 24px;
+    }
+
+    .btn-contact:active {
+      background: var(--accent-hover);
+      transform: scale(0.99);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .category-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 16px 0 10px 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .album-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .album-card:active {
+      transform: scale(0.97);
+    }
+
+    .album-cover {
+      width: 100%;
+      height: 120px;
+      background: #25252c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .album-info {
+      padding: 10px 12px;
+    }
+
+    .album-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .album-count {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .tab-view {
       display: none;
     }
 
-    .screen.active {
+    .tab-view.active {
       display: block;
       animation: fadeIn 0.2s ease;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    /* Header Profile */
-    .header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .title {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background-color: var(--card-bg);
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      width: 100%;
-      max-width: 320px;
-      transition: all 0.2s ease;
-    }
-
-    .contact-btn:active {
-      transform: scale(0.98);
-      background-color: var(--card-hover);
-    }
-
-    /* Section Headers */
-    .section-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin: 16px 0 10px 4px;
-    }
-
-    /* Back Navigation Bar inside sub-pages */
-    .page-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .back-btn {
+    .service-box {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .page-title {
-      font-size: 17px;
-      font-weight: 700;
-    }
-
-    /* Cards */
-    .cards-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      border-radius: 16px;
-      padding: 14px 16px;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.15s ease, background-color 0.15s ease;
-      border: 1px solid rgba(0, 0, 0, 0.03);
-    }
-
-    .card:active {
-      transform: scale(0.98);
-      background-color: var(--card-hover);
-    }
-
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-title::after {
-      content: "→";
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .card-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.35;
-    }
-
-    /* Gallery / Project Items */
-    .work-item {
-      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 16px;
       margin-bottom: 12px;
-      border: 1px solid var(--border-color);
     }
 
-    .work-item h4 {
+    .service-box h4 {
       font-size: 15px;
+      font-weight: 700;
       margin-bottom: 6px;
-      color: var(--text-main);
     }
 
-    .work-item p {
+    .service-box p {
       font-size: 13px;
       color: var(--text-muted);
       line-height: 1.4;
       margin-bottom: 10px;
     }
 
-    .work-tag {
-      display: inline-block;
-      background: var(--btn-active-bg);
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 11px;
+    .service-meta {
+      font-size: 12px;
       font-weight: 600;
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
+      color: var(--accent-purple);
     }
 
-    /* Bottom Navigation Bar */
-    .bottom-nav-container {
+    .nav-wrapper {
       position: fixed;
       bottom: 16px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: center;
-      z-index: 100;
       padding: 0 16px;
+      z-index: 100;
     }
 
-    .bottom-nav {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
+    .nav-bar {
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
       border-radius: 30px;
       padding: 4px;
       display: flex;
       gap: 4px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       width: 100%;
-      max-width: 320px;
+      max-width: 280px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
 
     .nav-btn {
@@ -238,7 +227,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      padding: 9px 12px;
+      padding: 10px 14px;
       border-radius: 24px;
       border: none;
       background: transparent;
@@ -246,168 +235,130 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
 
     .nav-btn.active {
-      background-color: var(--btn-active-bg);
-      color: var(--text-main);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
     }
   </style>
 </head>
 <body>
 
-  <!-- ==================== ЭКРАН 1: ГЛАВНАЯ (ПОРТФОЛИО) ==================== -->
-  <div id="screen-portfolio" class="screen active">
-    <div class="header">
-      <div class="title">Лилия</div>
-      <div class="subtitle">AI-контент & Творческий дневник</div>
-      <button class="contact-btn" onclick="openChat('LiliyaRoi')">
-        💬 Написать мне в Telegram
+  <!-- ВКЛАДКА 1: РАБОТЫ -->
+  <div id="view-works" class="tab-view active">
+    <div class="banner">
+      <div class="banner-title">ЛИЛИЯ</div>
+      <div class="banner-sub">AI-контент & визуальный дизайн</div>
+    </div>
+
+    <div class="content">
+      <button class="btn-contact" onclick="openLink('https://t.me/LiliyaRoi')">
+        💬 Связаться в Telegram
       </button>
-    </div>
 
-    <div class="section-title">📁 Направления портфолио</div>
-    <div class="cards-list">
-      
-      <div class="card" onclick="showScreen('page-visual')">
-        <div class="card-title">🛍 ПРОДАЮЩИЙ ВИЗУАЛ</div>
-        <div class="card-desc">Инфографика, реклама для брендов и карточки</div>
+      <div class="section-header">
+        <div class="section-title">Мои работы</div>
+        <div class="section-subtitle">Кликайте на альбом для перехода в канал 👇</div>
       </div>
 
-      <div class="card" onclick="showScreen('page-video')">
-        <div class="card-title">🎬 AI-ВИДЕО И АНИМАЦИЯ</div>
-        <div class="card-desc">Генерация роликов, оживление кадров и монтаж</div>
+      <div class="category-name">🛍 Продающий визуал</div>
+      <div class="grid">
+        <div class="album-card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="album-cover">📦</div>
+          <div class="album-info">
+            <div class="album-title">Wildberries & Ozon</div>
+            <div class="album-count">Инфографика карточек →</div>
+          </div>
+        </div>
+        <div class="album-card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="album-cover">🎯</div>
+          <div class="album-info">
+            <div class="album-title">Реклама брендов</div>
+            <div class="album-count">Промо-баннеры →</div>
+          </div>
+        </div>
       </div>
 
-      <div class="card" onclick="showScreen('page-art')">
-        <div class="card-title">🎨 НЕЙРОДИЗАЙН И АРТ-ПРОЕКТЫ</div>
-        <div class="card-desc">Нейрофотосессии, персонажи и креативный стиль</div>
+      <div class="category-name">🎬 AI-Видео и Анимация</div>
+      <div class="grid">
+        <div class="album-card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="album-cover">🎥</div>
+          <div class="album-info">
+            <div class="album-title">Reels & Shorts</div>
+            <div class="album-count">Динамичные ролики →</div>
+          </div>
+        </div>
+        <div class="album-card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="album-cover">⚡</div>
+          <div class="album-info">
+            <div class="album-title">Оживление кадров</div>
+            <div class="album-count">Нейроэффекты →</div>
+          </div>
+        </div>
       </div>
 
-      <div class="card" onclick="openChannel('portfolioroi')">
-        <div class="card-title">📖 МОЙ ДНЕВНИК В КАНАЛЕ</div>
-        <div class="card-desc">Процессы, тесты нейросетей и авторские заметки</div>
+      <div class="category-name">🎨 Нейродизайн и Арт</div>
+      <div class="grid">
+        <div class="album-card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="album-cover">✨</div>
+          <div class="album-info">
+            <div class="album-title">Нейрофотосессии</div>
+            <div class="album-count">Модели & Стилизация →</div>
+          </div>
+        </div>
+        <div class="album-card" onclick="openLink('https://t.me/portfolioroi')">
+          <div class="album-cover">📖</div>
+          <div class="album-info">
+            <div class="album-title">Творческий дневник</div>
+            <div class="album-count">Блог & Заметки →</div>
+          </div>
+        </div>
       </div>
 
     </div>
   </div>
 
-  <!-- ==================== ЭКРАН 2: УСЛУГИ ==================== -->
-  <div id="screen-services" class="screen">
-    <div class="header">
-      <div class="title">Лилия</div>
-      <div class="subtitle">Форматы сотрудничества и прайс</div>
-      <button class="contact-btn" onclick="openChat('LiliyaRoi')">
-        💬 Написать мне в Telegram
+  <!-- ВКЛАДКА 2: УСЛУГИ -->
+  <div id="view-services" class="tab-view">
+    <div class="banner">
+      <div class="banner-title">ФОРМАТЫ РАБОТЫ</div>
+      <div class="banner-sub">Услуги и сотрудничество</div>
+    </div>
+
+    <div class="content">
+      <button class="btn-contact" onclick="openLink('https://t.me/LiliyaRoi')">
+        Заказать проект
       </button>
-    </div>
 
-    <div class="section-title">💼 Доступные услуги</div>
-    <div class="cards-list">
-
-      <div class="work-item">
-        <h4>✨ AI-контент и видео под ключ</h4>
-        <p>Полное создание роликов от идеи и генерации до саунд-дизайна и финального монтажа.</p>
-        <span class="work-tag">Reels / Shorts / Реклама</span>
+      <div class="service-box">
+        <h4>✨ AI-видео и ролики под ключ</h4>
+        <p>Создание цепляющих Reels и Shorts от идеи до финального монтажа с эффектами.</p>
+        <div class="service-meta">Видеопродакшн</div>
       </div>
 
-      <div class="work-item">
-        <h4>📦 Упаковка брендов и товаров</h4>
-        <p>Продающая инфографика для карточек Wildberries, Ozon, баннеров и промо-кампаний.</p>
-        <span class="work-tag">Маркетплейсы / Дизайн</span>
+      <div class="service-box">
+        <h4>📦 Инфографика для маркетплейсов</h4>
+        <p>Разработка продающих карточек товаров для WB и Ozon с акцентом на УТП.</p>
+        <div class="service-meta">Дизайн для e-commerce</div>
       </div>
 
-      <div class="work-item">
-        <h4>🎨 Нейрофотосессии и концепты</h4>
-        <p>Генерация реалистичных или стилизованных персонажей, предметная съёмка без фотографа.</p>
-        <span class="work-tag">Midjourney / Flux / AI</span>
+      <div class="service-box">
+        <h4>🎨 Нейрофотосессии и концепт-арт</h4>
+        <p>Генерация модельных и предметных съёмок для брендов в уникальном стиле.</p>
+        <div class="service-meta">AI-генерация</div>
       </div>
-
     </div>
   </div>
 
-  <!-- ==================== СТРАНИЦА: ПРОДАЮЩИЙ ВИЗУАЛ ==================== -->
-  <div id="page-visual" class="screen">
-    <div class="page-header">
-      <button class="back-btn" onclick="showScreen('screen-portfolio')">← Назад</button>
-      <div class="page-title">🛍 Продающий визуал</div>
-    </div>
-
-    <div class="work-item">
-      <h4>Дизайн для маркетплейсов</h4>
-      <p>Создание продающей инфографики с акцентом на УТП товара, структурой и чистым визуальным рядом.</p>
-      <span class="work-tag">Wildberries / Ozon</span>
-    </div>
-
-    <div class="work-item">
-      <h4>Рекламные баннеры и креативы</h4>
-      <p>Оформление рекламных материалов, сторис и постов для соцсетей брендов.</p>
-      <span class="work-tag">Digital-реклама</span>
-    </div>
-
-    <button class="contact-btn" style="margin-top: 10px;" onclick="openChat('LiliyaRoi')">
-      Заказать визуал
-    </button>
-  </div>
-
-  <!-- ==================== СТРАНИЦА: AI-ВИДЕО ==================== -->
-  <div id="page-video" class="screen">
-    <div class="page-header">
-      <button class="back-btn" onclick="showScreen('screen-portfolio')">← Назад</button>
-      <div class="page-title">🎬 AI-видео и анимация</div>
-    </div>
-
-    <div class="work-item">
-      <h4>Оживление статичных кадров</h4>
-      <p>Создание плавных кинематографичных движений, переходов и эффектов из обычных изображений.</p>
-      <span class="work-tag">Runway / Luma / Kling</span>
-    </div>
-
-    <div class="work-item">
-      <h4>Динамичные ролики для соцсетей</h4>
-      <p>Сборка трендовых роликов с синхронизацией музыки, текстом и визуальными хуками.</p>
-      <span class="work-tag">Reels / Shorts</span>
-    </div>
-
-    <button class="contact-btn" style="margin-top: 10px;" onclick="openChat('LiliyaRoi')">
-      Заказать AI-видео
-    </button>
-  </div>
-
-  <!-- ==================== СТРАНИЦА: НЕЙРОДИЗАЙН ==================== -->
-  <div id="page-art" class="screen">
-    <div class="page-header">
-      <button class="back-btn" onclick="showScreen('screen-portfolio')">← Назад</button>
-      <div class="page-title">🎨 Нейродизайн и арт</div>
-    </div>
-
-    <div class="work-item">
-      <h4>Нейрофотосессии</h4>
-      <p>Создание уникальных модельных и предметных съёмок в любых локациях и стилистиках.</p>
-      <span class="work-tag">Fashion / Editorial</span>
-    </div>
-
-    <div class="work-item">
-      <h4>Персонажи и арт-концепты</h4>
-      <p>Разработка визуального образа брендов, маскотов и художественных иллюстраций.</p>
-      <span class="work-tag">Concept Art</span>
-    </div>
-
-    <button class="contact-btn" style="margin-top: 10px;" onclick="openChat('LiliyaRoi')">
-      Обсудить концепт
-    </button>
-  </div>
-
-  <!-- ==================== НИЖНЕЕ МЕНЮ ПЕРЕКЛЮЧЕНИЯ ==================== -->
-  <div class="bottom-nav-container">
-    <div class="bottom-nav">
-      <button id="btn-portfolio" class="nav-btn active" onclick="showScreen('screen-portfolio')">
-        📁 Портфолио
+  <!-- МЕНЮ -->
+  <div class="nav-wrapper">
+    <div class="nav-bar">
+      <button id="tab-btn-works" class="nav-btn active" onclick="switchTab('view-works')">
+        📷 Работы
       </button>
-      <button id="btn-services" class="nav-btn" onclick="showScreen('screen-services')">
-        💼 Услуги
+      <button id="tab-btn-services" class="nav-btn" onclick="switchTab('view-services')">
+        🛒 Услуги
       </button>
     </div>
   </div>
@@ -417,37 +368,29 @@
     if (tg) {
       tg.ready();
       tg.expand();
+      tg.setHeaderColor('#0e0e11');
+      tg.setBackgroundColor('#0e0e11');
     }
 
-    function showScreen(screenId) {
-      document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
-      const target = document.getElementById(screenId);
+    function switchTab(viewId) {
+      document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      const target = document.getElementById(viewId);
       if (target) {
         target.classList.add('active');
         window.scrollTo(0, 0);
       }
 
-      // Обновление подсветки нижних кнопок
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-      if (screenId === 'screen-services') {
-        document.getElementById('btn-services').classList.add('active');
+      if (viewId === 'view-services') {
+        document.getElementById('tab-btn-services').classList.add('active');
       } else {
-        document.getElementById('btn-portfolio').classList.add('active');
+        document.getElementById('tab-btn-works').classList.add('active');
       }
     }
 
-    function openChat(username) {
-      const url = 'https://t.me/' + username;
-      if (tg && typeof tg.openTelegramLink === 'function') {
-        tg.openTelegramLink(url);
-      } else {
-        window.open(url, '_blank');
-      }
-    }
-
-    function openChannel(channelName) {
-      const url = 'https://t.me/' + channelName;
-      if (tg && typeof tg.openTelegramLink === 'function') {
+    function openLink(url) {
+      if (tg && typeof tg.openTelegramLink === 'function' && url.includes('t.me/')) {
         tg.openTelegramLink(url);
       } else {
         window.open(url, '_blank');
