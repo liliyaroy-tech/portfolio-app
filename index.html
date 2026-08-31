@@ -3,165 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Лилия | AI-портфолио</title>
+  <title>Лилия | AI-Креатор & Портфолио</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
-      --bg-color: #f7f5f2;
-      --card-bg: #ffffff;
-      --text-main: #2b2b2b;
-      --text-sub: #7a756f;
-      --accent: #b08d57;
-      --btn-hover: #9c7b4a;
+      --bg-color: #0f1117;
+      --card-bg: #1a1d26;
+      --accent: #ff7b54;
+      --text-main: #ffffff;
+      --text-sub: #9ea4b0;
+      --tag-bg: rgba(255, 123, 84, 0.15);
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      margin: 0;
-      padding: 20px 16px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 24px;
-      max-width: 480px;
-    }
-    .header h1 {
-      font-size: 24px;
-      margin: 0 0 6px 0;
-      letter-spacing: -0.5px;
-    }
-    .header p {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin: 0;
-    }
-    .cards-container {
-      width: 100%;
-      max-width: 480px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 16px 18px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    .card:active {
-      transform: scale(0.98);
-    }
-    .card-info {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .card-icon {
-      font-size: 26px;
-      background: #fdfaf6;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      border: 1px solid rgba(176, 141, 87, 0.2);
-    }
-    .card-text h3 {
-      font-size: 16px;
-      margin: 0 0 4px 0;
-      font-weight: 600;
-    }
-    .card-text p {
-      font-size: 13px;
-      color: var(--text-sub);
-      margin: 0;
-    }
-    .card-arrow {
-      font-size: 18px;
-      color: var(--accent);
-      font-weight: bold;
-    }
-    .footer-btn {
-      margin-top: 24px;
-      width: 100%;
-      max-width: 480px;
-      background: var(--accent);
-      color: #fff;
-      text-align: center;
-      padding: 14px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      display: block;
-      box-sizing: border-box;
-      box-shadow: 0 4px 10px rgba(176, 141, 87, 0.3);
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; }
+    header { text-align: center; margin-bottom: 24px; }
+    header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    header p { font-size: 13px; color: var(--text-sub); }
+    
+    /* Фильтры категорий */
+    .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter-btn { background: var(--card-bg); color: var(--text-sub); border: 1px solid #2d313e; padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* Сетка витрины */
+    .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card { background: var(--card-bg); border-radius: 14px; overflow: hidden; border: 1px solid #262a36; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-3px); }
+    .card-media { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: #262a36; display: block; }
+    .card-body { padding: 10px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+    .card-tag { font-size: 10px; color: var(--accent); background: var(--tag-bg); padding: 2px 6px; border-radius: 6px; align-self: flex-start; font-weight: 600; }
+    .card-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
+
+    /* Попап кейса */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 100; padding: 20px; align-items: center; justify-content: center; }
+    .modal-content { background: var(--card-bg); border-radius: 18px; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 20px; position: relative; }
+    .close-btn { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.1); border: none; color: #fff; font-size: 18px; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
+    .modal-img { width: 100%; border-radius: 12px; margin-bottom: 14px; }
+    .modal-desc { font-size: 13px; line-height: 1.5; color: var(--text-sub); margin-bottom: 16px; }
+    .prompt-box { background: #12141a; padding: 12px; border-radius: 10px; font-size: 12px; color: #c4c9d4; font-family: monospace; line-height: 1.4; }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>Лилия | AI-портфолио</h1>
-    <p>Витрина AI-визуала, видео и инфографики</p>
+  <header>
+    <h1>AI Showcase & Portfolio</h1>
+    <p>Анимация • Сериалы • Праздничный арт</p>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCategory('all')">Все работы</button>
+    <button class="filter-btn" onclick="filterCategory('posters')">Постеры</button>
+    <button class="filter-btn" onclick="filterCategory('cartoons')">Мультфильмы & Сериалы</button>
   </div>
 
-  <div class="cards-container">
-    <a href="https://t.me/LRoy_Portfolio/28" class="card" target="_blank">
-      <div class="card-info">
-        <div class="card-icon">🛍️</div>
-        <div class="card-text">
-          <h3>Инфографика и Визуал</h3>
-          <p>Оформление карточек для Ozon и WB</p>
-        </div>
+  <div class="showcase-grid">
+    <!-- Кейс 1: 1 Сентября -->
+    <div class="card" data-cat="posters" onclick="openModal('1 Сентября: Айдентика', 'ChatGPT + Nano Banana Pro', 'Разработка реалистичного персонажа в контрасте с воздушной акварельной типографикой.', 'Вертикальная иллюстрация 4:5. Реалистичный школьник на книгах / акварельный полет.')">
+      <img class="card-media" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600" alt="1 Сентября">
+      <div class="card-body">
+        <span class="card-tag">ChatGPT • Art</span>
+        <h3 class="card-title">1 Сентября: Сменка</h3>
       </div>
-      <div class="card-arrow">→</div>
-    </a>
+    </div>
 
-    <a href="https://t.me/LRoy_Portfolio/22" class="card" target="_blank">
-      <div class="card-info">
-        <div class="card-icon">🎬</div>
-        <div class="card-text">
-          <h3>AI-видео и Анимация</h3>
-          <p>Оживление фото, ролики и динамика</p>
-        </div>
+    <!-- Кейс 2: Мультфильм Лео -->
+    <div class="card" data-cat="cartoons" onclick="openModal('Сериал про Лео', '3D Animation / Runway', 'Серия коротких эпизодов с сохранением единого консистентного персонажа.', '3D Pixar style character sheet, dynamic scenes, storyline integration.')">
+      <img class="card-media" src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=600" alt="Лео">
+      <div class="card-body">
+        <span class="card-tag">Мультсериал</span>
+        <h3 class="card-title">Приключения Лео</h3>
       </div>
-      <div class="card-arrow">→</div>
-    </a>
-
-    <a href="https://t.me/LRoy_Portfolio/6" class="card" target="_blank">
-      <div class="card-info">
-        <div class="card-icon">🎨</div>
-        <div class="card-text">
-          <h3>Арт & Нейродизайн</h3>
-          <p>Креативные концепты, стиль и фотосессии</p>
-        </div>
-      </div>
-      <div class="card-arrow">→</div>
-    </a>
+    </div>
   </div>
 
-  <a href="https://t.me/LiliyaRoi" class="footer-btn" target="_blank">
-    💬 Обсудить проект / Заказать
-  </a>
+  <div id="caseModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <h2 id="modalTitle" style="font-size: 18px; margin-bottom: 6px;"></h2>
+      <span id="modalTools" class="card-tag" style="margin-bottom: 14px; display: inline-block;"></span>
+      <p id="modalDesc" class="modal-desc"></p>
+      <div style="margin-top: 10px;">
+        <strong style="font-size: 12px; color: var(--accent);">Промпт / Логика:</strong>
+        <div id="modalPrompt" class="prompt-box" style="margin-top: 6px;"></div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
+    const tg = window.Telegram?.WebApp;
+    if (tg) { tg.expand(); tg.ready(); }
+
+    function filterCategory(cat) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.card').forEach(c => {
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'flex' : 'none';
+      });
+    }
+
+    function openModal(title, tools, desc, prompt) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalTools').innerText = tools;
+      document.getElementById('modalDesc').innerText = desc;
+      document.getElementById('modalPrompt').innerText = prompt;
+      document.getElementById('caseModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('caseModal').style.display = 'none';
     }
   </script>
 </body>
