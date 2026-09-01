@@ -27,7 +27,6 @@
       min-height: 100vh;
     }
 
-    /* Фоновые блики */
     .bg-glow-1 {
       position: fixed;
       top: -100px;
@@ -54,7 +53,6 @@
 
     .container { position: relative; z-index: 2; }
 
-    /* Шапка профиля */
     header { margin-bottom: 18px; }
     .hero-badge {
       display: inline-flex;
@@ -73,7 +71,6 @@
     header h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.4px; line-height: 1.2; color: #16171a; }
     header p { font-size: 13.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
 
-    /* Блок "Обо мне / Услуги" */
     .about-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -107,7 +104,6 @@
       color: #555861;
     }
 
-    /* Сетка коллекций и подписи */
     .section-title { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #22242a; letter-spacing: -0.2px; }
     .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
     
@@ -171,7 +167,6 @@
       letter-spacing: -0.2px;
     }
 
-    /* Закрепленная кнопка связи */
     .contact-bar {
       position: fixed;
       bottom: 0;
@@ -203,7 +198,6 @@
     }
     .btn-contact:active { transform: scale(0.98); }
 
-    /* Полноэкранный плеер Stories */
     .stories-viewer { display: none; position: fixed; inset: 0; background: #000000; z-index: 9999; flex-direction: column; justify-content: space-between; touch-action: manipulation; }
     
     .story-header { position: absolute; top: 0; left: 0; right: 0; padding: 14px 16px; z-index: 20; background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, transparent 100%); }
@@ -215,17 +209,14 @@
     .story-author-info { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; }
     .story-close-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); }
 
-    /* Медиа-контент */
     .story-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; }
     .story-media { width: 100%; height: 100%; object-fit: contain; background: #000000; display: none; }
     .story-media.active-media { display: block; }
 
-    /* Тапы переключения */
     .touch-nav { position: absolute; inset: 0; z-index: 10; display: flex; }
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
-    /* Описание снизу в истории */
     .story-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 16px 26px 16px; z-index: 20; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%); }
     .story-desc-title { font-size: 15px; font-weight: 700; color: #fff; }
     .story-desc-text { font-size: 12.5px; color: #d0d4de; margin-top: 5px; line-height: 1.45; }
@@ -266,7 +257,6 @@
     <div class="section-title">Коллекции кейсов</div>
     
     <div class="showcase-grid">
-      <!-- 1. Постеры -->
       <div class="story-card" onclick="openStoryAlbum('posters')">
         <img class="story-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры">
         <div class="story-card-overlay"></div>
@@ -277,7 +267,6 @@
         </div>
       </div>
 
-      <!-- 2. Спорт -->
       <div class="story-card" onclick="openStoryAlbum('sport')">
         <img class="story-card-bg" src="5321263694777882946.jpg" alt="Спорт">
         <div class="story-card-overlay"></div>
@@ -288,7 +277,6 @@
         </div>
       </div>
 
-      <!-- 3. Нейрофотосессии -->
       <div class="story-card" onclick="openStoryAlbum('photoshoot')">
         <img class="story-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
         <div class="story-card-overlay"></div>
@@ -299,18 +287,16 @@
         </div>
       </div>
 
-      <!-- 4. Реклама для брендов -->
       <div class="story-card" onclick="openStoryAlbum('commercial')">
-        <img class="story-card-bg" src="hd_ba59a11a97fefd377eb250748765c829.png" alt="Реклама">
+        <img class="story-card-bg" src="1 .jpg" alt="Реклама Jacquemus">
         <div class="story-card-overlay"></div>
-        <div class="story-badge">Брендинг</div>
+        <div class="story-badge">Кейс + Видео</div>
         <div class="story-meta">
-          <span class="story-tag">Коммерция</span>
+          <span class="story-tag">Jacquemus x Leo</span>
           <h3 class="story-title">Реклама для брендов</h3>
         </div>
       </div>
 
-      <!-- 5. Мультфильмы & Сериалы -->
       <div class="story-card" onclick="openStoryAlbum('cartoons')">
         <img class="story-card-bg" src="Gemini_Generated_Image_ (2).png" alt="Мультсериалы">
         <div class="story-card-overlay"></div>
@@ -321,7 +307,6 @@
         </div>
       </div>
 
-      <!-- 6. AI Челленджи -->
       <div class="story-card" onclick="openStoryAlbum('challenges')">
         <img class="story-card-bg" src="5377765299521788083.jpg" alt="Челленджи">
         <div class="story-card-overlay"></div>
@@ -340,7 +325,6 @@
     </a>
   </div>
 
-  <!-- Stories Viewer -->
   <div id="storiesViewer" class="stories-viewer">
     <div class="story-header">
       <div id="progressBars" class="progress-bars"></div>
@@ -401,9 +385,32 @@
         ]
       },
       commercial: {
-        title: 'Реклама для брендов',
+        title: 'Реклама: Jacquemus x Leo',
         slides: [
-          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Предметная визуализация', desc: 'Коммерческий арт и рекламные концепты для продуктов и брендов.' }
+          { 
+            type: 'image', 
+            src: '1 .jpg', 
+            title: 'Jacquemus x Leo: Концепт', 
+            desc: 'Анализ визуального кода бренда: архитектурная строгость, минимализм и терракотовые оттенки.' 
+          },
+          { 
+            type: 'video', 
+            src: '2_Video Project 3 (1).mp4', 
+            title: 'Морфинг & Динамика', 
+            desc: 'Видео-трансформация: преемственность стиля от подиумного кадра к персонажу кампании.' 
+          },
+          { 
+            type: 'image', 
+            src: '3_.jpg', 
+            title: 'Макро-продакшн & Масштаб', 
+            desc: 'Проработка текстур кожи, швов и фурнитуры. Сюрреалистичная работа с пропорциями аксессуара.' 
+          },
+          { 
+            type: 'image', 
+            src: '4_.jpg', 
+            title: 'Мудборд & Финализация', 
+            desc: 'Итоговая презентация концепции: интеграция персонажа в ДНК премиального бренда. Стек: Midjourney, Gemini, Canva.' 
+          }
         ]
       },
       cartoons: {
