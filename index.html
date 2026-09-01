@@ -414,7 +414,7 @@
       <div class="category-card" onclick="openCategory('challenges')">
         <img class="category-card-bg" src="кадр 1 .jpeg" alt="AI Челленджи" onerror="this.src='4444608151632.jpeg'">
         <div class="category-card-overlay"></div>
-        <div class="category-badge">4 дня</div>
+        <div class="category-badge">5 этапов</div>
         <div class="category-meta">
           <span class="category-tag">Марафон & Практика</span>
           <h3 class="category-title">AI Челленджи</h3>
@@ -479,9 +479,9 @@
     }
 
     function handleContactClick(e) {
-      if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openTelegramLink === 'function') {
+      if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
         e.preventDefault();
-        window.Telegram.WebApp.openTelegramLink('https://t.me/LiliyaRoi');
+        window.Telegram.WebApp.openLink('https://t.me/LiliyaRoi');
       }
     }
 
@@ -869,6 +869,21 @@
                 src: 'кадр 9 .jpeg', 
                 title: 'Финал: Встреча с самой собой', 
                 desc: 'Неожиданная развязка: в номере 13 за стеклом ночного города она встречает саму себя.' 
+              }
+            ]
+          },
+          {
+            id: 'challenge_day5',
+            title: 'День 5: Манифест «Нейротворцы PRO»',
+            badge: 'Видео-финал',
+            desc: 'Финальный ролик: трансформация пространства, футуризм и сообщество создателей',
+            thumb: 'кадр 6 .jpeg',
+            slides: [
+              { 
+                type: 'video', 
+                src: '01_825(3) (1).mp4', 
+                title: 'Манифест «Нейротворцы PRO»', 
+                desc: '«За гранью привычного начинается пространство новых идей. Здесь встречаются те, кто создает, экспериментирует и меняет будущее».' 
               }
             ]
           }
