@@ -57,7 +57,6 @@
     header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; line-height: 1.2; color: #16171a; }
     header p { font-size: 14.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; font-weight: 450; }
 
-    /* Блок «Чем могу быть полезна» */
     .about-card {
       background: var(--card-bg);
       border-radius: 18px;
@@ -365,10 +364,12 @@
 
     <div class="section-title">Коллекции кейсов</div>
     
+    <!-- Сетка категорий -->
     <div class="showcase-grid">
       
+      <!-- 1. Реклама для брендов -->
       <div class="category-card" onclick="openCategory('commercial')">
-        <img class="category-card-bg" src="2_1.jpg" alt="Реклама для брендов">
+        <img class="category-card-bg" src="т_1.jpg" alt="Реклама для брендов" onerror="this.src='2_1.jpg'">
         <div class="category-card-overlay"></div>
         <div class="category-badge">3 кейса</div>
         <div class="category-meta">
@@ -377,6 +378,7 @@
         </div>
       </div>
 
+      <!-- 2. Маркетплейсы & E-com -->
       <div class="category-card" onclick="openCategory('marketplaces')">
         <img class="category-card-bg" src="4_1.jpg" alt="Маркетплейсы">
         <div class="category-card-overlay"></div>
@@ -387,6 +389,7 @@
         </div>
       </div>
 
+      <!-- 3. Постеры & Афиши -->
       <div class="category-card" onclick="openCategory('posters')">
         <img class="category-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры & Афиши">
         <div class="category-card-overlay"></div>
@@ -397,6 +400,7 @@
         </div>
       </div>
 
+      <!-- 4. 3D & Мультфильмы -->
       <div class="category-card" onclick="openCategory('animation')">
         <img class="category-card-bg" src="Gemini_Generated_Image_ (2).png" alt="3D & Мультфильмы">
         <div class="category-card-overlay"></div>
@@ -407,6 +411,7 @@
         </div>
       </div>
 
+      <!-- 5. Нейрофотосессии -->
       <div class="category-card" onclick="openCategory('photoshoots')">
         <img class="category-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
         <div class="category-card-overlay"></div>
@@ -417,6 +422,7 @@
         </div>
       </div>
 
+      <!-- 6. AI Челленджи -->
       <div class="category-card" onclick="openCategory('challenges')">
         <img class="category-card-bg" src="5377765299521788083.jpg" alt="AI Челленджи">
         <div class="category-card-overlay"></div>
@@ -430,6 +436,7 @@
     </div>
   </div>
 
+  <!-- Кнопка Telegram -->
   <div class="contact-bar">
     <a href="https://t.me/LiliyaRoi" class="btn-contact" onclick="handleContactClick(event)">
       <span>⚡</span>
@@ -437,6 +444,7 @@
     </a>
   </div>
 
+  <!-- Всплывающая шторка со списком проектов -->
   <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
     <div class="modal-sheet" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -447,6 +455,7 @@
     </div>
   </div>
 
+  <!-- Stories Viewer -->
   <div id="storiesViewer" class="stories-viewer">
     <div class="story-header">
       <div id="progressBars" class="progress-bars"></div>
@@ -506,31 +515,37 @@
             title: 'Тихие стены: Упаковка бренда',
             badge: 'Упаковка под ключ',
             desc: 'Смысловая стратегия, анализ ЦА, AI-интерьеры и видео',
-            thumb: '2.jpg',
+            thumb: 'т_1.jpg',
             slides: [
               { 
                 type: 'image', 
-                src: '2.jpg', 
+                src: 'т_1.jpg', 
                 title: 'Бренд «Тихие стены»: Концепт', 
                 desc: 'Позиционирование «Акустика уюта». Продаем не отделку, а покой, приватность и комфорт дома.' 
               },
               { 
                 type: 'image', 
-                src: '3.jpg', 
+                src: '2.jpg', 
                 title: 'Анализ ЦА & Боли аудитории', 
                 desc: 'Решение проблем шума от соседей, эха и усталости через эстетичные интерьерные решения.' 
               },
               { 
                 type: 'image', 
+                src: '3.jpg', 
+                title: 'Акустический баланс & Звукопоглощение', 
+                desc: 'Интерьерные 3D-панели: эффективное гашение звуковых волн и премиальная геометрия стен.' 
+              },
+              { 
+                type: 'image', 
                 src: '4.jpg', 
-                title: 'Эмоциональный AI-визуал', 
-                desc: 'Фотореалистичные интерьеры: фактуры акустических панелей, мягкий свет и глубина пространства.' 
+                title: 'Фактуры, Текстуры & Материалы', 
+                desc: 'Глубокая проработка тактильности: натуральные ткани, микрорельеф и рассеянный теплый свет.' 
               },
               { 
                 type: 'image', 
                 src: '5.jpg', 
-                title: 'Контент-стратегия & Маркетинг', 
-                desc: 'Готовый план публикаций и рекламных креативов для выхода на рынок и роста продаж.',
+                title: 'Готовая бренд-упаковка', 
+                desc: 'Целостный визуал, готовый к масштабированию в соцсетях, на сайте и маркетплейсах.',
                 link: 'https://drive.google.com/drive/folders/16hVMsDgv23tElsx_xc4caaGSQmjVPaxi?usp=sharing'
               },
               { 
