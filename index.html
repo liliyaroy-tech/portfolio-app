@@ -11,19 +11,17 @@
       --card-bg: rgba(255, 255, 255, 0.88);
       --card-border: rgba(205, 195, 180, 0.4);
       --accent: #b88655;
-      --accent-soft: rgba(184, 134, 85, 0.12);
+      --accent-soft: rgba(184, 134, 85, 0.14);
       --text: #1d1d1f;
       --text-dim: #6e6e73;
-      --btn-grad: linear-gradient(135deg, #c49563 0%, #9e6f3e 100%);
-      --btn-shadow: rgba(184, 134, 85, 0.35);
-      --story-bg: #1a1412;
+      --story-bg: #1a1412; /* Тёмный шоколад */
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
     
     body {
       background-color: var(--bg-base);
       color: var(--text);
-      padding: 18px 16px 130px 16px;
+      padding: 18px 16px 135px 16px;
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
@@ -62,10 +60,10 @@
       gap: 6px;
       background: var(--accent-soft);
       color: var(--accent);
-      border: 1px solid rgba(184, 134, 85, 0.25);
+      border: 1px solid rgba(184, 134, 85, 0.28);
       padding: 5px 12px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 0.3px;
       margin-bottom: 10px;
@@ -169,6 +167,7 @@
       letter-spacing: -0.2px;
     }
 
+    /* Нижняя плашка со стильной кнопкой в стиле верхнего бейджа */
     .contact-bar {
       position: fixed;
       bottom: 0;
@@ -183,25 +182,30 @@
     }
     .btn-contact {
       width: 100%;
-      background: var(--btn-grad);
-      color: #ffffff;
-      text-decoration: none;
-      padding: 15px;
-      border-radius: 16px;
-      font-size: 14.5px;
+      background: var(--accent-soft);
+      color: #9c6a3b;
+      border: 1.5px solid rgba(184, 134, 85, 0.4);
+      padding: 14px;
+      border-radius: 20px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.3px;
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 24px var(--btn-shadow);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(184, 134, 85, 0.12);
+      transition: all 0.2s ease;
+      outline: none;
     }
-    .btn-contact:active { transform: scale(0.98); }
+    .btn-contact:active { 
+      transform: scale(0.98); 
+      background: rgba(184, 134, 85, 0.22);
+    }
 
+    /* Stories Viewer */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -392,9 +396,9 @@
   </div>
 
   <div class="contact-bar">
-    <a href="https://t.me/liliyaroy" target="_blank" class="btn-contact">
+    <button class="btn-contact" onclick="openContactChat()">
       <span>✉️ Написать / Задать вопрос</span>
-    </a>
+    </button>
   </div>
 
   <div id="storiesViewer" class="stories-viewer">
@@ -426,7 +430,20 @@
 
   <script>
     const tg = window.Telegram?.WebApp;
-    if (tg) { tg.expand(); tg.ready(); }
+    if (tg) { 
+      tg.expand(); 
+      tg.ready(); 
+    }
+
+    // Надежное открытие лички Telegram
+    function openContactChat() {
+      const username = 'liliyaroy';
+      if (tg && typeof tg.openTelegramLink === 'function') {
+        tg.openTelegramLink('https://t.me/' + username);
+      } else {
+        window.open('https://t.me/' + username, '_blank');
+      }
+    }
 
     function toggleAbout() {
       document.getElementById('aboutCard').classList.toggle('open');
