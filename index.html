@@ -198,28 +198,84 @@
     }
     .btn-contact:active { transform: scale(0.98); }
 
-    .stories-viewer { display: none; position: fixed; inset: 0; background: #000000; z-index: 9999; flex-direction: column; justify-content: space-between; touch-action: manipulation; }
+    /* Stories Viewer Styles - Light Luxury Theme */
+    .stories-viewer { 
+      display: none; 
+      position: fixed; 
+      inset: 0; 
+      background: #141416; 
+      z-index: 9999; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      touch-action: manipulation; 
+    }
     
-    .story-header { position: absolute; top: 0; left: 0; right: 0; padding: 14px 16px; z-index: 20; background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, transparent 100%); }
+    .story-header { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      padding: 14px 16px 20px 16px; 
+      z-index: 20; 
+      background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%); 
+    }
     .progress-bars { display: flex; gap: 5px; margin-bottom: 10px; }
-    .progress-bar-bg { flex: 1; height: 3px; background: rgba(255,255,255,0.25); border-radius: 3px; overflow: hidden; }
+    .progress-bar-bg { flex: 1; height: 3px; background: rgba(255,255,255,0.3); border-radius: 3px; overflow: hidden; }
     .progress-bar-fill { height: 100%; width: 0%; background: #ffffff; border-radius: 3px; }
 
     .story-user-row { display: flex; justify-content: space-between; align-items: center; color: #fff; }
-    .story-author-info { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; }
-    .story-close-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); }
+    .story-author-info { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+    .story-close-btn { 
+      background: rgba(255,255,255,0.25); 
+      border: 1px solid rgba(255,255,255,0.3); 
+      color: #fff; 
+      width: 32px; 
+      height: 32px; 
+      border-radius: 50%; 
+      font-size: 15px; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      backdrop-filter: blur(8px); 
+      -webkit-backdrop-filter: blur(8px);
+    }
 
     .story-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; }
-    .story-media { width: 100%; height: 100%; object-fit: contain; background: #000000; display: none; }
+    .story-media { width: 100%; height: 100%; object-fit: contain; display: none; }
     .story-media.active-media { display: block; }
 
     .touch-nav { position: absolute; inset: 0; z-index: 10; display: flex; }
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
-    .story-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 16px 26px 16px; z-index: 20; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%); }
-    .story-desc-title { font-size: 15px; font-weight: 700; color: #fff; }
-    .story-desc-text { font-size: 12.5px; color: #d0d4de; margin-top: 5px; line-height: 1.45; }
+    /* Премиальная стеклянная карточка описания */
+    .story-footer { 
+      position: absolute; 
+      bottom: 16px; 
+      left: 14px; 
+      right: 14px; 
+      padding: 14px 16px; 
+      z-index: 20; 
+      background: rgba(250, 248, 245, 0.88); 
+      backdrop-filter: blur(20px); 
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .story-desc-title { 
+      font-size: 14.5px; 
+      font-weight: 700; 
+      color: #1a1b1e; 
+      letter-spacing: -0.2px;
+    }
+    .story-desc-text { 
+      font-size: 12px; 
+      color: #4a4d56; 
+      margin-top: 4px; 
+      line-height: 1.45; 
+    }
   </style>
 </head>
 <body>
@@ -338,7 +394,7 @@
 
     <div class="story-stage">
       <img id="storyActiveImage" class="story-media" src="" alt="Story">
-      <video id="storyActiveVideo" class="story-media" playsinline preload="auto" muted></video>
+      <video id="storyActiveVideo" class="story-media" playsinline webkit-playsinline preload="auto" muted></video>
     </div>
 
     <div class="touch-nav">
@@ -421,4 +477,141 @@
       },
       challenges: {
         title: 'AI Челленджи',
-        slides:
+        slides: [
+          { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
+        ]
+      }
+    };
+
+    let activeAlbumKey = null;
+    let currentSlideIndex = 0;
+    let storyTimer = null;
+    let isTransitioning = false;
+    const DEFAULT_DURATION = 4000;
+
+    const imgEl = document.getElementById('storyActiveImage');
+    const vidEl = document.getElementById('storyActiveVideo');
+
+    function openStoryAlbum(albumKey) {
+      activeAlbumKey = albumKey;
+      currentSlideIndex = 0;
+      document.getElementById('storiesViewer').style.display = 'flex';
+      setupProgressBars();
+      showStorySlide(0);
+    }
+
+    function closeStories(e) {
+      if (e) e.stopPropagation();
+      clearTimeout(storyTimer);
+      isTransitioning = false;
+      vidEl.pause();
+      vidEl.onended = null;
+      vidEl.ontimeupdate = null;
+      vidEl.removeAttribute('src');
+      vidEl.load();
+      document.getElementById('storiesViewer').style.display = 'none';
+      activeAlbumKey = null;
+    }
+
+    function setupProgressBars() {
+      const album = albums[activeAlbumKey];
+      const container = document.getElementById('progressBars');
+      container.innerHTML = '';
+      album.slides.forEach((_, idx) => {
+        const bg = document.createElement('div');
+        bg.className = 'progress-bar-bg';
+        const fill = document.createElement('div');
+        fill.className = 'progress-bar-fill';
+        fill.id = `bar-fill-${idx}`;
+        bg.appendChild(fill);
+        container.appendChild(bg);
+      });
+      document.getElementById('storyAuthorTitle').innerText = album.title;
+    }
+
+    function showStorySlide(index) {
+      clearTimeout(storyTimer);
+      isTransitioning = false;
+      
+      vidEl.pause();
+      vidEl.onended = null;
+      vidEl.ontimeupdate = null;
+      
+      const album = albums[activeAlbumKey];
+      if (index >= album.slides.length) { closeStories(); return; }
+      if (index < 0) index = 0;
+
+      currentSlideIndex = index;
+      const slide = album.slides[index];
+
+      document.getElementById('storyDescTitle').innerText = slide.title;
+      document.getElementById('storyDescText').innerText = slide.desc;
+
+      album.slides.forEach((_, idx) => {
+        const fill = document.getElementById(`bar-fill-${idx}`);
+        if (!fill) return;
+        fill.style.transition = 'none';
+        if (idx < index) fill.style.width = '100%';
+        else fill.style.width = '0%';
+      });
+
+      if (slide.type === 'video') {
+        imgEl.classList.remove('active-media');
+        vidEl.classList.add('active-media');
+        vidEl.loop = false;
+        vidEl.src = slide.src;
+        vidEl.currentTime = 0;
+        
+        vidEl.ontimeupdate = () => {
+          if (vidEl.duration && !isTransitioning) {
+            const pct = (vidEl.currentTime / vidEl.duration) * 100;
+            const fill = document.getElementById(`bar-fill-${index}`);
+            if (fill) fill.style.width = `${pct}%`;
+          }
+        };
+
+        vidEl.onended = () => {
+          if (!isTransitioning) {
+            isTransitioning = true;
+            const fill = document.getElementById(`bar-fill-${index}`);
+            if (fill) fill.style.width = '100%';
+            storyNext();
+          }
+        };
+
+        vidEl.play().catch(() => {});
+
+      } else {
+        vidEl.classList.remove('active-media');
+        imgEl.classList.add('active-media');
+        imgEl.src = slide.src;
+
+        const fill = document.getElementById(`bar-fill-${index}`);
+        if (fill) {
+          fill.style.width = '0%';
+          setTimeout(() => {
+            fill.style.transition = `width ${DEFAULT_DURATION}ms linear`;
+            fill.style.width = '100%';
+          }, 20);
+        }
+        storyTimer = setTimeout(() => {
+          if (!isTransitioning) {
+            isTransitioning = true;
+            storyNext();
+          }
+        }, DEFAULT_DURATION);
+      }
+    }
+
+    function storyNext(e) {
+      if (e) e.stopPropagation();
+      showStorySlide(currentSlideIndex + 1);
+    }
+
+    function storyPrev(e) {
+      if (e) e.stopPropagation();
+      showStorySlide(currentSlideIndex - 1);
+    }
+  </script>
+</body>
+</html>
