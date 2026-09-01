@@ -234,7 +234,7 @@
     .project-badge { display: inline-block; font-size: 10.5px; font-weight: 700; background: var(--accent-soft); color: var(--accent); padding: 3px 8px; border-radius: 8px; margin-top: 5px; }
     .project-arrow { color: var(--accent); font-size: 16px; font-weight: bold; margin-left: 4px; }
 
-    /* Stories Viewer с увеличенными читабельными подписями */
+    /* Stories Viewer */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -280,7 +280,7 @@
     .story-stage { 
       position: absolute; 
       top: 55px;
-      bottom: 95px;
+      bottom: 100px;
       left: 0;
       right: 0;
       display: flex; 
@@ -300,7 +300,7 @@
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
-    /* Увеличенная и четкая нижняя плашка Stories */
+    /* Нижняя плашка Stories с поддержкой ссылки */
     .story-footer { 
       position: absolute; 
       bottom: 14px; 
@@ -328,6 +328,21 @@
       line-height: 1.45; 
       font-weight: 450;
     }
+    .story-link-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 9px;
+      padding: 9px 12px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+    .story-link-btn:active { opacity: 0.85; }
   </style>
 </head>
 <body>
@@ -366,9 +381,9 @@
     <div class="showcase-grid">
       
       <div class="category-card" onclick="openCategory('commercial')">
-        <img class="category-card-bg" src="2_1.jpg" alt="Реклама для брендов">
+        <img class="category-card-bg" src="1.jpg" alt="Реклама для брендов">
         <div class="category-card-overlay"></div>
-        <div class="category-badge">2 кейса</div>
+        <div class="category-badge">3 кейса</div>
         <div class="category-meta">
           <span class="category-tag">Fashion & Кампейны</span>
           <h3 class="category-title">Реклама для брендов</h3>
@@ -469,6 +484,9 @@
     <div class="story-footer">
       <div id="storyDescTitle" class="story-desc-title"></div>
       <div id="storyDescText" class="story-desc-text"></div>
+      <a id="storyLinkBtn" class="story-link-btn" href="#" target="_blank">
+        <span>📄 Открыть полный кейс и стратегию (Google Drive)</span>
+      </a>
     </div>
   </div>
 
@@ -492,11 +510,57 @@
       if (el) el.classList.toggle('open');
     }
 
-    // Подробные и емкие описания для слайдов Jacquemus
     const categories = {
       commercial: {
         title: 'Реклама для брендов',
         projects: [
+          {
+            id: 'silent_walls',
+            title: 'Тихие стены: Упаковка бренда',
+            badge: 'Упаковка под ключ',
+            desc: 'Смысловая стратегия, анализ ЦА, AI-интерьеры и видео',
+            thumb: '1.jpg',
+            slides: [
+              { 
+                type: 'image', 
+                src: '1.jpg', 
+                title: 'Бренд «Тихие стены»: Концепт', 
+                desc: 'Позиционирование «Акустика уюта». Продаем не отделку, а покой, приватность и комфорт дома.' 
+              },
+              { 
+                type: 'image', 
+                src: '2.jpg', 
+                title: 'Анализ ЦА & Боли аудитории', 
+                desc: 'Решение проблем шума от соседей, эха и усталости через эстетичные интерьерные решения.' 
+              },
+              { 
+                type: 'image', 
+                src: '3.jpg', 
+                title: 'Эмоциональный AI-визуал', 
+                desc: 'Фотореалистичные интерьеры: фактуры акустических панелей, мягкий свет и глубина пространства.' 
+              },
+              { 
+                type: 'image', 
+                src: '4jpg.jpg', 
+                title: 'Контент-стратегия & Маркетинг', 
+                desc: 'Готовый план публикаций и рекламных креативов для выхода на рынок и роста продаж.' 
+              },
+              { 
+                type: 'image', 
+                src: '5.jpg', 
+                title: 'Готовая бренд-упаковка', 
+                desc: 'Целостный визуал, готовый к масштабированию в соцсетях, на сайте и маркетплейсах.',
+                link: 'https://drive.google.com/drive/folders/16hVMsDgv23tElsx_xc4caaGSQmjVPaxi?usp=sharing'
+              },
+              { 
+                type: 'video', 
+                src: '6.mp4', 
+                title: 'Атмосферный видео-кампейн', 
+                desc: 'Эмоциональный ролик для соцсетей: погружение в акустический комфорт и тишину.',
+                link: 'https://drive.google.com/drive/folders/16hVMsDgv23tElsx_xc4caaGSQmjVPaxi?usp=sharing'
+              }
+            ]
+          },
           {
             id: 'jacquemus_summer',
             title: 'Jacquemus: Прованс & AI',
@@ -504,42 +568,12 @@
             desc: 'Курортный шик, консистентность модели и деталей',
             thumb: '2_1.jpg',
             slides: [
-              { 
-                type: 'image', 
-                src: '2_1.jpg', 
-                title: 'Jacquemus: Концепт & Мудборд', 
-                desc: 'Передача ДНК бренда: ослепляющее солнце, чистота архитектурных линий и курортный шик.' 
-              },
-              { 
-                type: 'image', 
-                src: '2_2.jpg', 
-                title: 'AI-Фотосессия: Имиджевый кадр', 
-                desc: 'Связка Midjourney + Nano Banana: идеальное сохранение внешности модели и черт лица.' 
-              },
-              { 
-                type: 'image', 
-                src: '2_3.jpg', 
-                title: 'Детали коллекции & Текстуры', 
-                desc: 'Точная передача формы плетеной сумочки, текстуры материала и мягкого теплого света.' 
-              },
-              { 
-                type: 'image', 
-                src: '2_4.jpg', 
-                title: 'Обувь & Аксессуары', 
-                desc: 'Сложная предметная детализация: швы, фурнитура и авторский акцент в виде листика.' 
-              },
-              { 
-                type: 'image', 
-                src: '2_5.jpg', 
-                title: 'Консистентность персонажа', 
-                desc: 'Анализ ракурсов и мимики: модель сохраняет 100% стабильность во всей серии кадров.' 
-              },
-              { 
-                type: 'video', 
-                src: '2_6.mp4', 
-                title: 'Анимированный кампейн', 
-                desc: 'Оживление статичной концепции: динамичный ролик для вовлечения и удержания внимания.' 
-              }
+              { type: 'image', src: '2_1.jpg', title: 'Jacquemus: Концепт & Мудборд', desc: 'Передача ДНК бренда: ослепляющее солнце, чистота архитектурных линий и курортный шик.' },
+              { type: 'image', src: '2_2.jpg', title: 'AI-Фотосессия: Имиджевый кадр', desc: 'Связка Midjourney + Nano Banana: идеальное сохранение внешности модели и черт лица.' },
+              { type: 'image', src: '2_3.jpg', title: 'Детали коллекции & Текстуры', desc: 'Точная передача формы плетеной сумочки, текстуры материала и мягкого теплого света.' },
+              { type: 'image', src: '2_4.jpg', title: 'Обувь & Аксессуары', desc: 'Сложная предметная детализация: швы, фурнитура и авторский акцент в виде листика.' },
+              { type: 'image', src: '2_5.jpg', title: 'Консистентность персонажа', desc: 'Анализ ракурсов и мимики: модель сохраняет 100% стабильность во всей серии кадров.' },
+              { type: 'video', src: '2_6.mp4', title: 'Анимированный кампейн', desc: 'Оживление статичной концепции: динамичный ролик для вовлечения и удержания внимания.' }
             ]
           },
           {
@@ -549,30 +583,10 @@
             desc: 'Интеграция персонажа мальтипу в ДНК бренда',
             thumb: '1 .jpg',
             slides: [
-              { 
-                type: 'image', 
-                src: '1 .jpg', 
-                title: 'Jacquemus x Leo: Концепт', 
-                desc: 'Визуальный код: архитектурный минимализм, терракота и гармоничное введение маскота.' 
-              },
-              { 
-                type: 'video', 
-                src: '2_Video Project 3 (1).mp4', 
-                title: 'Морфинг & Видео-трансформация', 
-                desc: 'Бесшовная преемственность стиля от подиумного кадра к главному герою кампании.' 
-              },
-              { 
-                type: 'image', 
-                src: '3_.jpg', 
-                title: 'Макро-продакшн & Масштаб', 
-                desc: 'Сюрреалистичная игра с пропорциями: гигантская сумка Jacquemus и текстуры кожи.' 
-              },
-              { 
-                type: 'image', 
-                src: '4_.jpg', 
-                title: 'Мудборд & Финализация', 
-                desc: 'Итоговая презентация проекта: интеграция персонажа в премиальный сегмент. Стек: MJ, Gemini, Canva.' 
-              }
+              { type: 'image', src: '1 .jpg', title: 'Jacquemus x Leo: Концепт', desc: 'Визуальный код: архитектурный минимализм, терракота и гармоничное введение маскота.' },
+              { type: 'video', src: '2_Video Project 3 (1).mp4', title: 'Морфинг & Видео-трансформация', desc: 'Бесшовная преемственность стиля от подиумного кадра к главному герою кампании.' },
+              { type: 'image', src: '3_.jpg', title: 'Макро-продакшн & Масштаб', desc: 'Сюрреалистичная игра с пропорциями: гигантская сумка Jacquemus и текстуры кожи.' },
+              { type: 'image', src: '4_.jpg', title: 'Мудборд & Финализация', desc: 'Итоговая презентация проекта: интеграция персонажа в премиальный сегмент. Стек: MJ, Gemini, Canva.' }
             ]
           }
         ]
@@ -710,11 +724,12 @@
     let activeProject = null;
     let currentSlideIndex = 0;
     let storyTimer = null;
-    const SLIDE_DURATION = 4000;
+    const SLIDE_DURATION = 4500;
 
     const imgEl = document.getElementById('storyActiveImage');
     const vidEl = document.getElementById('storyActiveVideo');
     const viewerEl = document.getElementById('storiesViewer');
+    const linkBtn = document.getElementById('storyLinkBtn');
 
     function startStories(project) {
       activeProject = project;
@@ -763,6 +778,20 @@
 
       document.getElementById('storyDescTitle').innerText = slide.title;
       document.getElementById('storyDescText').innerText = slide.desc;
+
+      if (slide.link) {
+        linkBtn.style.display = 'flex';
+        linkBtn.href = slide.link;
+        linkBtn.onclick = (e) => {
+          e.stopPropagation();
+          if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
+            e.preventDefault();
+            window.Telegram.WebApp.openLink(slide.link);
+          }
+        };
+      } else {
+        linkBtn.style.display = 'none';
+      }
 
       activeProject.slides.forEach((_, idx) => {
         const fill = document.getElementById('bar-fill-' + idx);
