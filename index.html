@@ -46,10 +46,7 @@
       pointer-events: none;
     }
 
-    .container { 
-      position: relative; 
-      z-index: 5; 
-    }
+    .container { position: relative; z-index: 5; }
 
     header { margin-bottom: 16px; }
     .hero-badge {
@@ -103,7 +100,7 @@
     .section-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #22242a; }
     .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     
-    .story-card {
+    .category-card {
       position: relative;
       background: #fff;
       border-radius: 16px;
@@ -118,10 +115,10 @@
       box-shadow: 0 6px 18px rgba(170, 150, 130, 0.12);
       user-select: none;
     }
-    .story-card:active { transform: scale(0.97); }
+    .category-card:active { transform: scale(0.97); }
     
-    .story-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
-    .story-card-overlay { 
+    .category-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
+    .category-card-overlay { 
       position: absolute; 
       inset: 0; 
       background: linear-gradient(180deg, rgba(15, 17, 23, 0) 35%, rgba(15, 17, 23, 0.78) 75%, rgba(15, 17, 23, 0.94) 100%); 
@@ -129,12 +126,12 @@
       pointer-events: none;
     }
     
-    .story-badge { 
+    .category-badge { 
       position: absolute; 
       top: 9px; 
       right: 9px; 
       z-index: 3; 
-      background: rgba(255, 255, 255, 0.9); 
+      background: rgba(255, 255, 255, 0.92); 
       backdrop-filter: blur(8px); 
       font-size: 9.5px; 
       padding: 3px 7px; 
@@ -144,9 +141,9 @@
       pointer-events: none;
     }
     
-    .story-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 2px; pointer-events: none; }
-    .story-tag { font-size: 9px; color: #e5dec9; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
-    .story-title { font-size: 13.5px; font-weight: 700; line-height: 1.25; color: #ffffff; }
+    .category-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 2px; pointer-events: none; }
+    .category-tag { font-size: 9px; color: #e5dec9; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
+    .category-title { font-size: 13.5px; font-weight: 700; line-height: 1.25; color: #ffffff; }
 
     /* Нижняя плашка */
     .contact-bar {
@@ -183,6 +180,59 @@
       background: rgba(184, 134, 85, 0.22);
     }
 
+    /* Модальное окно выбора проектов (Шторка) */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 5000;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.is-open { display: flex; }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 500px;
+      background: #f7f5f0;
+      border-radius: 24px 24px 0 0;
+      padding: 20px 16px 36px 16px;
+      max-height: 85vh;
+      overflow-y: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+      animation: slideUp 0.25s ease-out;
+    }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .modal-title { font-size: 17px; font-weight: 800; color: #16171a; }
+    .modal-close { background: rgba(0,0,0,0.06); border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; color: #555; }
+
+    .project-list { display: flex; flex-direction: column; gap: 10px; }
+    .project-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(180, 165, 145, 0.1);
+      transition: transform 0.15s ease;
+    }
+    .project-item:active { transform: scale(0.98); background: #fdfbf7; }
+    .project-thumb { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .project-info { flex: 1; min-width: 0; }
+    .project-title { font-size: 13.5px; font-weight: 700; color: #1a1b1e; }
+    .project-desc { font-size: 11px; color: var(--text-dim); margin-top: 2px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .project-badge { display: inline-block; font-size: 9px; font-weight: 700; background: var(--accent-soft); color: var(--accent); padding: 2px 6px; border-radius: 6px; margin-top: 4px; }
+    .project-arrow { color: var(--accent); font-size: 14px; font-weight: bold; margin-left: 4px; }
+
     /* Просмотрщик Stories */
     .stories-viewer { 
       display: none; 
@@ -194,9 +244,7 @@
       z-index: 999999; 
       touch-action: manipulation; 
     }
-    .stories-viewer.is-open {
-      display: block !important;
-    }
+    .stories-viewer.is-open { display: block !important; }
     
     .story-header { 
       position: absolute; 
@@ -302,65 +350,57 @@
     <div class="section-title">Коллекции кейсов</div>
     
     <div class="showcase-grid">
-      <div class="story-card" onclick="openStoryAlbum('jacquemus_summer')">
-        <img class="story-card-bg" src="2_1.jpg" alt="Jacquemus Summer">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">6 слайдов + видео</div>
-        <div class="story-meta">
-          <span class="story-tag">Fashion & Campaign</span>
-          <h3 class="story-title">Jacquemus: Прованс & AI</h3>
+      
+      <div class="category-card" onclick="openCategory('commercial')">
+        <img class="category-card-bg" src="2_1.jpg" alt="Реклама для брендов">
+        <div class="category-card-overlay"></div>
+        <div class="category-badge">2 кейса</div>
+        <div class="category-meta">
+          <span class="category-tag">Fashion & Кампейны</span>
+          <h3 class="category-title">Реклама для брендов</h3>
         </div>
       </div>
 
-      <div class="story-card" onclick="openStoryAlbum('commercial')">
-        <img class="story-card-bg" src="1 .jpg" alt="Реклама Jacquemus Leo">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Кейс + Видео</div>
-        <div class="story-meta">
-          <span class="story-tag">Jacquemus x Leo</span>
-          <h3 class="story-title">Реклама для брендов</h3>
+      <div class="category-card" onclick="openCategory('marketplaces')">
+        <img class="category-card-bg" src="3_.jpg" alt="Маркетплейсы">
+        <div class="category-card-overlay"></div>
+        <div class="category-badge">WB / Ozon</div>
+        <div class="category-meta">
+          <span class="category-tag">E-commerce & Карточки</span>
+          <h3 class="category-title">Маркетплейсы</h3>
         </div>
       </div>
 
-      <div class="story-card" onclick="openStoryAlbum('posters')">
-        <img class="story-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">2 слайда</div>
-        <div class="story-meta">
-          <span class="story-tag">Графика & Арт</span>
-          <h3 class="story-title">Постеры</h3>
+      <div class="category-card" onclick="openCategory('posters')">
+        <img class="category-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры & Афиши">
+        <div class="category-card-overlay"></div>
+        <div class="category-badge">2 кейса</div>
+        <div class="category-meta">
+          <span class="category-tag">Графика & События</span>
+          <h3 class="category-title">Постеры & Афиши</h3>
         </div>
       </div>
 
-      <div class="story-card" onclick="openStoryAlbum('sport')">
-        <img class="story-card-bg" src="5321263694777882946.jpg" alt="Спорт">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">5 фото</div>
-        <div class="story-meta">
-          <span class="story-tag">Экшн & Движение</span>
-          <h3 class="story-title">Спорт</h3>
+      <div class="category-card" onclick="openCategory('animation')">
+        <img class="category-card-bg" src="Gemini_Generated_Image_ (2).png" alt="3D & Мультфильмы">
+        <div class="category-card-overlay"></div>
+        <div class="category-badge">Концепты</div>
+        <div class="category-meta">
+          <span class="category-tag">Персонажи & Маскоты</span>
+          <h3 class="category-title">3D & Мультфильмы</h3>
         </div>
       </div>
 
-      <div class="story-card" onclick="openStoryAlbum('cartoons')">
-        <img class="story-card-bg" src="Gemini_Generated_Image_ (2).png" alt="Мультсериалы">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Анимация</div>
-        <div class="story-meta">
-          <span class="story-tag">3D Концепты</span>
-          <h3 class="story-title">Мультфильмы & Сериалы</h3>
+      <div class="category-card" onclick="openCategory('photoshoots')">
+        <img class="category-card-bg" src="5377748239911689516.jpg" alt="Фотосессии & Арт">
+        <div class="category-card-overlay"></div>
+        <div class="category-badge">Сеты</div>
+        <div class="category-meta">
+          <span class="category-tag">Lookbook & Челленджи</span>
+          <h3 class="category-title">Фотосессии & Арт</h3>
         </div>
       </div>
 
-      <div class="story-card" onclick="openStoryAlbum('challenges')">
-        <img class="story-card-bg" src="5377765299521788083.jpg" alt="Челленджи">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Марафон</div>
-        <div class="story-meta">
-          <span class="story-tag">Творчество</span>
-          <h3 class="story-title">AI Челленджи</h3>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -369,6 +409,16 @@
       <span>⚡</span>
       <span>Написать / Задать вопрос</span>
     </a>
+  </div>
+
+  <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title">Проекты</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="projectList" class="project-list"></div>
+    </div>
   </div>
 
   <div id="storiesViewer" class="stories-viewer">
@@ -418,210 +468,131 @@
       if (el) el.classList.toggle('open');
     }
 
-    const albums = {
-      jacquemus_summer: {
-        title: 'Jacquemus: Прованс & AI',
-        slides: [
-          { 
-            type: 'image', 
-            src: '2_1.jpg', 
-            title: 'Jacquemus: Концепт & Мудборд', 
-            desc: 'Ослепляющее солнце, чистота линий и безупречный курортный шик бренда.' 
+    // БАЗА ДАННЫХ КАТЕГОРИЙ И ПРОЕКТОВ
+    const categories = {
+      commercial: {
+        title: 'Реклама для брендов',
+        projects: [
+          {
+            id: 'jacquemus_summer',
+            title: 'Jacquemus: Прованс & AI',
+            badge: '6 слайдов + видео',
+            desc: 'Курортный шик, консистентность модели и деталей',
+            thumb: '2_1.jpg',
+            slides: [
+              { type: 'image', src: '2_1.jpg', title: 'Jacquemus: Концепт & Мудборд', desc: 'Ослепляющее солнце, чистота линий и безупречный курортный шик бренда.' },
+              { type: 'image', src: '2_2.jpg', title: 'AI-Фотосессия: Имиджевый кадр', desc: 'Связка Midjourney + Nano Banana: идеальное сохранение черт модели и образа.' },
+              { type: 'image', src: '2_3.jpg', title: 'Детали коллекции & Аксессуары', desc: 'Точная передача фирменной формы сумочки, текстуры ткани и теплого света.' },
+              { type: 'image', src: '2_4.jpg', title: 'Консистентность персонажа', desc: 'Стабильность лица и стиля во всей серии кадров без искажений.' },
+              { type: 'image', src: '2_5.jpg', title: 'Атмосфера Прованса', desc: 'Визуал, который работает как эмоциональный триггер и погружает в лето.' },
+              { type: 'video', src: '2_6.mp4', title: 'Анимированный кампейн', desc: 'Оживление концепции: динамичный ролик для соцсетей.' }
+            ]
           },
-          { 
-            type: 'image', 
-            src: '2_2.jpg', 
-            title: 'AI-Фотосессия: Имиджевый кадр', 
-            desc: 'Связка Midjourney + Nano Banana: идеальное сохранение черт модели и образа.' 
-          },
-          { 
-            type: 'image', 
-            src: '2_3.jpg', 
-            title: 'Детали коллекции & Аксессуары', 
-            desc: 'Точная передача фирменной формы сумочки, текстуры ткани и теплого света.' 
-          },
-          { 
-            type: 'image', 
-            src: '2_4.jpg', 
-            title: 'Консистентность персонажа', 
-            desc: 'Стабильность лица и стиля во всей серии кадров без искажений.' 
-          },
-          { 
-            type: 'image', 
-            src: '2_5.jpg', 
-            title: 'Атмосфера Прованса', 
-            desc: 'Визуал, который работает как эмоциональный триггер и погружает в лето.' 
-          },
-          { 
-            type: 'video', 
-            src: '2_6.mp4', 
-            title: 'Анимированный кампейн', 
-            desc: 'Оживление концепции: динамичный ролик для удержания внимания в соцсетях.' 
+          {
+            id: 'jacquemus_leo',
+            title: 'Jacquemus x Leo',
+            badge: '4 слайда + видео',
+            desc: 'Интеграция персонажа мальтипу в ДНК бренда',
+            thumb: '1 .jpg',
+            slides: [
+              { type: 'image', src: '1 .jpg', title: 'Jacquemus x Leo: Концепт', desc: 'Анализ визуального кода бренда: архитектурная строгость и минимализм.' },
+              { type: 'video', src: '2_Video Project 3 (1).mp4', title: 'Морфинг & Динамика', desc: 'Видео-трансформация: преемственность стиля от подиумного кадра к персонажу.' },
+              { type: 'image', src: '3_.jpg', title: 'Макро-продакшн & Масштаб', desc: 'Проработка текстур кожи, швов и фурнитуры. Сюрреалистичная работа с пропорциями.' },
+              { type: 'image', src: '4_.jpg', title: 'Мудборд & Финализация', desc: 'Презентация концепции: интеграция персонажа в ДНК премиального бренда.' }
+            ]
           }
         ]
       },
-      commercial: {
-        title: 'Jacquemus x Leo',
-        slides: [
-          { 
-            type: 'image', 
-            src: '1 .jpg', 
-            title: 'Jacquemus x Leo: Концепт', 
-            desc: 'Анализ визуального кода бренда: архитектурная строгость и минимализм.' 
-          },
-          { 
-            type: 'video', 
-            src: '2_Video Project 3 (1).mp4', 
-            title: 'Морфинг & Динамика', 
-            desc: 'Видео-трансформация: преемственность стиля от подиумного кадра к персонажу.' 
-          },
-          { 
-            type: 'image', 
-            src: '3_.jpg', 
-            title: 'Макро-продакшн & Масштаб', 
-            desc: 'Проработка текстур кожи, швов и фурнитуры. Сюрреалистичная работа с пропорциями.' 
-          },
-          { 
-            type: 'image', 
-            src: '4_.jpg', 
-            title: 'Мудборд & Финализация', 
-            desc: 'Презентация концепции: интеграция персонажа в ДНК премиального бренда.' 
+      marketplaces: {
+        title: 'Маркетплейсы & E-com',
+        projects: [
+          {
+            id: 'mp_goods',
+            title: 'Инфографика & Карточки товаров',
+            badge: 'AI Продакшн',
+            desc: 'Предметная AI-съемка и продающий визуал для WB и Ozon',
+            thumb: '3_.jpg',
+            slides: [
+              { type: 'image', src: '3_.jpg', title: 'Предметная AI-съемка', desc: 'Проработка текстур, идеальный студийный свет и акцент на деталях продукта.' }
+            ]
           }
         ]
       },
       posters: {
-        title: 'Постеры & Арт',
-        slides: [
-          { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
-          { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
+        title: 'Постеры & Афиши',
+        projects: [
+          {
+            id: 'sport_posters',
+            title: 'Спорт & Экшн',
+            badge: '5 фото',
+            desc: 'Динамика, картинг и волейбол с реальными спортсменами',
+            thumb: '5321263694777882946.jpg',
+            slides: [
+              { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
+              { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
+              { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
+              { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
+              { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
+            ]
+          },
+          {
+            id: 'holiday_posters',
+            title: 'Праздники & Ивенты',
+            badge: '2 слайда',
+            desc: 'Школьные и праздничные афиши с акварельной графикой',
+            thumb: '5375371130132174635 (1).jpg',
+            slides: [
+              { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
+              { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
+            ]
+          }
         ]
       },
-      sport: {
-        title: 'Спорт & Экшн',
-        slides: [
-          { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
-          { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
-          { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
-          { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
-          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
+      animation: {
+        title: '3D & Мультфильмы',
+        projects: [
+          {
+            id: 'leo_char',
+            title: 'Приключения Лео',
+            badge: '3D Концепт',
+            desc: 'Консистентный 3D-персонаж мальтипу для мультсериала',
+            thumb: 'Gemini_Generated_Image_ (2).png',
+            slides: [
+              { type: 'image', src: 'Gemini_Generated_Image_ (2).png', title: 'Приключения Лео: Концепт', desc: 'Консистентный 3D-персонаж мальтипу Лео для мультсериала.' }
+            ]
+          }
         ]
       },
-      cartoons: {
-        title: 'Мультфильмы & Сериалы',
-        slides: [
-          { type: 'image', src: 'Gemini_Generated_Image_ (2).png', title: 'Приключения Лео: Концепт', desc: 'Консистентный 3D-персонаж мальтипу Лео для мультсериала.' }
-        ]
-      },
-      challenges: {
-        title: 'AI Челленджи',
-        slides: [
-          { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
+      photoshoots: {
+        title: 'Фотосессии & Арт',
+        projects: [
+          {
+            id: 'lookbook_case',
+            title: 'Нейрофотосессии',
+            badge: 'Lookbook',
+            desc: 'Студийные портреты с сохранением внешности модели',
+            thumb: '5377748239911689516.jpg',
+            slides: [
+              { type: 'image', src: '5377748239911689516.jpg', title: 'Студийный портрет', desc: 'Индивидуальные фотосессии с сохранением внешности.' }
+            ]
+          },
+          {
+            id: 'challenge_case',
+            title: 'AI Челленджи & Марафон',
+            badge: 'Творчество',
+            desc: 'Сложные генерации, арт-эксперименты и марафоны',
+            thumb: '5377765299521788083.jpg',
+            slides: [
+              { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
+            ]
+          }
         ]
       }
     };
 
-    let activeAlbumKey = null;
-    let currentSlideIndex = 0;
-    let storyTimer = null;
-    const SLIDE_DURATION = 4000;
+    // ЛОГИКА ШТОРКИ ПРОЕКТОВ
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const projectList = document.getElementById('projectList');
 
-    const imgEl = document.getElementById('storyActiveImage');
-    const vidEl = document.getElementById('storyActiveVideo');
-    const viewerEl = document.getElementById('storiesViewer');
-
-    function openStoryAlbum(key) {
-      if (!albums[key]) return;
-      activeAlbumKey = key;
-      currentSlideIndex = 0;
-      viewerEl.classList.add('is-open');
-      setupProgressBars();
-      showSlide(0);
-    }
-
-    function closeStories(e) {
-      if (e) e.stopPropagation();
-      clearTimeout(storyTimer);
-      if (vidEl) {
-        vidEl.pause();
-        vidEl.src = '';
-      }
-      viewerEl.classList.remove('is-open');
-      activeAlbumKey = null;
-    }
-
-    function setupProgressBars() {
-      const album = albums[activeAlbumKey];
-      const container = document.getElementById('progressBars');
-      container.innerHTML = '';
-      album.slides.forEach((_, idx) => {
-        const bg = document.createElement('div');
-        bg.className = 'progress-bar-bg';
-        const fill = document.createElement('div');
-        fill.className = 'progress-bar-fill';
-        fill.id = 'bar-fill-' + idx;
-        bg.appendChild(fill);
-        container.appendChild(bg);
-      });
-      document.getElementById('storyAuthorTitle').innerText = album.title;
-    }
-
-    function showSlide(index) {
-      clearTimeout(storyTimer);
-      if (vidEl) vidEl.pause();
-      
-      const album = albums[activeAlbumKey];
-      if (!album) return;
-      if (index >= album.slides.length) { closeStories(); return; }
-      if (index < 0) index = 0;
-
-      currentSlideIndex = index;
-      const slide = album.slides[index];
-
-      document.getElementById('storyDescTitle').innerText = slide.title;
-      document.getElementById('storyDescText').innerText = slide.desc;
-
-      album.slides.forEach((_, idx) => {
-        const fill = document.getElementById('bar-fill-' + idx);
-        if (!fill) return;
-        fill.style.transition = 'none';
-        fill.style.width = idx < index ? '100%' : '0%';
-      });
-
-      const currentFill = document.getElementById('bar-fill-' + index);
-      if (currentFill) {
-        currentFill.style.width = '0%';
-        setTimeout(() => {
-          currentFill.style.transition = 'width ' + SLIDE_DURATION + 'ms linear';
-          currentFill.style.width = '100%';
-        }, 30);
-      }
-
-      if (slide.type === 'video') {
-        imgEl.classList.remove('active-media');
-        vidEl.classList.add('active-media');
-        vidEl.src = slide.src;
-        vidEl.currentTime = 0;
-        vidEl.play().catch(() => {});
-      } else {
-        vidEl.classList.remove('active-media');
-        imgEl.classList.add('active-media');
-        imgEl.src = slide.src;
-      }
-
-      storyTimer = setTimeout(() => {
-        storyNext();
-      }, SLIDE_DURATION);
-    }
-
-    function storyNext(e) {
-      if (e) e.stopPropagation();
-      showSlide(currentSlideIndex + 1);
-    }
-
-    function storyPrev(e) {
-      if (e) e.stopPropagation();
-      showSlide(currentSlideIndex - 1);
-    }
-  </script>
-</body>
-</html>
+    function openCategory(catKey) {
