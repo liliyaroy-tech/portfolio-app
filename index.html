@@ -183,7 +183,7 @@
       background: rgba(184, 134, 85, 0.22);
     }
 
-    /* Просмотрщик Stories (Изолирован, не виден пока не активен) */
+    /* Просмотрщик Stories */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -225,7 +225,7 @@
       display: flex; 
       align-items: center; 
       justify-content: center; 
-      z-index: 40;
+      z-index: 40; 
     }
 
     .story-stage { 
@@ -302,6 +302,26 @@
     <div class="section-title">Коллекции кейсов</div>
     
     <div class="showcase-grid">
+      <div class="story-card" onclick="openStoryAlbum('jacquemus_summer')">
+        <img class="story-card-bg" src="2_1.jpg" alt="Jacquemus Summer">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">6 слайдов + видео</div>
+        <div class="story-meta">
+          <span class="story-tag">Fashion & Campaign</span>
+          <h3 class="story-title">Jacquemus: Прованс & AI</h3>
+        </div>
+      </div>
+
+      <div class="story-card" onclick="openStoryAlbum('commercial')">
+        <img class="story-card-bg" src="1 .jpg" alt="Реклама Jacquemus Leo">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Кейс + Видео</div>
+        <div class="story-meta">
+          <span class="story-tag">Jacquemus x Leo</span>
+          <h3 class="story-title">Реклама для брендов</h3>
+        </div>
+      </div>
+
       <div class="story-card" onclick="openStoryAlbum('posters')">
         <img class="story-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры">
         <div class="story-card-overlay"></div>
@@ -319,26 +339,6 @@
         <div class="story-meta">
           <span class="story-tag">Экшн & Движение</span>
           <h3 class="story-title">Спорт</h3>
-        </div>
-      </div>
-
-      <div class="story-card" onclick="openStoryAlbum('photoshoot')">
-        <img class="story-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Сеты</div>
-        <div class="story-meta">
-          <span class="story-tag">Портреты</span>
-          <h3 class="story-title">Нейрофотосессии</h3>
-        </div>
-      </div>
-
-      <div class="story-card" onclick="openStoryAlbum('commercial')">
-        <img class="story-card-bg" src="1 .jpg" alt="Реклама Jacquemus">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Кейс + Видео</div>
-        <div class="story-meta">
-          <span class="story-tag">Jacquemus x Leo</span>
-          <h3 class="story-title">Реклама для брендов</h3>
         </div>
       </div>
 
@@ -419,31 +419,49 @@
     }
 
     const albums = {
-      posters: {
-        title: 'Постеры & Арт',
+      jacquemus_summer: {
+        title: 'Jacquemus: Прованс & AI',
         slides: [
-          { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
-          { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
-        ]
-      },
-      sport: {
-        title: 'Спорт & Экшн',
-        slides: [
-          { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
-          { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
-          { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
-          { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
-          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
-        ]
-      },
-      photoshoot: {
-        title: 'Нейрофотосессии',
-        slides: [
-          { type: 'image', src: '5377748239911689516.jpg', title: 'Студийный портрет', desc: 'Индивидуальные фотосессии с сохранением внешности.' }
+          { 
+            type: 'image', 
+            src: '2_1.jpg', 
+            title: 'Jacquemus: Концепт & Мудборд', 
+            desc: 'Ослепляющее солнце, чистота линий и безупречный курортный шик бренда.' 
+          },
+          { 
+            type: 'image', 
+            src: '2_2.jpg', 
+            title: 'AI-Фотосессия: Имиджевый кадр', 
+            desc: 'Связка Midjourney + Nano Banana: идеальное сохранение черт модели и образа.' 
+          },
+          { 
+            type: 'image', 
+            src: '2_3.jpg', 
+            title: 'Детали коллекции & Аксессуары', 
+            desc: 'Точная передача фирменной формы сумочки, текстуры ткани и теплого света.' 
+          },
+          { 
+            type: 'image', 
+            src: '2_4.jpg', 
+            title: 'Консистентность персонажа', 
+            desc: 'Стабильность лица и стиля во всей серии кадров без искажений.' 
+          },
+          { 
+            type: 'image', 
+            src: '2_5.jpg', 
+            title: 'Атмосфера Прованса', 
+            desc: 'Визуал, который работает как эмоциональный триггер и погружает в лето.' 
+          },
+          { 
+            type: 'video', 
+            src: '2_6.mp4', 
+            title: 'Анимированный кампейн', 
+            desc: 'Оживление концепции: динамичный ролик для удержания внимания в соцсетях.' 
+          }
         ]
       },
       commercial: {
-        title: 'Реклама: Jacquemus x Leo',
+        title: 'Jacquemus x Leo',
         slides: [
           { 
             type: 'image', 
@@ -469,6 +487,23 @@
             title: 'Мудборд & Финализация', 
             desc: 'Презентация концепции: интеграция персонажа в ДНК премиального бренда.' 
           }
+        ]
+      },
+      posters: {
+        title: 'Постеры & Арт',
+        slides: [
+          { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
+          { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
+        ]
+      },
+      sport: {
+        title: 'Спорт & Экшн',
+        slides: [
+          { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
+          { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
+          { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
+          { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
+          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
         ]
       },
       cartoons: {
