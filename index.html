@@ -8,8 +8,8 @@
   <style>
     :root {
       --bg-base: #f7f5f0;
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --card-border: rgba(205, 195, 180, 0.5);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-border: rgba(205, 195, 180, 0.55);
       --accent: #b88655;
       --accent-soft: rgba(184, 134, 85, 0.16);
       --text: #1d1d1f;
@@ -21,7 +21,7 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
     
     body {
@@ -33,22 +33,10 @@
       position: relative;
     }
 
-    .bg-glow-1 {
-      position: fixed;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 380px;
-      height: 380px;
-      background: radial-gradient(circle, rgba(235, 218, 195, 0.7) 0%, rgba(247, 245, 240, 0) 70%);
-      filter: blur(50px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
     .container { 
       position: relative; 
       z-index: 10; 
+      width: 100%;
     }
 
     header { margin-bottom: 18px; }
@@ -69,18 +57,18 @@
     header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; line-height: 1.2; color: #16171a; }
     header p { font-size: 14.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; font-weight: 450; }
 
+    /* Блок «Чем могу быть полезна» */
     .about-card {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       border-radius: 18px;
       border: 1px solid var(--card-border);
       padding: 16px 18px;
       margin-bottom: 22px;
       box-shadow: 0 6px 20px rgba(180, 165, 145, 0.14);
       cursor: pointer;
+      user-select: none;
     }
-    .about-toggle { display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .about-toggle { display: flex; justify-content: space-between; align-items: center; }
     .about-toggle-title { font-size: 15px; font-weight: 700; color: #22242a; display: flex; align-items: center; gap: 8px; }
     .about-arrow { font-size: 13px; color: var(--accent); transition: transform 0.3s ease; }
     .about-card.open .about-arrow { transform: rotate(180deg); }
@@ -107,7 +95,7 @@
     
     .category-card {
       position: relative;
-      background: #fff;
+      background: #e2ddd5;
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--card-border);
@@ -119,17 +107,15 @@
       padding: 12px;
       box-shadow: 0 6px 18px rgba(170, 150, 130, 0.12);
       user-select: none;
-      pointer-events: auto;
     }
     .category-card:active { transform: scale(0.97); }
     
-    .category-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
+    .category-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
     .category-card-overlay { 
       position: absolute; 
       inset: 0; 
-      background: linear-gradient(180deg, rgba(15, 17, 23, 0) 30%, rgba(15, 17, 23, 0.75) 70%, rgba(15, 17, 23, 0.95) 100%); 
+      background: linear-gradient(180deg, rgba(15, 17, 23, 0) 25%, rgba(15, 17, 23, 0.75) 70%, rgba(15, 17, 23, 0.95) 100%); 
       z-index: 2; 
-      pointer-events: none;
     }
     
     .category-badge { 
@@ -144,12 +130,11 @@
       border-radius: 12px; 
       font-weight: 700; 
       color: #1d1e22; 
-      pointer-events: none;
     }
     
-    .category-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 3px; pointer-events: none; }
-    .category-tag { font-size: 10.5px; color: #f0e6d2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .category-title { font-size: 15px; font-weight: 800; line-height: 1.25; color: #ffffff; }
+    .category-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 3px; }
+    .category-tag { font-size: 10px; color: #f0e6d2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .category-title { font-size: 14.5px; font-weight: 800; line-height: 1.25; color: #ffffff; }
 
     /* Нижняя кнопка */
     .contact-bar {
@@ -162,7 +147,7 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-top: 1px solid var(--card-border);
-      z-index: 50;
+      z-index: 100;
     }
     .btn-contact {
       display: flex;
@@ -190,18 +175,19 @@
     .modal-backdrop {
       display: none;
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      z-index: 500;
+      z-index: 5000;
       align-items: flex-end;
       justify-content: center;
-      pointer-events: none;
     }
     .modal-backdrop.is-open { 
       display: flex !important; 
-      pointer-events: auto !important; 
     }
 
     .modal-sheet {
@@ -233,7 +219,6 @@
       border: 1px solid var(--card-border);
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(180, 165, 145, 0.1);
-      transition: transform 0.15s ease;
       user-select: none;
     }
     .project-item:active { transform: scale(0.98); background: #fdfbf7; }
@@ -248,17 +233,18 @@
     .stories-viewer { 
       display: none; 
       position: fixed; 
-      inset: 0; 
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       width: 100vw; 
       height: 100vh; 
       background: var(--story-bg); 
-      z-index: 1000; 
-      pointer-events: none;
+      z-index: 10000; 
       touch-action: manipulation; 
     }
     .stories-viewer.is-open { 
       display: block !important; 
-      pointer-events: auto !important; 
     }
     
     .story-header { 
@@ -349,8 +335,6 @@
   </style>
 </head>
 <body>
-
-  <div class="bg-glow-1"></div>
 
   <div class="container">
     <header>
@@ -509,11 +493,11 @@
     }
 
     function toggleAbout() {
-      const el = document.getElementById('aboutCard');
+      var el = document.getElementById('aboutCard');
       if (el) el.classList.toggle('open');
     }
 
-    const categories = {
+    var categories = {
       commercial: {
         title: 'Реклама для брендов',
         projects: [
@@ -709,28 +693,160 @@
       }
     };
 
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const modalTitle = document.getElementById('modalTitle');
-    const projectList = document.getElementById('projectList');
+    var modalBackdrop = document.getElementById('modalBackdrop');
+    var modalTitle = document.getElementById('modalTitle');
+    var projectList = document.getElementById('projectList');
 
     function openCategory(catKey) {
-      const cat = categories[catKey];
+      var cat = categories[catKey];
       if (!cat) return;
 
       modalTitle.innerText = cat.title;
       projectList.innerHTML = '';
 
-      cat.projects.forEach(proj => {
-        const item = document.createElement('div');
+      cat.projects.forEach(function(proj) {
+        var item = document.createElement('div');
         item.className = 'project-item';
-        item.onclick = (e) => {
+        item.onclick = function(e) {
           e.stopPropagation();
           closeModal();
           startStories(proj);
         };
 
-        item.innerHTML = `
-          <img class="project-thumb" src="${proj.thumb}" alt="${proj.title}" onerror="this.src='2_1.jpg'">
-          <div class="project-info">
-            <div class="project-title">${proj.title}</div>
-            <div class="project-desc">${proj.desc}</div>
+        item.innerHTML = 
+          '<img class="project-thumb" src="' + proj.thumb + '" alt="' + proj.title + '" onerror="this.src=\'2_1.jpg\'">' +
+          '<div class="project-info">' +
+            '<div class="project-title">' + proj.title + '</div>' +
+            '<div class="project-desc">' + proj.desc + '</div>' +
+            '<span class="project-badge">' + proj.badge + '</span>' +
+          '</div>' +
+          '<div class="project-arrow">›</div>';
+        
+        projectList.appendChild(item);
+      });
+
+      modalBackdrop.classList.add('is-open');
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('is-open');
+    }
+
+    var activeProject = null;
+    var currentSlideIndex = 0;
+    var storyTimer = null;
+    var SLIDE_DURATION = 4500;
+
+    var imgEl = document.getElementById('storyActiveImage');
+    var vidEl = document.getElementById('storyActiveVideo');
+    var viewerEl = document.getElementById('storiesViewer');
+    var linkBtn = document.getElementById('storyLinkBtn');
+
+    function startStories(project) {
+      if (!project || !project.slides || project.slides.length === 0) return;
+      activeProject = project;
+      currentSlideIndex = 0;
+      viewerEl.classList.add('is-open');
+      setupProgressBars();
+      showSlide(0);
+    }
+
+    function closeStories(e) {
+      if (e) e.stopPropagation();
+      clearTimeout(storyTimer);
+      if (vidEl) {
+        vidEl.pause();
+        vidEl.src = '';
+      }
+      viewerEl.classList.remove('is-open');
+      activeProject = null;
+    }
+
+    function setupProgressBars() {
+      var container = document.getElementById('progressBars');
+      container.innerHTML = '';
+      activeProject.slides.forEach(function(_, idx) {
+        var bg = document.createElement('div');
+        bg.className = 'progress-bar-bg';
+        var fill = document.createElement('div');
+        fill.className = 'progress-bar-fill';
+        fill.id = 'bar-fill-' + idx;
+        bg.appendChild(fill);
+        container.appendChild(bg);
+      });
+      document.getElementById('storyAuthorTitle').innerText = activeProject.title;
+    }
+
+    function showSlide(index) {
+      clearTimeout(storyTimer);
+      if (vidEl) vidEl.pause();
+      
+      if (!activeProject) return;
+      if (index >= activeProject.slides.length) { closeStories(); return; }
+      if (index < 0) index = 0;
+
+      currentSlideIndex = index;
+      var slide = activeProject.slides[index];
+
+      document.getElementById('storyDescTitle').innerText = slide.title;
+      document.getElementById('storyDescText').innerText = slide.desc;
+
+      if (slide.link) {
+        linkBtn.style.display = 'flex';
+        linkBtn.href = slide.link;
+        linkBtn.onclick = function(e) {
+          e.stopPropagation();
+          if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
+            e.preventDefault();
+            window.Telegram.WebApp.openLink(slide.link);
+          }
+        };
+      } else {
+        linkBtn.style.display = 'none';
+      }
+
+      activeProject.slides.forEach(function(_, idx) {
+        var fill = document.getElementById('bar-fill-' + idx);
+        if (!fill) return;
+        fill.style.transition = 'none';
+        fill.style.width = idx < index ? '100%' : '0%';
+      });
+
+      var currentFill = document.getElementById('bar-fill-' + index);
+      if (currentFill) {
+        currentFill.style.width = '0%';
+        setTimeout(function() {
+          currentFill.style.transition = 'width ' + SLIDE_DURATION + 'ms linear';
+          currentFill.style.width = '100%';
+        }, 30);
+      }
+
+      if (slide.type === 'video') {
+        imgEl.classList.remove('active-media');
+        vidEl.classList.add('active-media');
+        vidEl.src = slide.src;
+        vidEl.currentTime = 0;
+        vidEl.play().catch(function() {});
+      } else {
+        vidEl.classList.remove('active-media');
+        imgEl.classList.add('active-media');
+        imgEl.src = slide.src;
+      }
+
+      storyTimer = setTimeout(function() {
+        storyNext();
+      }, SLIDE_DURATION);
+    }
+
+    function storyNext(e) {
+      if (e) e.stopPropagation();
+      showSlide(currentSlideIndex + 1);
+    }
+
+    function storyPrev(e) {
+      if (e) e.stopPropagation();
+      showSlide(currentSlideIndex - 1);
+    }
+  </script>
+</body>
+</html>
