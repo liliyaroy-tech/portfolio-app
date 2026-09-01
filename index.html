@@ -14,7 +14,7 @@
       --accent-soft: rgba(184, 134, 85, 0.14);
       --text: #1d1d1f;
       --text-dim: #6e6e73;
-      --story-bg: #1a1412; /* Тёплый тёмный шоколад */
+      --story-bg: #1a1412;
     }
     * {
       box-sizing: border-box;
@@ -33,8 +33,12 @@
       min-height: 100vh;
     }
 
-    .bg-glow-1 {
+    .bg-glow-1, .bg-glow-2 {
       position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-glow-1 {
       top: -100px;
       left: 50%;
       transform: translateX(-50%);
@@ -42,22 +46,17 @@
       height: 400px;
       background: radial-gradient(circle, rgba(235, 218, 195, 0.7) 0%, rgba(247, 245, 240, 0) 70%);
       filter: blur(50px);
-      z-index: 0;
-      pointer-events: none;
     }
     .bg-glow-2 {
-      position: fixed;
       bottom: 80px;
       right: -80px;
       width: 320px;
       height: 320px;
       background: radial-gradient(circle, rgba(225, 210, 185, 0.5) 0%, rgba(247, 245, 240, 0) 70%);
       filter: blur(60px);
-      z-index: 0;
-      pointer-events: none;
     }
 
-    .container { position: relative; z-index: 2; }
+    .container { position: relative; z-index: 10; }
 
     header { margin-bottom: 18px; }
     .hero-badge {
@@ -127,17 +126,18 @@
       padding: 14px 12px;
       box-shadow: 0 8px 22px rgba(170, 150, 130, 0.12);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      z-index: 10;
     }
     .story-card:active { transform: scale(0.97); }
     .story-card:hover { box-shadow: 0 12px 28px rgba(184, 134, 85, 0.2); }
     
-    .story-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.4s ease; }
-    .story-card:hover .story-card-bg { transform: scale(1.04); }
+    .story-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
     .story-card-overlay { 
       position: absolute; 
       inset: 0; 
       background: linear-gradient(180deg, rgba(15, 17, 23, 0) 35%, rgba(15, 17, 23, 0.78) 75%, rgba(15, 17, 23, 0.94) 100%); 
       z-index: 2; 
+      pointer-events: none;
     }
     
     .story-badge { 
@@ -156,7 +156,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
     }
     
-    .story-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 3px; }
+    .story-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 3px; pointer-events: none; }
     .story-tag { 
       font-size: 9.5px; 
       color: #e5dec9; 
@@ -173,6 +173,7 @@
       letter-spacing: -0.2px;
     }
 
+    /* Нижняя плашка со стильной золотисто-бежевой кнопкой */
     .contact-bar {
       position: fixed;
       bottom: 0;
@@ -200,10 +201,11 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      cursor: pointer;
+      text-decoration: none;
       box-shadow: 0 4px 16px rgba(184, 134, 85, 0.12);
       transition: all 0.2s ease;
       outline: none;
+      cursor: pointer;
     }
     .btn-contact:active { 
       transform: scale(0.98); 
@@ -214,7 +216,7 @@
       font-size: 15px;
     }
 
-    /* Режим Stories (Шоколадный фон + аккуратная плашка) */
+    /* Режим Stories */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -224,6 +226,9 @@
       flex-direction: column; 
       justify-content: space-between; 
       touch-action: manipulation; 
+    }
+    .stories-viewer.active {
+      display: flex;
     }
     
     .story-header { 
@@ -282,7 +287,6 @@
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
-    /* Компактная светлая карточка снизу (не перекрывает контент) */
     .story-footer { 
       position: absolute; 
       bottom: 14px; 
@@ -388,211 +392,3 @@
 
       <div class="story-card" onclick="openStoryAlbum('cartoons')">
         <img class="story-card-bg" src="Gemini_Generated_Image_ (2).png" alt="Мультсериалы">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Анимация</div>
-        <div class="story-meta">
-          <span class="story-tag">3D Концепты</span>
-          <h3 class="story-title">Мультфильмы & Сериалы</h3>
-        </div>
-      </div>
-
-      <div class="story-card" onclick="openStoryAlbum('challenges')">
-        <img class="story-card-bg" src="5377765299521788083.jpg" alt="Челленджи">
-        <div class="story-card-overlay"></div>
-        <div class="story-badge">Марафон</div>
-        <div class="story-meta">
-          <span class="story-tag">Творчество</span>
-          <h3 class="story-title">AI Челленджи</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="contact-bar">
-    <button class="btn-contact" onclick="openContactChat()">
-      <span class="btn-icon">⚡</span>
-      <span>Написать / Задать вопрос</span>
-    </button>
-  </div>
-
-  <div id="storiesViewer" class="stories-viewer">
-    <div class="story-header">
-      <div id="progressBars" class="progress-bars"></div>
-      <div class="story-user-row">
-        <div class="story-author-info">
-          <span id="storyAuthorTitle">Портфолио</span>
-        </div>
-        <button class="story-close-btn" onclick="closeStories(event)">✕</button>
-      </div>
-    </div>
-
-    <div class="story-stage">
-      <img id="storyActiveImage" class="story-media" src="" alt="Story">
-      <video id="storyActiveVideo" class="story-media" playsinline webkit-playsinline preload="auto" muted></video>
-    </div>
-
-    <div class="touch-nav">
-      <div class="touch-left" onclick="storyPrev(event)"></div>
-      <div class="touch-right" onclick="storyNext(event)"></div>
-    </div>
-
-    <div class="story-footer">
-      <div id="storyDescTitle" class="story-desc-title"></div>
-      <div id="storyDescText" class="story-desc-text"></div>
-    </div>
-  </div>
-
-  <script>
-    const tg = window.Telegram?.WebApp;
-    if (tg) { 
-      tg.expand(); 
-      tg.ready(); 
-    }
-
-    const MY_TELEGRAM_USERNAME = 'LiliyaRoi';
-
-    function openContactChat() {
-      const url = 'https://t.me/' + MY_TELEGRAM_USERNAME;
-      if (tg && typeof tg.openTelegramLink === 'function') {
-        tg.openTelegramLink(url);
-      } else {
-        window.location.href = url;
-      }
-    }
-
-    function toggleAbout() {
-      document.getElementById('aboutCard').classList.toggle('open');
-    }
-
-    const albums = {
-      posters: {
-        title: 'Постеры & Арт',
-        slides: [
-          { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
-          { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
-        ]
-      },
-      sport: {
-        title: 'Спорт & Экшн',
-        slides: [
-          { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
-          { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
-          { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
-          { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
-          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
-        ]
-      },
-      photoshoot: {
-        title: 'Нейрофотосессии',
-        slides: [
-          { type: 'image', src: '5377748239911689516.jpg', title: 'Студийный портрет', desc: 'Индивидуальные фотосессии с сохранением внешности.' }
-        ]
-      },
-      commercial: {
-        title: 'Реклама: Jacquemus x Leo',
-        slides: [
-          { 
-            type: 'image', 
-            src: '1 .jpg', 
-            title: 'Jacquemus x Leo: Концепт', 
-            desc: 'Анализ визуального кода бренда: архитектурная строгость, минимализм и терракотовые оттенки.' 
-          },
-          { 
-            type: 'video', 
-            src: '2_Video Project 3 (1).mp4', 
-            title: 'Морфинг & Динамика', 
-            desc: 'Видео-трансформация: преемственность стиля от подиумного кадра к персонажу кампании.' 
-          },
-          { 
-            type: 'image', 
-            src: '3_.jpg', 
-            title: 'Макро-продакшн & Масштаб', 
-            desc: 'Проработка текстур кожи, швов и фурнитуры. Сюрреалистичная работа с пропорциями аксессуара.' 
-          },
-          { 
-            type: 'image', 
-            src: '4_.jpg', 
-            title: 'Мудборд & Финализация', 
-            desc: 'Итоговая презентация концепции: интеграция персонажа в ДНК премиального бренда. Стек: Midjourney, Gemini, Canva.' 
-          }
-        ]
-      },
-      cartoons: {
-        title: 'Мультфильмы & Сериалы',
-        slides: [
-          { type: 'image', src: 'Gemini_Generated_Image_ (2).png', title: 'Приключения Лео: Концепт', desc: 'Консистентный 3D-персонаж мальтипу Лео для мультсериала.' }
-        ]
-      },
-      challenges: {
-        title: 'AI Челленджи',
-        slides: [
-          { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
-        ]
-      }
-    };
-
-    let activeAlbumKey = null;
-    let currentSlideIndex = 0;
-    let storyTimer = null;
-    let isTransitioning = false;
-    const SLIDE_DURATION = 4000;
-
-    const imgEl = document.getElementById('storyActiveImage');
-    const vidEl = document.getElementById('storyActiveVideo');
-
-    function openStoryAlbum(albumKey) {
-      activeAlbumKey = albumKey;
-      currentSlideIndex = 0;
-      document.getElementById('storiesViewer').style.display = 'flex';
-      setupProgressBars();
-      showStorySlide(0);
-    }
-
-    function closeStories(e) {
-      if (e) e.stopPropagation();
-      clearTimeout(storyTimer);
-      isTransitioning = false;
-      vidEl.pause();
-      vidEl.removeAttribute('src');
-      vidEl.load();
-      document.getElementById('storiesViewer').style.display = 'none';
-      activeAlbumKey = null;
-    }
-
-    function setupProgressBars() {
-      const album = albums[activeAlbumKey];
-      const container = document.getElementById('progressBars');
-      container.innerHTML = '';
-      album.slides.forEach((_, idx) => {
-        const bg = document.createElement('div');
-        bg.className = 'progress-bar-bg';
-        const fill = document.createElement('div');
-        fill.className = 'progress-bar-fill';
-        fill.id = `bar-fill-${idx}`;
-        bg.appendChild(fill);
-        container.appendChild(bg);
-      });
-      document.getElementById('storyAuthorTitle').innerText = album.title;
-    }
-
-    function showStorySlide(index) {
-      clearTimeout(storyTimer);
-      isTransitioning = false;
-      
-      vidEl.pause();
-      
-      const album = albums[activeAlbumKey];
-      if (index >= album.slides.length) { closeStories(); return; }
-      if (index < 0) index = 0;
-
-      currentSlideIndex = index;
-      const slide = album.slides[index];
-
-      document.getElementById('storyDescTitle').innerText = slide.title;
-      document.getElementById('storyDescText').innerText = slide.desc;
-
-      album.slides.forEach((_, idx) => {
-        const fill = document.getElementById(`bar-fill-${idx}`);
-        if (!fill) return;
-        fill.style.transition = 'none';
-        if (idx < index
