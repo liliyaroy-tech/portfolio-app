@@ -8,12 +8,12 @@
   <style>
     :root {
       --bg-base: #f7f5f0;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --card-border: rgba(205, 195, 180, 0.45);
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-border: rgba(205, 195, 180, 0.5);
       --accent: #b88655;
-      --accent-soft: rgba(184, 134, 85, 0.14);
+      --accent-soft: rgba(184, 134, 85, 0.16);
       --text: #1d1d1f;
-      --text-dim: #6e6e73;
+      --text-dim: #5c5c62;
       --story-bg: #151110;
     }
     * {
@@ -48,62 +48,63 @@
 
     .container { position: relative; z-index: 5; }
 
-    header { margin-bottom: 16px; }
+    header { margin-bottom: 18px; }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: var(--accent-soft);
       color: var(--accent);
-      border: 1px solid rgba(184, 134, 85, 0.28);
-      padding: 5px 12px;
+      border: 1px solid rgba(184, 134, 85, 0.32);
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 11.5px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.3px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
-    header h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.4px; line-height: 1.2; color: #16171a; }
-    header p { font-size: 13.5px; color: var(--text-dim); margin-top: 5px; line-height: 1.45; }
+    header h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.4px; line-height: 1.2; color: #16171a; }
+    header p { font-size: 14.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; font-weight: 450; }
 
     .about-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid var(--card-border);
-      padding: 14px 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 20px rgba(180, 165, 145, 0.12);
+      padding: 16px 18px;
+      margin-bottom: 22px;
+      box-shadow: 0 6px 20px rgba(180, 165, 145, 0.14);
     }
     .about-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-    .about-toggle-title { font-size: 13.5px; font-weight: 700; color: #22242a; display: flex; align-items: center; gap: 8px; }
-    .about-arrow { font-size: 11px; color: var(--accent); transition: transform 0.3s ease; }
+    .about-toggle-title { font-size: 15px; font-weight: 700; color: #22242a; display: flex; align-items: center; gap: 8px; }
+    .about-arrow { font-size: 13px; color: var(--accent); transition: transform 0.3s ease; }
     .about-card.open .about-arrow { transform: rotate(180deg); }
     
-    .about-content { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); font-size: 12.5px; color: #3a3d45; line-height: 1.55; }
+    .about-content { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 14px; color: #2e3138; line-height: 1.6; }
     .about-card.open .about-content { display: block; }
 
-    .services-list { list-style: none; margin: 10px 0; display: flex; flex-direction: column; gap: 8px; }
-    .services-list li { display: flex; gap: 8px; align-items: flex-start; }
-    .check-icon { color: #22a06b; font-size: 13px; font-weight: bold; flex-shrink: 0; }
+    .services-list { list-style: none; margin: 10px 0; display: flex; flex-direction: column; gap: 10px; }
+    .services-list li { display: flex; gap: 10px; align-items: flex-start; }
+    .check-icon { color: #22a06b; font-size: 15px; font-weight: bold; flex-shrink: 0; margin-top: 1px; }
     .about-quote {
       background: #eeeae0;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border-left: 3px solid var(--accent);
-      margin-top: 10px;
-      font-size: 11.5px;
-      color: #555861;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border-left: 3.5px solid var(--accent);
+      margin-top: 12px;
+      font-size: 13px;
+      color: #444750;
+      line-height: 1.5;
     }
 
-    .section-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #22242a; }
+    .section-title { font-size: 17px; font-weight: 800; margin-bottom: 14px; color: #22242a; }
     .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     
     .category-card {
       position: relative;
       background: #fff;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--card-border);
       cursor: pointer;
@@ -121,38 +122,38 @@
     .category-card-overlay { 
       position: absolute; 
       inset: 0; 
-      background: linear-gradient(180deg, rgba(15, 17, 23, 0) 35%, rgba(15, 17, 23, 0.78) 75%, rgba(15, 17, 23, 0.94) 100%); 
+      background: linear-gradient(180deg, rgba(15, 17, 23, 0) 30%, rgba(15, 17, 23, 0.75) 70%, rgba(15, 17, 23, 0.95) 100%); 
       z-index: 2; 
       pointer-events: none;
     }
     
     .category-badge { 
       position: absolute; 
-      top: 9px; 
-      right: 9px; 
+      top: 10px; 
+      right: 10px; 
       z-index: 3; 
-      background: rgba(255, 255, 255, 0.92); 
+      background: rgba(255, 255, 255, 0.95); 
       backdrop-filter: blur(8px); 
-      font-size: 9.5px; 
-      padding: 3px 7px; 
-      border-radius: 10px; 
+      font-size: 11px; 
+      padding: 4px 9px; 
+      border-radius: 12px; 
       font-weight: 700; 
       color: #1d1e22; 
       pointer-events: none;
     }
     
-    .category-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 2px; pointer-events: none; }
-    .category-tag { font-size: 9px; color: #e5dec9; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
-    .category-title { font-size: 13.5px; font-weight: 700; line-height: 1.25; color: #ffffff; }
+    .category-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 3px; pointer-events: none; }
+    .category-tag { font-size: 10.5px; color: #f0e6d2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .category-title { font-size: 15px; font-weight: 800; line-height: 1.25; color: #ffffff; }
 
-    /* Нижняя плашка */
+    /* Кнопка внизу */
     .contact-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       padding: 12px 16px 24px 16px;
-      background: rgba(247, 245, 240, 0.95);
+      background: rgba(247, 245, 240, 0.96);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-top: 1px solid var(--card-border);
@@ -166,11 +167,11 @@
       width: 100%;
       background: var(--accent-soft);
       color: #9c6a3b;
-      border: 1.5px solid rgba(184, 134, 85, 0.4);
-      padding: 13px;
+      border: 1.5px solid rgba(184, 134, 85, 0.45);
+      padding: 14px;
       border-radius: 18px;
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 15px;
+      font-weight: 750;
       text-decoration: none;
       box-shadow: 0 4px 16px rgba(184, 134, 85, 0.12);
       cursor: pointer;
@@ -180,12 +181,12 @@
       background: rgba(184, 134, 85, 0.22);
     }
 
-    /* Модальное окно выбора проектов */
+    /* Модальная шторка со списком проектов */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 5000;
@@ -199,7 +200,7 @@
       max-width: 500px;
       background: #f7f5f0;
       border-radius: 24px 24px 0 0;
-      padding: 20px 16px 36px 16px;
+      padding: 22px 16px 36px 16px;
       max-height: 85vh;
       overflow-y: auto;
       border-top: 1px solid rgba(255, 255, 255, 0.6);
@@ -208,32 +209,32 @@
     }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .modal-title { font-size: 17px; font-weight: 800; color: #16171a; }
-    .modal-close { background: rgba(0,0,0,0.06); border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; color: #555; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .modal-title { font-size: 18px; font-weight: 800; color: #16171a; }
+    .modal-close { background: rgba(0,0,0,0.06); border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 15px; font-weight: bold; cursor: pointer; color: #444; }
 
-    .project-list { display: flex; flex-direction: column; gap: 10px; }
+    .project-list { display: flex; flex-direction: column; gap: 12px; }
     .project-item {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       background: #ffffff;
-      padding: 10px 12px;
-      border-radius: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(180, 165, 145, 0.1);
       transition: transform 0.15s ease;
     }
     .project-item:active { transform: scale(0.98); background: #fdfbf7; }
-    .project-thumb { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .project-thumb { width: 62px; height: 62px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
     .project-info { flex: 1; min-width: 0; }
-    .project-title { font-size: 13.5px; font-weight: 700; color: #1a1b1e; }
-    .project-desc { font-size: 11px; color: var(--text-dim); margin-top: 2px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .project-badge { display: inline-block; font-size: 9px; font-weight: 700; background: var(--accent-soft); color: var(--accent); padding: 2px 6px; border-radius: 6px; margin-top: 4px; }
-    .project-arrow { color: var(--accent); font-size: 14px; font-weight: bold; margin-left: 4px; }
+    .project-title { font-size: 15px; font-weight: 750; color: #1a1b1e; }
+    .project-desc { font-size: 12px; color: var(--text-dim); margin-top: 3px; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .project-badge { display: inline-block; font-size: 10.5px; font-weight: 700; background: var(--accent-soft); color: var(--accent); padding: 3px 8px; border-radius: 8px; margin-top: 5px; }
+    .project-arrow { color: var(--accent); font-size: 16px; font-weight: bold; margin-left: 4px; }
 
-    /* Просмотрщик Stories */
+    /* Stories Viewer с увеличенными читабельными подписями */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -255,20 +256,20 @@
       z-index: 30; 
       background: linear-gradient(180deg, rgba(21, 17, 16, 0.85) 0%, transparent 100%); 
     }
-    .progress-bars { display: flex; gap: 4px; margin-bottom: 10px; }
-    .progress-bar-bg { flex: 1; height: 3px; background: rgba(255,255,255,0.3); border-radius: 3px; overflow: hidden; }
+    .progress-bars { display: flex; gap: 4px; margin-bottom: 12px; }
+    .progress-bar-bg { flex: 1; height: 3.5px; background: rgba(255,255,255,0.3); border-radius: 3px; overflow: hidden; }
     .progress-bar-fill { height: 100%; width: 0%; background: #ffffff; border-radius: 3px; }
 
     .story-user-row { display: flex; justify-content: space-between; align-items: center; color: #fff; }
-    .story-author-info { font-size: 13.5px; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+    .story-author-info { font-size: 14.5px; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
     .story-close-btn { 
       background: rgba(255,255,255,0.22); 
       border: 1px solid rgba(255,255,255,0.3); 
       color: #fff; 
-      width: 30px; 
-      height: 30px; 
+      width: 32px; 
+      height: 32px; 
       border-radius: 50%; 
-      font-size: 14px; 
+      font-size: 15px; 
       cursor: pointer; 
       display: flex; 
       align-items: center; 
@@ -279,7 +280,7 @@
     .story-stage { 
       position: absolute; 
       top: 55px;
-      bottom: 75px;
+      bottom: 95px;
       left: 0;
       right: 0;
       display: flex; 
@@ -299,21 +300,34 @@
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
+    /* Увеличенная и четкая нижняя плашка Stories */
     .story-footer { 
       position: absolute; 
-      bottom: 12px; 
-      left: 12px; 
-      right: 12px; 
-      padding: 9px 12px; 
+      bottom: 14px; 
+      left: 14px; 
+      right: 14px; 
+      padding: 13px 16px; 
       z-index: 30; 
-      background: rgba(247, 245, 240, 0.94); 
+      background: rgba(247, 245, 240, 0.96); 
       backdrop-filter: blur(16px); 
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(205, 195, 180, 0.5);
-      border-radius: 12px;
+      border: 1px solid rgba(205, 195, 180, 0.6);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
-    .story-desc-title { font-size: 12.5px; font-weight: 700; color: #1a1b1e; }
-    .story-desc-text { font-size: 10.5px; color: #555861; margin-top: 2px; }
+    .story-desc-title { 
+      font-size: 15px; 
+      font-weight: 800; 
+      color: #1a1b1e; 
+      letter-spacing: -0.2px;
+    }
+    .story-desc-text { 
+      font-size: 13px; 
+      color: #3e4148; 
+      margin-top: 4px; 
+      line-height: 1.45; 
+      font-weight: 450;
+    }
   </style>
 </head>
 <body>
@@ -349,10 +363,8 @@
 
     <div class="section-title">Коллекции кейсов</div>
     
-    <!-- Сетка из 6 категорий -->
     <div class="showcase-grid">
       
-      <!-- 1. Реклама для брендов -->
       <div class="category-card" onclick="openCategory('commercial')">
         <img class="category-card-bg" src="2_1.jpg" alt="Реклама для брендов">
         <div class="category-card-overlay"></div>
@@ -363,7 +375,6 @@
         </div>
       </div>
 
-      <!-- 2. Маркетплейсы & E-com -->
       <div class="category-card" onclick="openCategory('marketplaces')">
         <img class="category-card-bg" src="3_.jpg" alt="Маркетплейсы">
         <div class="category-card-overlay"></div>
@@ -374,7 +385,6 @@
         </div>
       </div>
 
-      <!-- 3. Постеры & Афиши -->
       <div class="category-card" onclick="openCategory('posters')">
         <img class="category-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры & Афиши">
         <div class="category-card-overlay"></div>
@@ -385,7 +395,6 @@
         </div>
       </div>
 
-      <!-- 4. 3D & Мультфильмы -->
       <div class="category-card" onclick="openCategory('animation')">
         <img class="category-card-bg" src="Gemini_Generated_Image_ (2).png" alt="3D & Мультфильмы">
         <div class="category-card-overlay"></div>
@@ -396,24 +405,22 @@
         </div>
       </div>
 
-      <!-- 5. Нейрофотосессии -->
       <div class="category-card" onclick="openCategory('photoshoots')">
         <img class="category-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
         <div class="category-card-overlay"></div>
         <div class="category-badge">Lookbook</div>
         <div class="category-meta">
-          <span class="category-tag">Портреты & Персонажи</span>
+          <span class="category-tag">Портреты & Образы</span>
           <h3 class="category-title">Нейрофотосессии</h3>
         </div>
       </div>
 
-      <!-- 6. AI Челленджи & Марафон -->
       <div class="category-card" onclick="openCategory('challenges')">
         <img class="category-card-bg" src="5377765299521788083.jpg" alt="AI Челленджи">
         <div class="category-card-overlay"></div>
         <div class="category-badge">Марафон</div>
         <div class="category-meta">
-          <span class="category-tag">Творчество & Эксперименты</span>
+          <span class="category-tag">Творчество & Арт</span>
           <h3 class="category-title">AI Челленджи</h3>
         </div>
       </div>
@@ -421,7 +428,6 @@
     </div>
   </div>
 
-  <!-- Нижняя кнопка Telegram -->
   <div class="contact-bar">
     <a href="https://t.me/LiliyaRoi" class="btn-contact" onclick="handleContactClick(event)">
       <span>⚡</span>
@@ -429,7 +435,6 @@
     </a>
   </div>
 
-  <!-- Всплывающая шторка со списком проектов -->
   <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
     <div class="modal-sheet" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -440,7 +445,6 @@
     </div>
   </div>
 
-  <!-- Stories Viewer -->
   <div id="storiesViewer" class="stories-viewer">
     <div class="story-header">
       <div id="progressBars" class="progress-bars"></div>
@@ -488,7 +492,7 @@
       if (el) el.classList.toggle('open');
     }
 
-    // БАЗА ДАННЫХ КАТЕГОРИЙ И ПРОЕКТОВ
+    // Подробные и емкие описания для слайдов Jacquemus
     const categories = {
       commercial: {
         title: 'Реклама для брендов',
@@ -500,12 +504,42 @@
             desc: 'Курортный шик, консистентность модели и деталей',
             thumb: '2_1.jpg',
             slides: [
-              { type: 'image', src: '2_1.jpg', title: 'Jacquemus: Концепт & Мудборд', desc: 'Ослепляющее солнце, чистота линий и безупречный курортный шик бренда.' },
-              { type: 'image', src: '2_2.jpg', title: 'AI-Фотосессия: Имиджевый кадр', desc: 'Связка Midjourney + Nano Banana: идеальное сохранение черт модели и образа.' },
-              { type: 'image', src: '2_3.jpg', title: 'Детали коллекции & Аксессуары', desc: 'Точная передача фирменной формы сумочки, текстуры ткани и теплого света.' },
-              { type: 'image', src: '2_4.jpg', title: 'Консистентность персонажа', desc: 'Стабильность лица и стиля во всей серии кадров без искажений.' },
-              { type: 'image', src: '2_5.jpg', title: 'Атмосфера Прованса', desc: 'Визуал, который работает как эмоциональный триггер и погружает в лето.' },
-              { type: 'video', src: '2_6.mp4', title: 'Анимированный кампейн', desc: 'Оживление концепции: динамичный ролик для соцсетей.' }
+              { 
+                type: 'image', 
+                src: '2_1.jpg', 
+                title: 'Jacquemus: Концепт & Мудборд', 
+                desc: 'Передача ДНК бренда: ослепляющее солнце, чистота архитектурных линий и курортный шик.' 
+              },
+              { 
+                type: 'image', 
+                src: '2_2.jpg', 
+                title: 'AI-Фотосессия: Имиджевый кадр', 
+                desc: 'Связка Midjourney + Nano Banana: идеальное сохранение внешности модели и черт лица.' 
+              },
+              { 
+                type: 'image', 
+                src: '2_3.jpg', 
+                title: 'Детали коллекции & Текстуры', 
+                desc: 'Точная передача формы плетеной сумочки, текстуры материала и мягкого теплого света.' 
+              },
+              { 
+                type: 'image', 
+                src: '2_4.jpg', 
+                title: 'Обувь & Аксессуары', 
+                desc: 'Сложная предметная детализация: швы, фурнитура и авторский акцент в виде листика.' 
+              },
+              { 
+                type: 'image', 
+                src: '2_5.jpg', 
+                title: 'Консистентность персонажа', 
+                desc: 'Анализ ракурсов и мимики: модель сохраняет 100% стабильность во всей серии кадров.' 
+              },
+              { 
+                type: 'video', 
+                src: '2_6.mp4', 
+                title: 'Анимированный кампейн', 
+                desc: 'Оживление статичной концепции: динамичный ролик для вовлечения и удержания внимания.' 
+              }
             ]
           },
           {
@@ -515,10 +549,30 @@
             desc: 'Интеграция персонажа мальтипу в ДНК бренда',
             thumb: '1 .jpg',
             slides: [
-              { type: 'image', src: '1 .jpg', title: 'Jacquemus x Leo: Концепт', desc: 'Анализ визуального кода бренда: архитектурная строгость и минимализм.' },
-              { type: 'video', src: '2_Video Project 3 (1).mp4', title: 'Морфинг & Динамика', desc: 'Видео-трансформация: преемственность стиля от подиумного кадра к персонажу.' },
-              { type: 'image', src: '3_.jpg', title: 'Макро-продакшн & Масштаб', desc: 'Проработка текстур кожи, швов и фурнитуры. Сюрреалистичная работа с пропорциями.' },
-              { type: 'image', src: '4_.jpg', title: 'Мудборд & Финализация', desc: 'Презентация концепции: интеграция персонажа в ДНК премиального бренда.' }
+              { 
+                type: 'image', 
+                src: '1 .jpg', 
+                title: 'Jacquemus x Leo: Концепт', 
+                desc: 'Визуальный код: архитектурный минимализм, терракота и гармоничное введение маскота.' 
+              },
+              { 
+                type: 'video', 
+                src: '2_Video Project 3 (1).mp4', 
+                title: 'Морфинг & Видео-трансформация', 
+                desc: 'Бесшовная преемственность стиля от подиумного кадра к главному герою кампании.' 
+              },
+              { 
+                type: 'image', 
+                src: '3_.jpg', 
+                title: 'Макро-продакшн & Масштаб', 
+                desc: 'Сюрреалистичная игра с пропорциями: гигантская сумка Jacquemus и текстуры кожи.' 
+              },
+              { 
+                type: 'image', 
+                src: '4_.jpg', 
+                title: 'Мудборд & Финализация', 
+                desc: 'Итоговая презентация проекта: интеграция персонажа в премиальный сегмент. Стек: MJ, Gemini, Canva.' 
+              }
             ]
           }
         ]
@@ -615,7 +669,6 @@
       }
     };
 
-    // ЛОГИКА ШТОРКИ ПРОЕКТОВ
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalTitle = document.getElementById('modalTitle');
     const projectList = document.getElementById('projectList');
@@ -654,7 +707,6 @@
       modalBackdrop.classList.remove('is-open');
     }
 
-    // ЛОГИКА STORIES
     let activeProject = null;
     let currentSlideIndex = 0;
     let storyTimer = null;
