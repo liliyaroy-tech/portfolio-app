@@ -45,27 +45,18 @@
 
   <header>
     <h1>AI Showcase & Portfolio</h1>
-    <p>Постеры • Сериалы • Праздничный арт</p>
+    <p>Спорт • Анимация • Постеры</p>
   </header>
 
   <div class="filters">
     <button class="filter-btn active" onclick="filterCategory(event, 'all')">Все работы</button>
-    <button class="filter-btn" onclick="filterCategory(event, 'posters')">Постеры и Арт</button>
+    <button class="filter-btn" onclick="filterCategory(event, 'sport')">Спорт & Движение</button>
     <button class="filter-btn" onclick="filterCategory(event, 'cartoons')">Мультфильмы & Сериалы</button>
   </div>
 
   <div class="showcase-grid">
-    <!-- Постеры: Спорт -->
-    <div class="card" data-cat="posters" onclick="openModal('Спорт & Движение', 'AI Visuals / Midjourney', '5321263694777882946.jpg', 'Серия динамичных постеров: экстремальный спорт, механика движения и кинематографичный свет.', 'Dynamic sports action, high speed, cinematic lighting, hyper-realistic details.')">
-      <img class="card-media" src="5321263694777882946.jpg" alt="Спорт">
-      <div class="card-body">
-        <span class="card-tag">Постеры и Арт</span>
-        <h3 class="card-title">Спорт & Движение</h3>
-      </div>
-    </div>
-
     <!-- Мультсериал: Лео -->
-    <div class="card" data-cat="cartoons" onclick="openModal('Приключения Лео', '3D Animation / Character Sheet', 'Gemini_Generated_Image_ (2).png', 'Консистентный персонаж мальтипу Лео для серии анимационных короткометражек.', '3D Pixar style character sheet, male maltipoo puppy Leo, fluffy fur, high detail.')">
+    <div class="card" data-cat="cartoons" onclick="openModal('Приключения Лео', '3D Animation / Character Sheet', 'Gemini_Generated_Image_ (2).png', 'Консистентный 3D-персонаж мальтипу Лео для серии анимационных историй.', '3D Pixar style character sheet, male maltipoo puppy Leo, fluffy apricot fur, high detail.')">
       <img class="card-media" src="Gemini_Generated_Image_ (2).png" alt="Лео">
       <div class="card-body">
         <span class="card-tag">Мультсериал</span>
@@ -73,21 +64,48 @@
       </div>
     </div>
 
-    <!-- Постеры: 1 Сентября -->
-    <div class="card" data-cat="posters" onclick="openModal('1 Сентября: Школьная пора', 'AI Art & Typography', '5375371130132174635 (1).jpg', 'Концепт праздничных постеров с акварельной стилистикой и выразительной типографикой.', 'Back to school concept, watercolor typography, realistic children, creative layout.')">
-      <img class="card-media" src="5375371130132174635 (1).jpg" alt="1 Сентября">
+    <!-- Спорт 1 -->
+    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 1', 'AI Art & Motion', '5321263694777882946.jpg', 'Экшн-кадр спортивной серии с проработкой кинематографичного освещения и динамики.', 'Dynamic sports action scene, intense movement, dramatic lighting, sharp focus.')">
+      <img class="card-media" src="5321263694777882946.jpg" alt="Спорт 1">
       <div class="card-body">
-        <span class="card-tag">Постеры и Арт</span>
-        <h3 class="card-title">1 Сентября: Сменка</h3>
+        <span class="card-tag">Спорт & Движение</span>
+        <h3 class="card-title">Экшн & Движение I</h3>
       </div>
     </div>
 
-    <!-- Арт: Концепты -->
-    <div class="card" data-cat="posters" onclick="openModal('Концептуальный Арт', 'AI Concept Art', '5377748239911689516.jpg', 'Визуальные арт-концепты и проработка стилистики.', 'Cinematic lighting, high aesthetic composition, digital illustration.')">
-      <img class="card-media" src="5377748239911689516.jpg" alt="Арт">
+    <!-- Спорт 2 -->
+    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 2', 'AI Art & Motion', '5375371130132174635 (1).jpg', 'Динамическая визуализация и композиция в спортивной тематике.', 'Athletic movement, high energy, professional color grading, cinematic composition.')">
+      <img class="card-media" src="5375371130132174635 (1).jpg" alt="Спорт 2">
       <div class="card-body">
-        <span class="card-tag">Постеры и Арт</span>
-        <h3 class="card-title">Арт & Концепты</h3>
+        <span class="card-tag">Спорт & Движение</span>
+        <h3 class="card-title">Экшн & Движение II</h3>
+      </div>
+    </div>
+
+    <!-- Спорт 3 -->
+    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 3', 'AI Art & Motion', '5377748239911689516.jpg', 'Серия постеров: спортивная атмосфера, скорость и фиксация момента.', 'Sports poster, speed effect, vivid colors, realistic action.')">
+      <img class="card-media" src="5377748239911689516.jpg" alt="Спорт 3">
+      <div class="card-body">
+        <span class="card-tag">Спорт & Движение</span>
+        <h3 class="card-title">Экшн & Движение III</h3>
+      </div>
+    </div>
+
+    <!-- Спорт 4 -->
+    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 4', 'AI Art & Motion', '5377765299521788083.jpg', 'Энергия спорта и проработка детализации окружения.', 'Dynamic athletic poster, powerful motion, clean render, 4k.')">
+      <img class="card-media" src="5377765299521788083.jpg" alt="Спорт 4">
+      <div class="card-body">
+        <span class="card-tag">Спорт & Движение</span>
+        <h3 class="card-title">Экшн & Движение IV</h3>
+      </div>
+    </div>
+
+    <!-- Спорт 5 -->
+    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 5', 'AI Art & Motion', 'hd_ba59a11a97fefd377eb250748765c829.png', 'Концептуальный спортивный арт высокой четкости.', 'High definition sports visual, aesthetic poster style, cinematic atmosphere.')">
+      <img class="card-media" src="hd_ba59a11a97fefd377eb250748765c829.png" alt="Спорт 5">
+      <div class="card-body">
+        <span class="card-tag">Спорт & Движение</span>
+        <h3 class="card-title">Экшн & Движение V</h3>
       </div>
     </div>
   </div>
