@@ -42,11 +42,14 @@
       height: 380px;
       background: radial-gradient(circle, rgba(235, 218, 195, 0.7) 0%, rgba(247, 245, 240, 0) 70%);
       filter: blur(50px);
-      z-index: 1;
+      z-index: 0;
       pointer-events: none;
     }
 
-    .container { position: relative; z-index: 5; }
+    .container { 
+      position: relative; 
+      z-index: 10; 
+    }
 
     header { margin-bottom: 18px; }
     .hero-badge {
@@ -75,8 +78,9 @@
       padding: 16px 18px;
       margin-bottom: 22px;
       box-shadow: 0 6px 20px rgba(180, 165, 145, 0.14);
+      cursor: pointer;
     }
-    .about-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+    .about-toggle { display: flex; justify-content: space-between; align-items: center; user-select: none; }
     .about-toggle-title { font-size: 15px; font-weight: 700; color: #22242a; display: flex; align-items: center; gap: 8px; }
     .about-arrow { font-size: 13px; color: var(--accent); transition: transform 0.3s ease; }
     .about-card.open .about-arrow { transform: rotate(180deg); }
@@ -115,6 +119,7 @@
       padding: 12px;
       box-shadow: 0 6px 18px rgba(170, 150, 130, 0.12);
       user-select: none;
+      pointer-events: auto;
     }
     .category-card:active { transform: scale(0.97); }
     
@@ -146,7 +151,7 @@
     .category-tag { font-size: 10.5px; color: #f0e6d2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     .category-title { font-size: 15px; font-weight: 800; line-height: 1.25; color: #ffffff; }
 
-    /* Кнопка внизу */
+    /* Нижняя кнопка */
     .contact-bar {
       position: fixed;
       bottom: 0;
@@ -157,7 +162,7 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-top: 1px solid var(--card-border);
-      z-index: 100;
+      z-index: 50;
     }
     .btn-contact {
       display: flex;
@@ -189,11 +194,15 @@
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      z-index: 5000;
+      z-index: 500;
       align-items: flex-end;
       justify-content: center;
+      pointer-events: none;
     }
-    .modal-backdrop.is-open { display: flex; }
+    .modal-backdrop.is-open { 
+      display: flex !important; 
+      pointer-events: auto !important; 
+    }
 
     .modal-sheet {
       width: 100%;
@@ -225,6 +234,7 @@
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(180, 165, 145, 0.1);
       transition: transform 0.15s ease;
+      user-select: none;
     }
     .project-item:active { transform: scale(0.98); background: #fdfbf7; }
     .project-thumb { width: 62px; height: 62px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
@@ -239,13 +249,17 @@
       display: none; 
       position: fixed; 
       inset: 0; 
-      width: 100vw;
-      height: 100vh;
+      width: 100vw; 
+      height: 100vh; 
       background: var(--story-bg); 
-      z-index: 999999; 
+      z-index: 1000; 
+      pointer-events: none;
       touch-action: manipulation; 
     }
-    .stories-viewer.is-open { display: block !important; }
+    .stories-viewer.is-open { 
+      display: block !important; 
+      pointer-events: auto !important; 
+    }
     
     .story-header { 
       position: absolute; 
@@ -279,10 +293,10 @@
 
     .story-stage { 
       position: absolute; 
-      top: 55px;
-      bottom: 100px;
-      left: 0;
-      right: 0;
+      top: 55px; 
+      bottom: 110px; 
+      left: 0; 
+      right: 0; 
       display: flex; 
       align-items: center; 
       justify-content: center; 
@@ -310,24 +324,13 @@
       z-index: 30; 
       background: rgba(247, 245, 240, 0.96); 
       backdrop-filter: blur(16px); 
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(205, 195, 180, 0.6);
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      -webkit-backdrop-filter: blur(16px); 
+      border: 1px solid rgba(205, 195, 180, 0.6); 
+      border-radius: 16px; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3); 
     }
-    .story-desc-title { 
-      font-size: 15px; 
-      font-weight: 800; 
-      color: #1a1b1e; 
-      letter-spacing: -0.2px;
-    }
-    .story-desc-text { 
-      font-size: 13px; 
-      color: #3e4148; 
-      margin-top: 4px; 
-      line-height: 1.45; 
-      font-weight: 450;
-    }
+    .story-desc-title { font-size: 15px; font-weight: 800; color: #1a1b1e; letter-spacing: -0.2px; }
+    .story-desc-text { font-size: 13px; color: #3e4148; margin-top: 4px; line-height: 1.45; font-weight: 450; }
     .story-link-btn {
       display: none;
       align-items: center;
@@ -356,8 +359,8 @@
       <p>Нейросети для бизнеса: создаю визуал и видео уровня продакшена за часы, а не недели.</p>
     </header>
 
-    <div class="about-card" id="aboutCard">
-      <div class="about-toggle" onclick="toggleAbout()">
+    <div class="about-card" id="aboutCard" onclick="toggleAbout()">
+      <div class="about-toggle">
         <div class="about-toggle-title">
           <span>✨ Чем могу быть полезна</span>
         </div>
@@ -731,58 +734,3 @@
           <div class="project-info">
             <div class="project-title">${proj.title}</div>
             <div class="project-desc">${proj.desc}</div>
-            <span class="project-badge">${proj.badge}</span>
-          </div>
-          <div class="project-arrow">›</div>
-        `;
-        projectList.appendChild(item);
-      });
-
-      modalBackdrop.classList.add('is-open');
-    }
-
-    function closeModal() {
-      modalBackdrop.classList.remove('is-open');
-    }
-
-    let activeProject = null;
-    let currentSlideIndex = 0;
-    let storyTimer = null;
-    const SLIDE_DURATION = 4500;
-
-    const imgEl = document.getElementById('storyActiveImage');
-    const vidEl = document.getElementById('storyActiveVideo');
-    const viewerEl = document.getElementById('storiesViewer');
-    const linkBtn = document.getElementById('storyLinkBtn');
-
-    function startStories(project) {
-      if (!project || !project.slides || project.slides.length === 0) return;
-      activeProject = project;
-      currentSlideIndex = 0;
-      viewerEl.classList.add('is-open');
-      setupProgressBars();
-      showSlide(0);
-    }
-
-    function closeStories(e) {
-      if (e) e.stopPropagation();
-      clearTimeout(storyTimer);
-      if (vidEl) {
-        vidEl.pause();
-        vidEl.src = '';
-      }
-      viewerEl.classList.remove('is-open');
-      activeProject = null;
-    }
-
-    function setupProgressBars() {
-      const container = document.getElementById('progressBars');
-      container.innerHTML = '';
-      activeProject.slides.forEach((_, idx) => {
-        const bg = document.createElement('div');
-        bg.className = 'progress-bar-bg';
-        const fill = document.createElement('div');
-        fill.className = 'progress-bar-fill';
-        fill.id = 'bar-fill-' + idx;
-        bg.appendChild(fill);
-        container.appendChild(bg
