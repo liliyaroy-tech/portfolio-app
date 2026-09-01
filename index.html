@@ -412,9 +412,9 @@
       </div>
 
       <div class="category-card" onclick="openCategory('challenges')">
-        <img class="category-card-bg" src="3_Bottle_with_wings_and_feathers_202608182217.jpeg" alt="AI Челленджи" onerror="this.src='4444608151632.jpeg'">
+        <img class="category-card-bg" src="2_пер .jpeg" alt="AI Челленджи" onerror="this.src='4444608151632.jpeg'">
         <div class="category-card-overlay"></div>
-        <div class="category-badge">2 дня</div>
+        <div class="category-badge">3 дня</div>
         <div class="category-meta">
           <span class="category-tag">Марафон & Практика</span>
           <h3 class="category-title">AI Челленджи</h3>
@@ -479,9 +479,9 @@
     }
 
     function handleContactClick(e) {
-      if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openTelegramLink === 'function') {
+      if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
         e.preventDefault();
-        window.Telegram.WebApp.openTelegramLink('https://t.me/LiliyaRoi');
+        window.Telegram.WebApp.openLink('https://t.me/LiliyaRoi');
       }
     }
 
@@ -767,6 +767,45 @@
                 src: '4_ChatGPT Image 18 авг. 2026 г., 23_32_37.png', 
                 title: 'Кампейн: Интеграция героини', 
                 desc: 'Связка персонажа марафона с продуктом: античная эстетика, мраморная колонна и премиум-контекст.' 
+              }
+            ]
+          },
+          {
+            id: 'challenge_day3',
+            title: 'День 3: Виртуальная примерка & Fashion',
+            badge: '5 кадров',
+            desc: 'Перенос аутфита на героиню: общие планы, детали аксессуаров и ракурсы',
+            thumb: '2_пер .jpeg',
+            slides: [
+              { 
+                type: 'image', 
+                src: '1_пер .jpeg', 
+                title: 'Fashion Flat-lay: Референс аутфита', 
+                desc: 'Подборка элементов гардероба: топ с драпировкой, плиссированная юбка, слингбэки и аксессуары.' 
+              },
+              { 
+                type: 'image', 
+                src: '2_пер .jpeg', 
+                title: 'Полный образ в интерьере', 
+                desc: 'Общий план в вечернем лаунже: естественная посадка одежды, соблюдение пропорций и фактур.' 
+              },
+              { 
+                type: 'image', 
+                src: '3_Adding_jewelry_and_sunglasses_to…_202608200055.jpeg', 
+                title: 'Портрет & Аксессуары', 
+                desc: 'Крупный план в кафе: акцент на брендовых очках Miu Miu, украшениях и естественном свете.' 
+              },
+              { 
+                type: 'image', 
+                src: '4_Woman_looking_at_minimalist_inte…_202608202352.jpeg', 
+                title: 'Ракурс сзади & Детали сумки', 
+                desc: 'Фактура зернистой кожи сумки, текстура волос и глубина интерьера галереи.' 
+              },
+              { 
+                type: 'image', 
+                src: '5_стор.jpeg', 
+                title: 'Сетка ракурсов & Консистентность', 
+                desc: '9 вариантов углов и планов на улице: 100% сохранение посадки одежды и узнаваемости героини.' 
               }
             ]
           }
