@@ -412,9 +412,9 @@
       </div>
 
       <div class="category-card" onclick="openCategory('challenges')">
-        <img class="category-card-bg" src="2_пер .jpeg" alt="AI Челленджи" onerror="this.src='4444608151632.jpeg'">
+        <img class="category-card-bg" src="кадр 1 .jpeg" alt="AI Челленджи" onerror="this.src='4444608151632.jpeg'">
         <div class="category-card-overlay"></div>
-        <div class="category-badge">3 дня</div>
+        <div class="category-badge">4 дня</div>
         <div class="category-meta">
           <span class="category-tag">Марафон & Практика</span>
           <h3 class="category-title">AI Челленджи</h3>
@@ -479,9 +479,9 @@
     }
 
     function handleContactClick(e) {
-      if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
+      if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openTelegramLink === 'function') {
         e.preventDefault();
-        window.Telegram.WebApp.openLink('https://t.me/LiliyaRoi');
+        window.Telegram.WebApp.openTelegramLink('https://t.me/LiliyaRoi');
       }
     }
 
@@ -806,6 +806,69 @@
                 src: '5_стор.jpeg', 
                 title: 'Сетка ракурсов & Консистентность', 
                 desc: '9 вариантов углов и планов на улице: 100% сохранение посадки одежды и узнаваемости героини.' 
+              }
+            ]
+          },
+          {
+            id: 'challenge_day4',
+            title: 'День 4: Кино-раскадровка «Room 13»',
+            badge: '9 кадров',
+            desc: 'Сюжетный кампейн: отель, таинственный номер 13, Zadig и игра отражений',
+            thumb: 'кадр 1 .jpeg',
+            slides: [
+              { 
+                type: 'image', 
+                src: 'кадр 1 .jpeg', 
+                title: 'Начало: Прибытие в пустой отель', 
+                desc: 'Общий кинематографичный план холла отеля: строгая перспектива, приглушенный свет и ожидание.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 2 .jpeg', 
+                title: 'Стойка регистрации & Room 13', 
+                desc: 'Средний план: карточка с номером 13 и культовый флакон ZADIG на мраморной стойке.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 3 .jpeg', 
+                title: 'Крупный план & Реакция', 
+                desc: 'Фокус на эмоциях и взгляде: кинематографичное боке и сохранение консистентности персонажа.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 4 .jpeg', 
+                title: 'Действие: Одно распыление ZADIG', 
+                desc: 'Детализация жеста: нанесение парфюма на запястье. С этого момента реальность отеля начинает меняться.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 5.jpeg', 
+                title: 'Шаг в неизвестность', 
+                desc: 'Динамичный нижний ракурс: вход в лифт, отражение в зеркальном полу, акцент на обуви и сумочке.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 6 .jpeg', 
+                title: 'Двери лифта & Дробление реальности', 
+                desc: 'Симметричный кадр через зеркальные панели: напряжение, неоновый холодный свет и утроение силуэта.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 7 .jpeg', 
+                title: 'Коридор отеля & Поиск номера 13', 
+                desc: 'Перспектива коридора с номерами 11, 12, 14... Номер 13 существует исключительно в отражении зеркала.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 8.jpeg', 
+                title: 'Прикосновение к отражению', 
+                desc: 'Кульминация: героиня касается зеркальной стены, за которой скрывается другая грань пространства.' 
+              },
+              { 
+                type: 'image', 
+                src: 'кадр 9 .jpeg', 
+                title: 'Финал: Встреча с самой собой', 
+                desc: 'Неожиданная развязка: в номере 13 за стеклом ночного города она встречает саму себя.' 
               }
             ]
           }
