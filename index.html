@@ -45,16 +45,25 @@
 
   <header>
     <h1>AI Showcase & Portfolio</h1>
-    <p>Спорт • Анимация • Постеры</p>
+    <p>Автоспорт • Анимация • Постеры</p>
   </header>
 
   <div class="filters">
     <button class="filter-btn active" onclick="filterCategory(event, 'all')">Все работы</button>
-    <button class="filter-btn" onclick="filterCategory(event, 'sport')">Спорт & Движение</button>
+    <button class="filter-btn" onclick="filterCategory(event, 'sport')">Автоспорт & Постеры</button>
     <button class="filter-btn" onclick="filterCategory(event, 'cartoons')">Мультфильмы & Сериалы</button>
   </div>
 
   <div class="showcase-grid">
+    <!-- Постер 1 -->
+    <div class="card" data-cat="sport" onclick="openModal('Картинг: Экшн на трассе', 'AI Visuals & Photoshop', '5321263694777882946.jpg', 'Спортивный постер с интеграцией гонщика, динамикой движения карта и атмосферным закатным светом.', 'Karting action poster, young driver, dynamic motion blur, dramatic sunset lighting, high resolution.')">
+      <img class="card-media" src="5321263694777882946.jpg" alt="Картинг: Экшн на трассе">
+      <div class="card-body">
+        <span class="card-tag">Автоспорт</span>
+        <h3 class="card-title">Экшн на трассе</h3>
+      </div>
+    </div>
+
     <!-- Мультсериал: Лео -->
     <div class="card" data-cat="cartoons" onclick="openModal('Приключения Лео', '3D Animation / Character Sheet', 'Gemini_Generated_Image_ (2).png', 'Консистентный 3D-персонаж мальтипу Лео для серии анимационных историй.', '3D Pixar style character sheet, male maltipoo puppy Leo, fluffy apricot fur, high detail.')">
       <img class="card-media" src="Gemini_Generated_Image_ (2).png" alt="Лео">
@@ -64,48 +73,39 @@
       </div>
     </div>
 
-    <!-- Спорт 1 -->
-    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 1', 'AI Art & Motion', '5321263694777882946.jpg', 'Экшн-кадр спортивной серии с проработкой кинематографичного освещения и динамики.', 'Dynamic sports action scene, intense movement, dramatic lighting, sharp focus.')">
-      <img class="card-media" src="5321263694777882946.jpg" alt="Спорт 1">
+    <!-- Постер 2 -->
+    <div class="card" data-cat="sport" onclick="openModal('Картинг: Кубок Санкт-Петербурга', 'AI Design & Typography', '5375371130132174635 (1).jpg', 'Афиша к этапу соревнований по картингу: типографика, схема трека и презентация пилота.', 'Professional sports event poster layout, racing driver in race suit, typography, track layout scheme.')">
+      <img class="card-media" src="5375371130132174635 (1).jpg" alt="Кубок СПб">
       <div class="card-body">
-        <span class="card-tag">Спорт & Движение</span>
-        <h3 class="card-title">Экшн & Движение I</h3>
+        <span class="card-tag">Автоспорт</span>
+        <h3 class="card-title">Кубок СПб: Афиша</h3>
       </div>
     </div>
 
-    <!-- Спорт 2 -->
-    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 2', 'AI Art & Motion', '5375371130132174635 (1).jpg', 'Динамическая визуализация и композиция в спортивной тематике.', 'Athletic movement, high energy, professional color grading, cinematic composition.')">
-      <img class="card-media" src="5375371130132174635 (1).jpg" alt="Спорт 2">
+    <!-- Постер 3 -->
+    <div class="card" data-cat="sport" onclick="openModal('Картинг: Нацелен на победу', 'AI Concept & Poster Art', '5377748239911689516.jpg', 'Эмоциональный постер со шлемом и картом на неоновом гоночном фоне.', 'Motorsport poster design, driver helmet with neon reflections, high energy graphic composition.')">
+      <img class="card-media" src="5377748239911689516.jpg" alt="Нацелен на победу">
       <div class="card-body">
-        <span class="card-tag">Спорт & Движение</span>
-        <h3 class="card-title">Экшн & Движение II</h3>
+        <span class="card-tag">Автоспорт</span>
+        <h3 class="card-title">Нацелен на победу</h3>
       </div>
     </div>
 
-    <!-- Спорт 3 -->
-    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 3', 'AI Art & Motion', '5377748239911689516.jpg', 'Серия постеров: спортивная атмосфера, скорость и фиксация момента.', 'Sports poster, speed effect, vivid colors, realistic action.')">
-      <img class="card-media" src="5377748239911689516.jpg" alt="Спорт 3">
+    <!-- Постер 4 -->
+    <div class="card" data-cat="sport" onclick="openModal('Картинг: Скорость и Драйв', 'AI Visuals & Retouch', '5377765299521788083.jpg', 'Композиционный постер гоночной серии: детализация экипировки и карта в движении.', 'Karting racer in dynamic angle, cinematic color palette, high speed visual effect.')">
+      <img class="card-media" src="5377765299521788083.jpg" alt="Скорость и Драйв">
       <div class="card-body">
-        <span class="card-tag">Спорт & Движение</span>
-        <h3 class="card-title">Экшн & Движение III</h3>
+        <span class="card-tag">Автоспорт</span>
+        <h3 class="card-title">Скорость и Драйв</h3>
       </div>
     </div>
 
-    <!-- Спорт 4 -->
-    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 4', 'AI Art & Motion', '5377765299521788083.jpg', 'Энергия спорта и проработка детализации окружения.', 'Dynamic athletic poster, powerful motion, clean render, 4k.')">
-      <img class="card-media" src="5377765299521788083.jpg" alt="Спорт 4">
+    <!-- Постер 5 -->
+    <div class="card" data-cat="sport" onclick="openModal('Картинг: Концепт Арт', 'AI Art & Poster Design', 'hd_ba59a11a97fefd377eb250748765c829.png', 'Финальный концепт-арт гоночной серии высокой четкости.', 'High definition motorsport poster design, professional color grading, realistic details.')">
+      <img class="card-media" src="hd_ba59a11a97fefd377eb250748765c829.png" alt="Концепт Арт">
       <div class="card-body">
-        <span class="card-tag">Спорт & Движение</span>
-        <h3 class="card-title">Экшн & Движение IV</h3>
-      </div>
-    </div>
-
-    <!-- Спорт 5 -->
-    <div class="card" data-cat="sport" onclick="openModal('Спорт & Движение: Кадр 5', 'AI Art & Motion', 'hd_ba59a11a97fefd377eb250748765c829.png', 'Концептуальный спортивный арт высокой четкости.', 'High definition sports visual, aesthetic poster style, cinematic atmosphere.')">
-      <img class="card-media" src="hd_ba59a11a97fefd377eb250748765c829.png" alt="Спорт 5">
-      <div class="card-body">
-        <span class="card-tag">Спорт & Движение</span>
-        <h3 class="card-title">Экшн & Движение V</h3>
+        <span class="card-tag">Автоспорт</span>
+        <h3 class="card-title">Концепт Арт</h3>
       </div>
     </div>
   </div>
