@@ -2,125 +2,344 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Лилия | AI-Креатор & Портфолио</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Лилия Рой | AI-Дизайнер & Креатор</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
     :root {
-      --bg-color: #0f1117;
-      --card-bg: #1a1d26;
+      --bg-base: #0a0c12;
+      --card-bg: rgba(22, 26, 37, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
       --accent: #ff7b54;
-      --text-main: #ffffff;
-      --text-sub: #9ea4b0;
-      --tag-bg: rgba(255, 123, 84, 0.15);
+      --accent-glow: rgba(255, 123, 84, 0.25);
+      --text: #ffffff;
+      --text-dim: #9aa1b3;
+      --btn-grad: linear-gradient(135deg, #ff7b54 0%, #ff4b4b 100%);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-main); padding: 16px; }
-    header { text-align: center; margin-bottom: 20px; }
-    header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    header p { font-size: 13px; color: var(--text-sub); }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
     
-    .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; scrollbar-width: none; }
-    .filters::-webkit-scrollbar { display: none; }
-    .filter-btn { background: var(--card-bg); color: var(--text-sub); border: 1px solid #2d313e; padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-    .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text);
+      padding: 18px 16px 100px 16px;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
 
-    .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .card { background: var(--card-bg); border-radius: 14px; overflow: hidden; border: 1px solid #262a36; cursor: pointer; transition: transform 0.2s; display: flex; flex-direction: column; }
-    .card:hover { transform: translateY(-3px); }
-    .card-media { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: #262a36; display: block; }
-    .card-body { padding: 10px; display: flex; flex-direction: column; gap: 4px; flex-grow: 1; }
-    .card-tag { font-size: 10px; color: var(--accent); background: var(--tag-bg); padding: 2px 6px; border-radius: 6px; align-self: flex-start; font-weight: 600; }
-    .card-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
+    /* Мягкие световые пятна на фоне (Ambient Glow) */
+    .bg-glow-1 {
+      position: fixed;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(255, 123, 84, 0.15) 0%, rgba(108, 92, 231, 0.08) 50%, transparent 75%);
+      filter: blur(50px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-glow-2 {
+      position: fixed;
+      bottom: 40px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(108, 92, 231, 0.12) 0%, transparent 70%);
+      filter: blur(60px);
+      z-index: 0;
+      pointer-events: none;
+    }
 
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 100; padding: 16px; align-items: center; justify-content: center; }
-    .modal-content { background: var(--card-bg); border-radius: 16px; max-width: 440px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 18px; position: relative; }
-    .close-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.1); border: none; color: #fff; font-size: 18px; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
-    .modal-img { width: 100%; border-radius: 10px; margin-bottom: 12px; aspect-ratio: 4/5; object-fit: cover; }
-    .modal-desc { font-size: 12px; line-height: 1.5; color: var(--text-sub); margin-bottom: 12px; }
-    .prompt-box { background: #12141a; padding: 10px; border-radius: 8px; font-size: 11px; color: #c4c9d4; font-family: monospace; line-height: 1.4; white-space: pre-wrap; }
+    .container { position: relative; z-index: 2; }
+
+    /* Шапка профиля */
+    header { margin-bottom: 20px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 123, 84, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(255, 123, 84, 0.25);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    header h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
+    header p { font-size: 13px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+
+    /* Стеклянный аккордеон "Обо мне / Услуги" */
+    .about-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 18px;
+      border: 1px solid var(--card-border);
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      transition: border-color 0.3s ease;
+    }
+    .about-card:hover { border-color: rgba(255, 255, 255, 0.15); }
+    .about-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+    .about-toggle-title { font-size: 13px; font-weight: 700; color: #f1f3f8; display: flex; align-items: center; gap: 8px; }
+    .about-arrow { font-size: 11px; color: var(--text-dim); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .about-card.open .about-arrow { transform: rotate(180deg); color: var(--accent); }
+    
+    .about-content { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: #cdd3e0; line-height: 1.6; }
+    .about-card.open .about-content { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+    .services-list { list-style: none; margin: 10px 0; display: flex; flex-direction: column; gap: 9px; }
+    .services-list li { display: flex; gap: 10px; align-items: flex-start; }
+    .check-icon { color: #2ed573; flex-shrink: 0; font-size: 13px; font-weight: bold; }
+    .about-quote {
+      background: rgba(10, 12, 18, 0.6);
+      padding: 11px 13px;
+      border-radius: 12px;
+      border-left: 3px solid var(--accent);
+      margin-top: 12px;
+      font-size: 11.5px;
+      color: var(--text-dim);
+    }
+
+    /* Сетка коллекций */
+    .section-title { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #f1f3f8; letter-spacing: -0.2px; }
+    .showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
+    
+    .story-card {
+      position: relative;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .story-card:active { transform: scale(0.97); }
+    .story-card:hover {
+      border-color: rgba(255, 123, 84, 0.4);
+      box-shadow: 0 12px 30px rgba(255, 123, 84, 0.15);
+    }
+    .story-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.82); transition: transform 0.4s ease, filter 0.3s ease; }
+    .story-card:hover .story-card-bg { filter: brightness(0.95); transform: scale(1.05); }
+    .story-card-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,18,0.05) 35%, rgba(10,12,18,0.9) 100%); z-index: 2; }
+    
+    .story-badge { position: absolute; top: 10px; right: 10px; z-index: 3; background: rgba(10, 12, 18, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.18); font-size: 10px; padding: 3px 8px; border-radius: 12px; font-weight: 600; color: #fff; }
+    .story-meta { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 2px; }
+    .story-tag { font-size: 9.5px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+    .story-title { font-size: 13.5px; font-weight: 700; line-height: 1.3; }
+
+    /* Закрепленная кнопка связи (Glassmorphism) */
+    .contact-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 16px 20px 16px;
+      background: rgba(10, 12, 18, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--card-border);
+      z-index: 90;
+    }
+    .btn-contact {
+      width: 100%;
+      background: var(--btn-grad);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-contact:active { transform: scale(0.98); }
+
+    /* Полноэкранный плеер Stories */
+    .stories-viewer { display: none; position: fixed; inset: 0; background: #000000; z-index: 9999; flex-direction: column; justify-content: space-between; touch-action: manipulation; }
+    
+    .story-header { position: absolute; top: 0; left: 0; right: 0; padding: 14px 16px; z-index: 20; background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, transparent 100%); }
+    .progress-bars { display: flex; gap: 5px; margin-bottom: 10px; }
+    .progress-bar-bg { flex: 1; height: 3px; background: rgba(255,255,255,0.25); border-radius: 3px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: #ffffff; border-radius: 3px; }
+
+    .story-user-row { display: flex; justify-content: space-between; align-items: center; color: #fff; }
+    .story-author-info { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; }
+    .story-close-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); }
+
+    /* Медиа-контент */
+    .story-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 5; }
+    .story-media { width: 100%; height: 100%; object-fit: contain; background: #000000; display: none; }
+    .story-media.active-media { display: block; }
+
+    /* Тапы */
+    .touch-nav { position: absolute; inset: 0; z-index: 10; display: flex; }
+    .touch-left { width: 35%; height: 100%; }
+    .touch-right { width: 65%; height: 100%; }
+
+    /* Описание снизу */
+    .story-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 16px 26px 16px; z-index: 20; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%); }
+    .story-desc-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .story-desc-text { font-size: 12.5px; color: #d0d4de; margin-top: 5px; line-height: 1.45; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>AI Showcase & Portfolio</h1>
-    <p>Постеры • Анимация • AI-дизайн</p>
-  </header>
+  <!-- Мягкие люксовые световые пятна фона -->
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
 
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterCategory(event, 'all')">Все работы</button>
-    <button class="filter-btn" onclick="filterCategory(event, 'posters')">Постеры</button>
-    <button class="filter-btn" onclick="filterCategory(event, 'cartoons')">Мультфильмы & Сериалы</button>
+  <div class="container">
+    <header>
+      <div class="hero-badge">⚡ AI-Креатор & Дизайнер</div>
+      <h1>Лилия Рой</h1>
+      <p>Нейросети для бизнеса: создаю визуал и видео уровня продакшена за часы, а не недели.</p>
+    </header>
+
+    <!-- Раскрывающийся блок "Обо мне & Услуги" -->
+    <div class="about-card" id="aboutCard">
+      <div class="about-toggle" onclick="toggleAbout()">
+        <div class="about-toggle-title">
+          <span>✨ Чем могу быть полезна</span>
+        </div>
+        <div class="about-arrow">▼</div>
+      </div>
+      <div class="about-content">
+        <ul class="services-list">
+          <li><span class="check-icon">✔</span> <span><strong>AI-фотосессии и визуал:</strong> уникальный контент без студий и моделей.</span></li>
+          <li><span class="check-icon">✔</span> <span><strong>Контент для соцсетей:</strong> трендовые ролики и Reels для роста охватов.</span></li>
+          <li><span class="check-icon">✔</span> <span><strong>Digital-образы:</strong> разработка стильных аватаров и персонажей для брендов.</span></li>
+          <li><span class="check-icon">✔</span> <span><strong>Креатив для рекламы:</strong> визуализация любых концепций — от предметов до футуризма.</span></li>
+        </ul>
+        <div class="about-quote">
+          <strong>Системный подход:</strong> понимаю задачи бизнеса, держу дедлайны и выдаю чёткий продающий результат.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">Коллекции кейсов</div>
+    
+    <div class="showcase-grid">
+      <!-- 1. Постеры -->
+      <div class="story-card" onclick="openStoryAlbum('posters')">
+        <img class="story-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">3 слайда</div>
+        <div class="story-meta">
+          <span class="story-tag">Графика & Арт</span>
+          <h3 class="story-title">Постеры</h3>
+        </div>
+      </div>
+
+      <!-- 2. Спорт -->
+      <div class="story-card" onclick="openStoryAlbum('sport')">
+        <img class="story-card-bg" src="5321263694777882946.jpg" alt="Спорт">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">5 фото</div>
+        <div class="story-meta">
+          <span class="story-tag">Экшн & Движение</span>
+          <h3 class="story-title">Спорт</h3>
+        </div>
+      </div>
+
+      <!-- 3. Нейрофотосессии -->
+      <div class="story-card" onclick="openStoryAlbum('photoshoot')">
+        <img class="story-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Сеты</div>
+        <div class="story-meta">
+          <span class="story-tag">Портреты</span>
+          <h3 class="story-title">Нейрофотосессии</h3>
+        </div>
+      </div>
+
+      <!-- 4. Реклама для брендов -->
+      <div class="story-card" onclick="openStoryAlbum('commercial')">
+        <img class="story-card-bg" src="hd_ba59a11a97fefd377eb250748765c829.png" alt="Реклама">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Брендинг</div>
+        <div class="story-meta">
+          <span class="story-tag">Коммерция</span>
+          <h3 class="story-title">Реклама для брендов</h3>
+        </div>
+      </div>
+
+      <!-- 5. Мультфильмы & Сериалы -->
+      <div class="story-card" onclick="openStoryAlbum('cartoons')">
+        <img class="story-card-bg" src="Gemini_Generated_Image_ (2).png" alt="Мультсериалы">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Анимация</div>
+        <div class="story-meta">
+          <span class="story-tag">3D Концепты</span>
+          <h3 class="story-title">Мультфильмы & Сериалы</h3>
+        </div>
+      </div>
+
+      <!-- 6. AI Челленджи -->
+      <div class="story-card" onclick="openStoryAlbum('challenges')">
+        <img class="story-card-bg" src="5377765299521788083.jpg" alt="Челленджи">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Марафон</div>
+        <div class="story-meta">
+          <span class="story-tag">Творчество</span>
+          <h3 class="story-title">AI Челленджи</h3>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="showcase-grid">
-    <!-- Постер 1: Экшн на трассе -->
-    <div class="card" data-cat="posters" onclick="openModal('Картинг: Экшн на трассе', 'AI Visuals & Photoshop', '5321263694777882946.jpg', 'Спортивный постер с интеграцией пилота Дмитрия Романова, динамикой движения карта и закатным освещением.', 'Karting action poster, young driver, dynamic motion blur, dramatic sunset lighting, high resolution.')">
-      <img class="card-media" src="5321263694777882946.jpg" alt="Картинг: Экшн на трассе">
-      <div class="card-body">
-        <span class="card-tag">Постер</span>
-        <h3 class="card-title">Экшн на трассе</h3>
-      </div>
-    </div>
-
-    <!-- Мультсериал: Лео -->
-    <div class="card" data-cat="cartoons" onclick="openModal('Приключения Лео', '3D Animation / Character Sheet', 'Gemini_Generated_Image_ (2).png', 'Консистентный 3D-персонаж мальтипу Лео для серии анимационных историй.', '3D Pixar style character sheet, male maltipoo puppy Leo, fluffy apricot fur, high detail.')">
-      <img class="card-media" src="Gemini_Generated_Image_ (2).png" alt="Лео">
-      <div class="card-body">
-        <span class="card-tag">Мультсериал</span>
-        <h3 class="card-title">Приключения Лео</h3>
-      </div>
-    </div>
-
-    <!-- Постер 2: Кубок СПб -->
-    <div class="card" data-cat="posters" onclick="openModal('Картинг: Кубок Санкт-Петербурга', 'AI Design & Typography', '5375371130132174635 (1).jpg', 'Афиша к этапу соревнований по картингу: акцидентная типографика, схема картодрома Ижорец и презентация пилота.', 'Professional sports event poster layout, racing driver in race suit, typography, track layout scheme.')">
-      <img class="card-media" src="5375371130132174635 (1).jpg" alt="Кубок СПб">
-      <div class="card-body">
-        <span class="card-tag">Постер</span>
-        <h3 class="card-title">Кубок СПб: Афиша</h3>
-      </div>
-    </div>
-
-    <!-- Постер 3: Нацелен на победу -->
-    <div class="card" data-cat="posters" onclick="openModal('Картинг: Нацелен на победу', 'AI Concept & Poster Art', '5377748239911689516.jpg', 'Эмоциональный постер со шлемом и картом #29 на контрастном гоночном фоне.', 'Motorsport poster design, driver helmet with reflections, high energy graphic composition.')">
-      <img class="card-media" src="5377748239911689516.jpg" alt="Нацелен на победу">
-      <div class="card-body">
-        <span class="card-tag">Постер</span>
-        <h3 class="card-title">Нацелен на победу</h3>
-      </div>
-    </div>
-
-    <!-- Постер 4: Скорость и Драйв -->
-    <div class="card" data-cat="posters" onclick="openModal('Картинг: Скорость и Драйв', 'AI Visuals & Retouch', '5377765299521788083.jpg', 'Композиционный постер гоночной академии SNC: акцент на динамике и скорости болида.', 'Karting racer in dynamic angle, cinematic color palette, high speed visual effect.')">
-      <img class="card-media" src="5377765299521788083.jpg" alt="Скорость и Драйв">
-      <div class="card-body">
-        <span class="card-tag">Постер</span>
-        <h3 class="card-title">Скорость и Драйв</h3>
-      </div>
-    </div>
-
-    <!-- Постер 5: Волейбол -->
-    <div class="card" data-cat="posters" onclick="openModal('Волейбол: Атака над сеткой', 'AI Art & Sports Poster', 'hd_ba59a11a97fefd377eb250748765c829.png', 'Динамичный постер волейбольного матча на заполненной арене: прыжок, фиксация мяча в воздухе и атмосферный стадионный свет.', 'Volleyball player jumping at the net, powerful spike motion, indoor stadium arena, cinematic lighting, flying volleyballs, 8k.')">
-      <img class="card-media" src="hd_ba59a11a97fefd377eb250748765c829.png" alt="Волейбол: Атака над сеткой">
-      <div class="card-body">
-        <span class="card-tag">Постер</span>
-        <h3 class="card-title">Атака над сеткой</h3>
-      </div>
-    </div>
+  <!-- Закрепленная кнопка связи -->
+  <div class="contact-bar">
+    <a href="https://t.me/liliyaroy" target="_blank" class="btn-contact">
+      <span>✉️ Написать / Задать вопрос</span>
+    </a>
   </div>
 
-  <div id="caseModal" class="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">✕</button>
-      <img id="modalImg" class="modal-img" src="" alt="Превью">
-      <h2 id="modalTitle" style="font-size: 16px; margin-bottom: 6px;"></h2>
-      <span id="modalTools" class="card-tag" style="margin-bottom: 12px; display: inline-block;"></span>
-      <p id="modalDesc" class="modal-desc"></p>
-      <div style="margin-top: 8px;">
-        <strong style="font-size: 11px; color: var(--accent);">Промпт / Логика:</strong>
-        <div id="modalPrompt" class="prompt-box" style="margin-top: 6px;"></div>
+  <!-- Полноэкранный плеер Stories -->
+  <div id="storiesViewer" class="stories-viewer">
+    <div class="story-header">
+      <div id="progressBars" class="progress-bars"></div>
+      <div class="story-user-row">
+        <div class="story-author-info">
+          <span id="storyAuthorTitle">Портфолио</span>
+        </div>
+        <button class="story-close-btn" onclick="closeStories(event)">✕</button>
       </div>
+    </div>
+
+    <div class="story-stage">
+      <img id="storyActiveImage" class="story-media" src="" alt="Story">
+      <video id="storyActiveVideo" class="story-media" playsinline preload="auto" muted></video>
+    </div>
+
+    <div class="touch-nav">
+      <div class="touch-left" onclick="storyPrev(event)"></div>
+      <div class="touch-right" onclick="storyNext(event)"></div>
+    </div>
+
+    <div class="story-footer">
+      <div id="storyDescTitle" class="story-desc-title"></div>
+      <div id="storyDescText" class="story-desc-text"></div>
     </div>
   </div>
 
@@ -128,25 +347,160 @@
     const tg = window.Telegram?.WebApp;
     if (tg) { tg.expand(); tg.ready(); }
 
-    function filterCategory(e, cat) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      document.querySelectorAll('.card').forEach(c => {
-        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'flex' : 'none';
+    function toggleAbout() {
+      document.getElementById('aboutCard').classList.toggle('open');
+    }
+
+    const albums = {
+      posters: {
+        title: 'Постеры & Арт',
+        slides: [
+          { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
+          { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
+        ]
+      },
+      sport: {
+        title: 'Спорт & Экшн',
+        slides: [
+          { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
+          { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
+          { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
+          { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
+          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
+        ]
+      },
+      photoshoot: {
+        title: 'Нейрофотосессии',
+        slides: [
+          { type: 'image', src: '5377748239911689516.jpg', title: 'Студийный портрет', desc: 'Индивидуальные фотосессии с сохранением внешности.' }
+        ]
+      },
+      commercial: {
+        title: 'Реклама для брендов',
+        slides: [
+          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Предметная визуализация', desc: 'Коммерческий арт и рекламные концепты для продуктов и брендов.' }
+        ]
+      },
+      cartoons: {
+        title: 'Мультфильмы & Сериалы',
+        slides: [
+          { type: 'image', src: 'Gemini_Generated_Image_ (2).png', title: 'Приключения Лео: Концепт', desc: 'Консистентный 3D-персонаж мальтипу Лео для мультсериала.' }
+        ]
+      },
+      challenges: {
+        title: 'AI Челленджи',
+        slides: [
+          { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
+        ]
+      }
+    };
+
+    let activeAlbumKey = null;
+    let currentSlideIndex = 0;
+    let storyTimer = null;
+    const DEFAULT_DURATION = 4000;
+
+    const imgEl = document.getElementById('storyActiveImage');
+    const vidEl = document.getElementById('storyActiveVideo');
+
+    function openStoryAlbum(albumKey) {
+      activeAlbumKey = albumKey;
+      currentSlideIndex = 0;
+      document.getElementById('storiesViewer').style.display = 'flex';
+      setupProgressBars();
+      showStorySlide(0);
+    }
+
+    function closeStories(e) {
+      if (e) e.stopPropagation();
+      clearTimeout(storyTimer);
+      vidEl.pause();
+      vidEl.src = '';
+      document.getElementById('storiesViewer').style.display = 'none';
+      activeAlbumKey = null;
+    }
+
+    function setupProgressBars() {
+      const album = albums[activeAlbumKey];
+      const container = document.getElementById('progressBars');
+      container.innerHTML = '';
+      album.slides.forEach((_, idx) => {
+        const bg = document.createElement('div');
+        bg.className = 'progress-bar-bg';
+        const fill = document.createElement('div');
+        fill.className = 'progress-bar-fill';
+        fill.id = `bar-fill-${idx}`;
+        bg.appendChild(fill);
+        container.appendChild(bg);
+      });
+      document.getElementById('storyAuthorTitle').innerText = album.title;
+    }
+
+    function showStorySlide(index) {
+      clearTimeout(storyTimer);
+      vidEl.pause();
+      
+      const album = albums[activeAlbumKey];
+      if (index >= album.slides.length) { closeStories(); return; }
+      if (index < 0) index = 0;
+
+      currentSlideIndex = index;
+      const slide = album.slides[index];
+
+      document.getElementById('storyDescTitle').innerText = slide.title;
+      document.getElementById('storyDescText').innerText = slide.desc;
+
+      if (slide.type === 'video') {
+        imgEl.classList.remove('active-media');
+        vidEl.classList.add('active-media');
+        vidEl.src = slide.src;
+        vidEl.currentTime = 0;
+        vidEl.play().catch(() => {});
+
+        vidEl.onloadedmetadata = () => {
+          const dur = (vidEl.duration * 1000) || DEFAULT_DURATION;
+          animateBar(index, dur);
+          storyTimer = setTimeout(() => storyNext(), dur);
+        };
+        vidEl.onerror = () => {
+          animateBar(index, DEFAULT_DURATION);
+          storyTimer = setTimeout(() => storyNext(), DEFAULT_DURATION);
+        };
+      } else {
+        vidEl.classList.remove('active-media');
+        imgEl.classList.add('active-media');
+        imgEl.src = slide.src;
+        animateBar(index, DEFAULT_DURATION);
+        storyTimer = setTimeout(() => storyNext(), DEFAULT_DURATION);
+      }
+    }
+
+    function animateBar(index, duration) {
+      const album = albums[activeAlbumKey];
+      album.slides.forEach((_, idx) => {
+        const fill = document.getElementById(`bar-fill-${idx}`);
+        if (!fill) return;
+        fill.style.transition = 'none';
+        if (idx < index) fill.style.width = '100%';
+        else if (idx > index) fill.style.width = '0%';
+        else {
+          fill.style.width = '0%';
+          setTimeout(() => {
+            fill.style.transition = `width ${duration}ms linear`;
+            fill.style.width = '100%';
+          }, 20);
+        }
       });
     }
 
-    function openModal(title, tools, imgSrc, desc, prompt) {
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalTools').innerText = tools;
-      document.getElementById('modalImg').src = imgSrc;
-      document.getElementById('modalDesc').innerText = desc;
-      document.getElementById('modalPrompt').innerText = prompt;
-      document.getElementById('caseModal').style.display = 'flex';
+    function storyNext(e) {
+      if (e) e.stopPropagation();
+      showStorySlide(currentSlideIndex + 1);
     }
 
-    function closeModal() {
-      document.getElementById('caseModal').style.display = 'none';
+    function storyPrev(e) {
+      if (e) e.stopPropagation();
+      showStorySlide(currentSlideIndex - 1);
     }
   </script>
 </body>
