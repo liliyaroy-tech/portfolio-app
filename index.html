@@ -135,7 +135,6 @@
     .category-tag { font-size: 10px; color: #f0e6d2; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     .category-title { font-size: 14.5px; font-weight: 800; line-height: 1.25; color: #ffffff; }
 
-    /* Нижняя кнопка */
     .contact-bar {
       position: fixed;
       bottom: 0;
@@ -170,7 +169,6 @@
       background: rgba(184, 134, 85, 0.22);
     }
 
-    /* Модальная шторка со списком проектов */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -228,7 +226,6 @@
     .project-badge { display: inline-block; font-size: 10.5px; font-weight: 700; background: var(--accent-soft); color: var(--accent); padding: 3px 8px; border-radius: 8px; margin-top: 5px; }
     .project-arrow { color: var(--accent); font-size: 16px; font-weight: bold; margin-left: 4px; }
 
-    /* Stories Viewer */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -299,7 +296,6 @@
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
-    /* Нижняя плашка Stories */
     .story-footer { 
       position: absolute; 
       bottom: 14px; 
@@ -364,10 +360,7 @@
 
     <div class="section-title">Коллекции кейсов</div>
     
-    <!-- Сетка категорий -->
     <div class="showcase-grid">
-      
-      <!-- 1. Реклама для брендов -->
       <div class="category-card" onclick="openCategory('commercial')">
         <img class="category-card-bg" src="т_1.jpg" alt="Реклама для брендов" onerror="this.src='2_1.jpg'">
         <div class="category-card-overlay"></div>
@@ -378,7 +371,6 @@
         </div>
       </div>
 
-      <!-- 2. Маркетплейсы & E-com -->
       <div class="category-card" onclick="openCategory('marketplaces')">
         <img class="category-card-bg" src="4_1.jpg" alt="Маркетплейсы">
         <div class="category-card-overlay"></div>
@@ -389,7 +381,6 @@
         </div>
       </div>
 
-      <!-- 3. Постеры & Афиши -->
       <div class="category-card" onclick="openCategory('posters')">
         <img class="category-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры & Афиши">
         <div class="category-card-overlay"></div>
@@ -400,7 +391,6 @@
         </div>
       </div>
 
-      <!-- 4. 3D & Мультфильмы -->
       <div class="category-card" onclick="openCategory('animation')">
         <img class="category-card-bg" src="Gemini_Generated_Image_ (2).png" alt="3D & Мультфильмы">
         <div class="category-card-overlay"></div>
@@ -411,7 +401,6 @@
         </div>
       </div>
 
-      <!-- 5. Нейрофотосессии -->
       <div class="category-card" onclick="openCategory('photoshoots')">
         <img class="category-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
         <div class="category-card-overlay"></div>
@@ -422,7 +411,6 @@
         </div>
       </div>
 
-      <!-- 6. AI Челленджи -->
       <div class="category-card" onclick="openCategory('challenges')">
         <img class="category-card-bg" src="5377765299521788083.jpg" alt="AI Челленджи">
         <div class="category-card-overlay"></div>
@@ -432,11 +420,9 @@
           <h3 class="category-title">AI Челленджи</h3>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Кнопка Telegram -->
   <div class="contact-bar">
     <a href="https://t.me/LiliyaRoi" class="btn-contact" onclick="handleContactClick(event)">
       <span>⚡</span>
@@ -444,7 +430,6 @@
     </a>
   </div>
 
-  <!-- Всплывающая шторка со списком проектов -->
   <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
     <div class="modal-sheet" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -455,7 +440,6 @@
     </div>
   </div>
 
-  <!-- Stories Viewer -->
   <div id="storiesViewer" class="stories-viewer">
     <div class="story-header">
       <div id="progressBars" class="progress-bars"></div>
@@ -537,7 +521,7 @@
               },
               { 
                 type: 'image', 
-                src: '4.jpg', 
+                src: '4_т.jpg', 
                 title: 'Фактуры, Текстуры & Материалы', 
                 desc: 'Глубокая проработка тактильности: натуральные ткани, микрорельеф и рассеянный теплый свет.' 
               },
@@ -577,9 +561,9 @@
             title: 'Jacquemus x Leo',
             badge: '4 слайда + видео',
             desc: 'Интеграция персонажа мальтипу в ДНК бренда',
-            thumb: '1_.jpg',
+            thumb: '1Ж.jpg',
             slides: [
-              { type: 'image', src: '1_.jpg', title: 'Jacquemus x Leo: Концепт', desc: 'Визуальный код: архитектурный минимализм, терракота и гармоничное введение маскота.' },
+              { type: 'image', src: '1Ж.jpg', title: 'Jacquemus x Leo: Концепт', desc: 'Визуальный код: архитектурный минимализм, терракота и гармоничное введение маскота.' },
               { type: 'video', src: '2_Video Project 3 (1).mp4', title: 'Морфинг & Видео-трансформация', desc: 'Бесшовная преемственность стиля от подиумного кадра к главному герою кампании.' },
               { type: 'image', src: '3_.jpg', title: 'Макро-продакшн & Масштаб', desc: 'Сюрреалистичная игра с пропорциями: гигантская сумка Jacquemus и текстуры кожи.' },
               { type: 'image', src: '4_.jpg', title: 'Мудборд & Финализация', desc: 'Итоговая презентация проекта: интеграция персонажа в премиальный сегмент. Стек: MJ, Gemini, Canva.' }
