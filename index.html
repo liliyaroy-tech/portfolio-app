@@ -14,10 +14,9 @@
       --accent-soft: rgba(184, 134, 85, 0.12);
       --text: #1d1d1f;
       --text-dim: #6e6e73;
-      /* Фирменный золотисто-кофейный градиент вместо черного */
       --btn-grad: linear-gradient(135deg, #c49563 0%, #9e6f3e 100%);
       --btn-shadow: rgba(184, 134, 85, 0.35);
-      --story-bg: #1a1412; /* Тёмный шоколад для историй */
+      --story-bg: #1a1412;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
     
@@ -170,7 +169,6 @@
       letter-spacing: -0.2px;
     }
 
-    /* Нижняя плашка со стильной золотисто-кофейной кнопкой */
     .contact-bar {
       position: fixed;
       bottom: 0;
@@ -204,7 +202,6 @@
     }
     .btn-contact:active { transform: scale(0.98); }
 
-    /* Stories Viewer - Тёмный шоколад */
     .stories-viewer { 
       display: none; 
       position: fixed; 
@@ -269,7 +266,6 @@
     .touch-left { width: 35%; height: 100%; }
     .touch-right { width: 65%; height: 100%; }
 
-    /* Парящая светлая карточка описания */
     .story-footer { 
       position: absolute; 
       bottom: 28px; 
@@ -326,3 +322,290 @@
         </ul>
         <div class="about-quote">
           <strong>Системный подход:</strong> понимаю задачи бизнеса, держу дедлайны и выдаю чёткий продающий результат.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">Коллекции кейсов</div>
+    
+    <div class="showcase-grid">
+      <div class="story-card" onclick="openStoryAlbum('posters')">
+        <img class="story-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">3 слайда</div>
+        <div class="story-meta">
+          <span class="story-tag">Графика & Арт</span>
+          <h3 class="story-title">Постеры</h3>
+        </div>
+      </div>
+
+      <div class="story-card" onclick="openStoryAlbum('sport')">
+        <img class="story-card-bg" src="5321263694777882946.jpg" alt="Спорт">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">5 фото</div>
+        <div class="story-meta">
+          <span class="story-tag">Экшн & Движение</span>
+          <h3 class="story-title">Спорт</h3>
+        </div>
+      </div>
+
+      <div class="story-card" onclick="openStoryAlbum('photoshoot')">
+        <img class="story-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Сеты</div>
+        <div class="story-meta">
+          <span class="story-tag">Портреты</span>
+          <h3 class="story-title">Нейрофотосессии</h3>
+        </div>
+      </div>
+
+      <div class="story-card" onclick="openStoryAlbum('commercial')">
+        <img class="story-card-bg" src="1 .jpg" alt="Реклама Jacquemus">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Кейс + Видео</div>
+        <div class="story-meta">
+          <span class="story-tag">Jacquemus x Leo</span>
+          <h3 class="story-title">Реклама для брендов</h3>
+        </div>
+      </div>
+
+      <div class="story-card" onclick="openStoryAlbum('cartoons')">
+        <img class="story-card-bg" src="Gemini_Generated_Image_ (2).png" alt="Мультсериалы">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Анимация</div>
+        <div class="story-meta">
+          <span class="story-tag">3D Концепты</span>
+          <h3 class="story-title">Мультфильмы & Сериалы</h3>
+        </div>
+      </div>
+
+      <div class="story-card" onclick="openStoryAlbum('challenges')">
+        <img class="story-card-bg" src="5377765299521788083.jpg" alt="Челленджи">
+        <div class="story-card-overlay"></div>
+        <div class="story-badge">Марафон</div>
+        <div class="story-meta">
+          <span class="story-tag">Творчество</span>
+          <h3 class="story-title">AI Челленджи</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-bar">
+    <a href="https://t.me/liliyaroy" target="_blank" class="btn-contact">
+      <span>✉️ Написать / Задать вопрос</span>
+    </a>
+  </div>
+
+  <div id="storiesViewer" class="stories-viewer">
+    <div class="story-header">
+      <div id="progressBars" class="progress-bars"></div>
+      <div class="story-user-row">
+        <div class="story-author-info">
+          <span id="storyAuthorTitle">Портфолио</span>
+        </div>
+        <button class="story-close-btn" onclick="closeStories(event)">✕</button>
+      </div>
+    </div>
+
+    <div class="story-stage">
+      <img id="storyActiveImage" class="story-media" src="" alt="Story">
+      <video id="storyActiveVideo" class="story-media" playsinline webkit-playsinline preload="auto" muted></video>
+    </div>
+
+    <div class="touch-nav">
+      <div class="touch-left" onclick="storyPrev(event)"></div>
+      <div class="touch-right" onclick="storyNext(event)"></div>
+    </div>
+
+    <div class="story-footer">
+      <div id="storyDescTitle" class="story-desc-title"></div>
+      <div id="storyDescText" class="story-desc-text"></div>
+    </div>
+  </div>
+
+  <script>
+    const tg = window.Telegram?.WebApp;
+    if (tg) { tg.expand(); tg.ready(); }
+
+    function toggleAbout() {
+      document.getElementById('aboutCard').classList.toggle('open');
+    }
+
+    const albums = {
+      posters: {
+        title: 'Постеры & Арт',
+        slides: [
+          { type: 'image', src: '5375371130132174635 (1).jpg', title: '1 Сентября: Постер I', desc: 'Праздничная концепция с акварельной типографикой.' },
+          { type: 'image', src: '5377748239911689516.jpg', title: '1 Сентября: Постер II', desc: 'Школьная серия: образ персонажа и композиционный баланс.' }
+        ]
+      },
+      sport: {
+        title: 'Спорт & Экшн',
+        slides: [
+          { type: 'image', src: '5321263694777882946.jpg', title: 'Картинг: Экшн на трассе', desc: 'Спортивный постер с пилотом Дмитрием Романовым и закатным светом.' },
+          { type: 'image', src: '5375371130132174635 (1).jpg', title: 'Картинг: Кубок СПб', desc: 'Афиша этапа: типографика и схема картодрома Ижорец.' },
+          { type: 'image', src: '5377748239911689516.jpg', title: 'Картинг: Нацелен на победу', desc: 'Эмоциональный постер со шлемом и картом #29.' },
+          { type: 'image', src: '5377765299521788083.jpg', title: 'Картинг: Скорость и Драйв', desc: 'Постер гоночной академии SNC: динамика болида.' },
+          { type: 'image', src: 'hd_ba59a11a97fefd377eb250748765c829.png', title: 'Волейбол: Атака над сеткой', desc: 'Динамичный постер матча: прыжок и фиксация мяча в воздухе.' }
+        ]
+      },
+      photoshoot: {
+        title: 'Нейрофотосессии',
+        slides: [
+          { type: 'image', src: '5377748239911689516.jpg', title: 'Студийный портрет', desc: 'Индивидуальные фотосессии с сохранением внешности.' }
+        ]
+      },
+      commercial: {
+        title: 'Реклама: Jacquemus x Leo',
+        slides: [
+          { 
+            type: 'image', 
+            src: '1 .jpg', 
+            title: 'Jacquemus x Leo: Концепт', 
+            desc: 'Анализ визуального кода бренда: архитектурная строгость, минимализм и терракотовые оттенки.' 
+          },
+          { 
+            type: 'video', 
+            src: '2_Video Project 3 (1).mp4', 
+            title: 'Морфинг & Динамика', 
+            desc: 'Видео-трансформация: преемственность стиля от подиумного кадра к персонажу кампании.' 
+          },
+          { 
+            type: 'image', 
+            src: '3_.jpg', 
+            title: 'Макро-продакшн & Масштаб', 
+            desc: 'Проработка текстур кожи, швов и фурнитуры. Сюрреалистичная работа с пропорциями аксессуара.' 
+          },
+          { 
+            type: 'image', 
+            src: '4_.jpg', 
+            title: 'Мудборд & Финализация', 
+            desc: 'Итоговая презентация концепции: интеграция персонажа в ДНК премиального бренда. Стек: Midjourney, Gemini, Canva.' 
+          }
+        ]
+      },
+      cartoons: {
+        title: 'Мультфильмы & Сериалы',
+        slides: [
+          { type: 'image', src: 'Gemini_Generated_Image_ (2).png', title: 'Приключения Лео: Концепт', desc: 'Консистентный 3D-персонаж мальтипу Лео для мультсериала.' }
+        ]
+      },
+      challenges: {
+        title: 'AI Челленджи',
+        slides: [
+          { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
+        ]
+      }
+    };
+
+    let activeAlbumKey = null;
+    let currentSlideIndex = 0;
+    let storyTimer = null;
+    let isTransitioning = false;
+    const SLIDE_DURATION = 4000;
+
+    const imgEl = document.getElementById('storyActiveImage');
+    const vidEl = document.getElementById('storyActiveVideo');
+
+    function openStoryAlbum(albumKey) {
+      activeAlbumKey = albumKey;
+      currentSlideIndex = 0;
+      document.getElementById('storiesViewer').style.display = 'flex';
+      setupProgressBars();
+      showStorySlide(0);
+    }
+
+    function closeStories(e) {
+      if (e) e.stopPropagation();
+      clearTimeout(storyTimer);
+      isTransitioning = false;
+      vidEl.pause();
+      vidEl.removeAttribute('src');
+      vidEl.load();
+      document.getElementById('storiesViewer').style.display = 'none';
+      activeAlbumKey = null;
+    }
+
+    function setupProgressBars() {
+      const album = albums[activeAlbumKey];
+      const container = document.getElementById('progressBars');
+      container.innerHTML = '';
+      album.slides.forEach((_, idx) => {
+        const bg = document.createElement('div');
+        bg.className = 'progress-bar-bg';
+        const fill = document.createElement('div');
+        fill.className = 'progress-bar-fill';
+        fill.id = `bar-fill-${idx}`;
+        bg.appendChild(fill);
+        container.appendChild(bg);
+      });
+      document.getElementById('storyAuthorTitle').innerText = album.title;
+    }
+
+    function showStorySlide(index) {
+      clearTimeout(storyTimer);
+      isTransitioning = false;
+      
+      vidEl.pause();
+      
+      const album = albums[activeAlbumKey];
+      if (index >= album.slides.length) { closeStories(); return; }
+      if (index < 0) index = 0;
+
+      currentSlideIndex = index;
+      const slide = album.slides[index];
+
+      document.getElementById('storyDescTitle').innerText = slide.title;
+      document.getElementById('storyDescText').innerText = slide.desc;
+
+      album.slides.forEach((_, idx) => {
+        const fill = document.getElementById(`bar-fill-${idx}`);
+        if (!fill) return;
+        fill.style.transition = 'none';
+        if (idx < index) fill.style.width = '100%';
+        else fill.style.width = '0%';
+      });
+
+      const fill = document.getElementById(`bar-fill-${index}`);
+      if (fill) {
+        fill.style.width = '0%';
+        setTimeout(() => {
+          fill.style.transition = `width ${SLIDE_DURATION}ms linear`;
+          fill.style.width = '100%';
+        }, 20);
+      }
+
+      if (slide.type === 'video') {
+        imgEl.classList.remove('active-media');
+        vidEl.classList.add('active-media');
+        vidEl.loop = false;
+        vidEl.src = slide.src;
+        vidEl.currentTime = 0;
+        vidEl.play().catch(() => {});
+      } else {
+        vidEl.classList.remove('active-media');
+        imgEl.classList.add('active-media');
+        imgEl.src = slide.src;
+      }
+
+      storyTimer = setTimeout(() => {
+        if (!isTransitioning) {
+          isTransitioning = true;
+          storyNext();
+        }
+      }, SLIDE_DURATION);
+    }
+
+    function storyNext(e) {
+      if (e) e.stopPropagation();
+      showStorySlide(currentSlideIndex + 1);
+    }
+
+    function storyPrev(e) {
+      if (e) e.stopPropagation();
+      showStorySlide(currentSlideIndex - 1);
+    }
+  </script>
+</body>
+</html>
