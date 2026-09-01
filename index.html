@@ -180,7 +180,7 @@
       background: rgba(184, 134, 85, 0.22);
     }
 
-    /* Модальное окно выбора проектов (Шторка) */
+    /* Модальное окно выбора проектов */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -349,8 +349,10 @@
 
     <div class="section-title">Коллекции кейсов</div>
     
+    <!-- Сетка из 6 категорий -->
     <div class="showcase-grid">
       
+      <!-- 1. Реклама для брендов -->
       <div class="category-card" onclick="openCategory('commercial')">
         <img class="category-card-bg" src="2_1.jpg" alt="Реклама для брендов">
         <div class="category-card-overlay"></div>
@@ -361,6 +363,7 @@
         </div>
       </div>
 
+      <!-- 2. Маркетплейсы & E-com -->
       <div class="category-card" onclick="openCategory('marketplaces')">
         <img class="category-card-bg" src="3_.jpg" alt="Маркетплейсы">
         <div class="category-card-overlay"></div>
@@ -371,6 +374,7 @@
         </div>
       </div>
 
+      <!-- 3. Постеры & Афиши -->
       <div class="category-card" onclick="openCategory('posters')">
         <img class="category-card-bg" src="5375371130132174635 (1).jpg" alt="Постеры & Афиши">
         <div class="category-card-overlay"></div>
@@ -381,6 +385,7 @@
         </div>
       </div>
 
+      <!-- 4. 3D & Мультфильмы -->
       <div class="category-card" onclick="openCategory('animation')">
         <img class="category-card-bg" src="Gemini_Generated_Image_ (2).png" alt="3D & Мультфильмы">
         <div class="category-card-overlay"></div>
@@ -391,19 +396,32 @@
         </div>
       </div>
 
+      <!-- 5. Нейрофотосессии -->
       <div class="category-card" onclick="openCategory('photoshoots')">
-        <img class="category-card-bg" src="5377748239911689516.jpg" alt="Фотосессии & Арт">
+        <img class="category-card-bg" src="5377748239911689516.jpg" alt="Нейрофотосессии">
         <div class="category-card-overlay"></div>
-        <div class="category-badge">Сеты</div>
+        <div class="category-badge">Lookbook</div>
         <div class="category-meta">
-          <span class="category-tag">Lookbook & Челленджи</span>
-          <h3 class="category-title">Фотосессии & Арт</h3>
+          <span class="category-tag">Портреты & Персонажи</span>
+          <h3 class="category-title">Нейрофотосессии</h3>
+        </div>
+      </div>
+
+      <!-- 6. AI Челленджи & Марафон -->
+      <div class="category-card" onclick="openCategory('challenges')">
+        <img class="category-card-bg" src="5377765299521788083.jpg" alt="AI Челленджи">
+        <div class="category-card-overlay"></div>
+        <div class="category-badge">Марафон</div>
+        <div class="category-meta">
+          <span class="category-tag">Творчество & Эксперименты</span>
+          <h3 class="category-title">AI Челленджи</h3>
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- Нижняя кнопка Telegram -->
   <div class="contact-bar">
     <a href="https://t.me/LiliyaRoi" class="btn-contact" onclick="handleContactClick(event)">
       <span>⚡</span>
@@ -411,6 +429,7 @@
     </a>
   </div>
 
+  <!-- Всплывающая шторка со списком проектов -->
   <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()">
     <div class="modal-sheet" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -421,6 +440,7 @@
     </div>
   </div>
 
+  <!-- Stories Viewer -->
   <div id="storiesViewer" class="stories-viewer">
     <div class="story-header">
       <div id="progressBars" class="progress-bars"></div>
@@ -564,23 +584,28 @@
         ]
       },
       photoshoots: {
-        title: 'Фотосессии & Арт',
+        title: 'Нейрофотосессии',
         projects: [
           {
             id: 'lookbook_case',
-            title: 'Нейрофотосессии',
-            badge: 'Lookbook',
-            desc: 'Студийные портреты с сохранением внешности модели',
+            title: 'Студийный Lookbook',
+            badge: 'Портреты',
+            desc: 'Индивидуальные фотосессии с сохранением внешности модели',
             thumb: '5377748239911689516.jpg',
             slides: [
               { type: 'image', src: '5377748239911689516.jpg', title: 'Студийный портрет', desc: 'Индивидуальные фотосессии с сохранением внешности.' }
             ]
-          },
+          }
+        ]
+      },
+      challenges: {
+        title: 'AI Челленджи & Марафон',
+        projects: [
           {
             id: 'challenge_case',
-            title: 'AI Челленджи & Марафон',
-            badge: 'Творчество',
-            desc: 'Сложные генерации, арт-эксперименты и марафоны',
+            title: 'Творческий марафон',
+            badge: 'День 1',
+            desc: 'Сложные генерации, арт-эксперименты и работа с промптами',
             thumb: '5377765299521788083.jpg',
             slides: [
               { type: 'image', src: '5377765299521788083.jpg', title: 'День 1: Творческое задание', desc: 'Эксперименты со стилистикой, композицией и промптами марафона.' }
@@ -596,3 +621,139 @@
     const projectList = document.getElementById('projectList');
 
     function openCategory(catKey) {
+      const cat = categories[catKey];
+      if (!cat) return;
+
+      modalTitle.innerText = cat.title;
+      projectList.innerHTML = '';
+
+      cat.projects.forEach(proj => {
+        const item = document.createElement('div');
+        item.className = 'project-item';
+        item.onclick = () => {
+          closeModal();
+          startStories(proj);
+        };
+
+        item.innerHTML = `
+          <img class="project-thumb" src="${proj.thumb}" alt="${proj.title}">
+          <div class="project-info">
+            <div class="project-title">${proj.title}</div>
+            <div class="project-desc">${proj.desc}</div>
+            <span class="project-badge">${proj.badge}</span>
+          </div>
+          <div class="project-arrow">›</div>
+        `;
+        projectList.appendChild(item);
+      });
+
+      modalBackdrop.classList.add('is-open');
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('is-open');
+    }
+
+    // ЛОГИКА STORIES
+    let activeProject = null;
+    let currentSlideIndex = 0;
+    let storyTimer = null;
+    const SLIDE_DURATION = 4000;
+
+    const imgEl = document.getElementById('storyActiveImage');
+    const vidEl = document.getElementById('storyActiveVideo');
+    const viewerEl = document.getElementById('storiesViewer');
+
+    function startStories(project) {
+      activeProject = project;
+      currentSlideIndex = 0;
+      viewerEl.classList.add('is-open');
+      setupProgressBars();
+      showSlide(0);
+    }
+
+    function closeStories(e) {
+      if (e) e.stopPropagation();
+      clearTimeout(storyTimer);
+      if (vidEl) {
+        vidEl.pause();
+        vidEl.src = '';
+      }
+      viewerEl.classList.remove('is-open');
+      activeProject = null;
+    }
+
+    function setupProgressBars() {
+      const container = document.getElementById('progressBars');
+      container.innerHTML = '';
+      activeProject.slides.forEach((_, idx) => {
+        const bg = document.createElement('div');
+        bg.className = 'progress-bar-bg';
+        const fill = document.createElement('div');
+        fill.className = 'progress-bar-fill';
+        fill.id = 'bar-fill-' + idx;
+        bg.appendChild(fill);
+        container.appendChild(bg);
+      });
+      document.getElementById('storyAuthorTitle').innerText = activeProject.title;
+    }
+
+    function showSlide(index) {
+      clearTimeout(storyTimer);
+      if (vidEl) vidEl.pause();
+      
+      if (!activeProject) return;
+      if (index >= activeProject.slides.length) { closeStories(); return; }
+      if (index < 0) index = 0;
+
+      currentSlideIndex = index;
+      const slide = activeProject.slides[index];
+
+      document.getElementById('storyDescTitle').innerText = slide.title;
+      document.getElementById('storyDescText').innerText = slide.desc;
+
+      activeProject.slides.forEach((_, idx) => {
+        const fill = document.getElementById('bar-fill-' + idx);
+        if (!fill) return;
+        fill.style.transition = 'none';
+        fill.style.width = idx < index ? '100%' : '0%';
+      });
+
+      const currentFill = document.getElementById('bar-fill-' + index);
+      if (currentFill) {
+        currentFill.style.width = '0%';
+        setTimeout(() => {
+          currentFill.style.transition = 'width ' + SLIDE_DURATION + 'ms linear';
+          currentFill.style.width = '100%';
+        }, 30);
+      }
+
+      if (slide.type === 'video') {
+        imgEl.classList.remove('active-media');
+        vidEl.classList.add('active-media');
+        vidEl.src = slide.src;
+        vidEl.currentTime = 0;
+        vidEl.play().catch(() => {});
+      } else {
+        vidEl.classList.remove('active-media');
+        imgEl.classList.add('active-media');
+        imgEl.src = slide.src;
+      }
+
+      storyTimer = setTimeout(() => {
+        storyNext();
+      }, SLIDE_DURATION);
+    }
+
+    function storyNext(e) {
+      if (e) e.stopPropagation();
+      showSlide(currentSlideIndex + 1);
+    }
+
+    function storyPrev(e) {
+      if (e) e.stopPropagation();
+      showSlide(currentSlideIndex - 1);
+    }
+  </script>
+</body>
+</html>
