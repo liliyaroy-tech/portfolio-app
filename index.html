@@ -258,14 +258,16 @@
 
     .story-user-row { display: flex; justify-content: space-between; align-items: center; color: #fff; }
     .story-author-info { font-size: 14.5px; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
-    .story-close-btn { 
+    .story-controls { display: flex; align-items: center; gap: 8px; }
+    
+    .story-sound-btn, .story-close-btn { 
       background: rgba(255,255,255,0.22); 
       border: 1px solid rgba(255,255,255,0.3); 
       color: #fff; 
       width: 32px; 
       height: 32px; 
       border-radius: 50%; 
-      font-size: 15px; 
+      font-size: 14px; 
       cursor: pointer; 
       display: flex; 
       align-items: center; 
@@ -394,7 +396,7 @@
       <div class="category-card" onclick="openCategory('animation')">
         <img class="category-card-bg" src="Gemini_Generated_Image_ (2).png" alt="3D & Мультфильмы">
         <div class="category-card-overlay"></div>
-        <div class="category-badge">Концепты</div>
+        <div class="category-badge">2 проекта</div>
         <div class="category-meta">
           <span class="category-tag">Персонажи & Маскоты</span>
           <h3 class="category-title">3D & Мультфильмы</h3>
@@ -447,7 +449,10 @@
         <div class="story-author-info">
           <span id="storyAuthorTitle">Портфолио</span>
         </div>
-        <button class="story-close-btn" onclick="closeStories(event)">✕</button>
+        <div class="story-controls">
+          <button id="storySoundBtn" class="story-sound-btn" onclick="toggleSound(event)" style="display:none;">🔊</button>
+          <button class="story-close-btn" onclick="closeStories(event)">✕</button>
+        </div>
       </div>
     </div>
 
@@ -606,13 +611,25 @@
         title: '3D & Мультфильмы',
         projects: [
           {
-            id: 'leo_char',
-            title: 'Приключения Лео',
-            badge: '3D Концепт',
-            desc: 'Консистентный 3D-персонаж мальтипу для мультсериала',
+            id: 'leo_series',
+            title: 'Сериал: Приключения Лео',
+            badge: '3 серии',
+            desc: 'Мультсериал про мальтипу Лео: от концепта до живой 3D-анимации',
             thumb: 'Gemini_Generated_Image_ (2).png',
             slides: [
-              { type: 'image', src: 'Gemini_Generated_Image_ (2).png', title: 'Приключения Лео: Концепт', desc: 'Консистентный 3D-персонаж мальтипу Лео для мультсериала.' }
+              { type: 'video', src: 'Лео 1.mp4', title: 'Приключения Лео: Серия 1', desc: 'Знакомство с 3D-персонажем Лео: анимация и пластика героя.' },
+              { type: 'video', src: 'Лео_2.mp4', title: 'Приключения Лео: Серия 2', desc: 'Развитие сюжета: динамичные сцены и взаимодействие с окружением.' },
+              { type: 'video', src: 'IMG_1123.MOV', title: 'Приключения Лео: Серия 3', desc: 'Финальный эпизод серии: визуальная консистентность и кинематографичный рендер.' }
+            ]
+          },
+          {
+            id: 'animation_lab',
+            title: 'Эксперименты & Анимация',
+            badge: 'AI Видео',
+            desc: 'Разработка визуальных эффектов, морфинга и анимационных сцен',
+            thumb: 'Gemini_Generated_Image_ (2).png',
+            slides: [
+              { type: 'video', src: 'IMG_7277.MP4', title: 'Анимационный концепт', desc: 'Трендовая генеративная анимация и динамика движения.' }
             ]
           }
         ]
@@ -757,6 +774,14 @@
     var vidEl = document.getElementById('storyActiveVideo');
     var viewerEl = document.getElementById('storiesViewer');
     var linkBtn = document.getElementById('storyLinkBtn');
+    var soundBtn = document.getElementById('storySoundBtn');
+
+    function toggleSound(e) {
+      if (e) e.stopPropagation();
+      if (!vidEl) return;
+      vidEl.muted = !vidEl.muted;
+      soundBtn.innerText = vidEl.muted ? '🔇' : '🔊';
+    }
 
     function startStories(project) {
       if (!project || !project.slides || project.slides.length === 0) return;
@@ -839,8 +864,13 @@
       if (slide.type === 'video') {
         imgEl.classList.remove('active-media');
         vidEl.classList.add('active-media');
+        soundBtn.style.display = 'flex';
+        
         vidEl.src = slide.src;
         vidEl.currentTime = 0;
+        vidEl.muted = false;
+        vidEl.volume = 1.0;
+        soundBtn.innerText = '🔊';
         
         vidEl.ontimeupdate = function() {
           if (vidEl.duration && currentFill) {
@@ -855,8 +885,17 @@
           storyNext();
         };
 
-        vidEl.play().catch(function() {});
+        var playPromise = vidEl.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function() {
+            // Если браузер заблокировал звук при автостарте — включаем мягкий старт
+            vidEl.muted = true;
+            soundBtn.innerText = '🔇';
+            vidEl.play();
+          });
+        }
       } else {
+        soundBtn.style.display = 'none';
         vidEl.classList.remove('active-media');
         imgEl.classList.add('active-media');
         imgEl.src = slide.src;
